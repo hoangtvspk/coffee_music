@@ -43,6 +43,8 @@ dependencies:
   shared_preferences: ^2.5.3
   flutter_launcher_icons: ^0.14.3
   flutter_dotenv: ^5.1.0
+  flutter_native_splash: ^2.4.5
+  flutter_appauth: ^9.0.0
 
 dev_dependencies:
   change_app_package_name: ^1.5.0
@@ -52,7 +54,6 @@ dev_dependencies:
     sdk: flutter
   freezed: ^2.5.8
   json_serializable: ^6.9.4
-  flutter_native_splash: ^2.4.5
   mocktail: ^1.0.3
 
 flutter_launcher_icons:
@@ -94,6 +95,12 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/images/spotify_logo.png
+    - assets/images/google_icon.png
+    - assets/images/facebook_icon.png
+    - assets/images/apple_icon.png
+    - assets/images/spotify_icon.png
+    - assets/images/phone_icon.png
     - lib/core/config/.env.dev
     - lib/core/config/.env.staging
     - lib/core/config/.env.prod

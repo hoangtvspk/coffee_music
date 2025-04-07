@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
   void setToken() async {
     final storageToken = await SecureStorage().readAccessToken();
     setState(() {
-         token = storageToken ?? 'No token';
+      token = storageToken ?? 'No token';
     });
   }
 
@@ -43,24 +43,25 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body:   Column(
+      body: Column(
         spacing: 20,
         children: [
           Center(
             child: context.watch<AuthBloc>().state.maybeWhen(
-              success: (user) => Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('Welcome back,'),
-                  Text(
-                    user.name,
-                    style: Theme.of(context).textTheme.headlineMedium,
+                  success: (user) => Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Welcome back,'),
+                      Text(
+                        user.name,
+                        style: Theme.of(context).textTheme.headlineMedium,
+                      ),
+                    ],
                   ),
-                ],
-              ),
-              orElse: () => const SizedBox(),
-            ),),
-            Text(token),
+                  orElse: () => const SizedBox(),
+                ),
+          ),
+          Text(token),
         ],
       ),
     );

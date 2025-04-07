@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc_with_clean_architectore/features/auth/presentation/pages/auth_service.dart';
 import 'package:go_router/go_router.dart';
 import '../bloc/auth_bloc.dart';
 
@@ -13,12 +14,28 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  static const environment = String.fromEnvironment('ENVIRONMENT', defaultValue: 'dev');
+
+  final authService = AuthService();
+  String? _profileInfo;
+
+  Future<void> _login() async {
+    await authService.signInWithSpotify();
+    final profile = await authService.getUserProfile();
+
+    setState(() {
+      _profileInfo = profile != null
+          ? 'Name: ${profile['display_name']}\nEmail: ${profile['email']}'
+          : 'Failed to load profile';
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Login', style: TextStyle(color: Color(0xFF8D623A))), backgroundColor: const Color(0xFFE8DAB8)),
+      appBar: AppBar(
+          title:
+              const Text('Login', style: TextStyle(color: Color(0xFF8D623A))),
+          backgroundColor: const Color(0xFFE8DAB8)),
       backgroundColor: const Color(0xFFE8DAB8),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -67,7 +84,8 @@ class _LoginPageState extends State<LoginPage> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF8D623A),
                       ),
-                      child: const Text('Login', style: TextStyle(color: Colors.white)),
+                      child: const Text('Login',
+                          style: TextStyle(color: Colors.white)),
                     ),
                     BlocListener<AuthBloc, AuthState>(
                       listener: (context, state) {
@@ -93,6 +111,12 @@ class _LoginPageState extends State<LoginPage> {
               },
               child: const Text('Don\'t have an account? Register'),
             ),
+            ElevatedButton(
+              onPressed: _login,
+              child: Text('Login with Spotify'),
+            ),
+            SizedBox(height: 20),
+            if (_profileInfo != null) Text(_profileInfo!),
           ],
         ),
       ),
