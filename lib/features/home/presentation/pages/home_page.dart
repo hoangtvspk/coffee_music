@@ -33,13 +33,19 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text('Home'),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: () {
-              // Navigate to Login Page (if needed)
-              context.read<AuthBloc>().add(const AuthEvent.logout());
-              context.go('/');
+          BlocListener<AuthBloc, AuthState>(
+            listener: (context, state) {
+              state.maybeWhen(
+                initial: () => context.go('/'),
+                orElse: () {},
+              );
             },
+            child: IconButton(
+              icon: const Icon(Icons.logout),
+              onPressed: () {
+                context.read<AuthBloc>().add(const AuthEvent.logout());
+              },
+            ),
           ),
         ],
       ),
