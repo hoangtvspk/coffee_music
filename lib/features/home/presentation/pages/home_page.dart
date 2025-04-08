@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
                   success: (user) => Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('Welcome back,'),
+                      const Text('Welcome back,'),
                       Text(
                         user.name,
                         style: Theme.of(context).textTheme.headlineMedium,

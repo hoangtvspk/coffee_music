@@ -9,7 +9,6 @@ import 'package:go_router/go_router.dart';
 import '../../features/auth/presentation/pages/login_page.dart' show LoginPage;
 import '../../features/register/data/repositories/auth_repository_impl.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../storage/secure_storage.dart';
 
 GoRouter router = GoRouter(
