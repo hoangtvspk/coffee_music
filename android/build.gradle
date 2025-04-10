@@ -19,6 +19,6 @@ tasks.register("clean", Delete) {
 
 buildscript {
     ext {
-        namespace = "bui.dev.flutter_bloc_with_clean_architectore"
+        namespace = "bui.dev.buitify"
     }
 }

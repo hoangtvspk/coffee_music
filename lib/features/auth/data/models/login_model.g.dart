@@ -11,7 +11,6 @@ _$LoginModelImpl _$$LoginModelImplFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String,
       name: json['name'] as String,
       email: json['email'] as String,
-      token: json['token'] as String,
     );
 
 Map<String, dynamic> _$$LoginModelImplToJson(_$LoginModelImpl instance) =>
@@ -19,5 +18,4 @@ Map<String, dynamic> _$$LoginModelImplToJson(_$LoginModelImpl instance) =>
       'id': instance.id,
       'name': instance.name,
       'email': instance.email,
-      'token': instance.token,
     };

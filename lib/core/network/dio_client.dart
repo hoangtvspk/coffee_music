@@ -1,15 +1,19 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_bloc_with_clean_architectore/core/config/env_config.dart';
+import 'package:buitify_coffee/core/config/env_config.dart';
+import 'package:buitify_coffee/core/storage/secure_storage.dart';
+import 'package:buitify_coffee/features/auth/data/datasources/auth_remote_data_source.dart';
 
 class DioClient {
   static DioClient? _instance;
   final Dio _dio;
+  final SecureStorage _secureStorage = SecureStorage();
   String? _accessToken;
   String? _refreshToken;
 
   // Private constructor
   DioClient._internal(this._dio) {
+    _initializeTokens();
     setupInterceptors();
   }
 
@@ -28,15 +32,30 @@ class DioClient {
     return _instance!;
   }
 
-  // Methods to update tokens
-  void setTokens({String? accessToken, String? refreshToken}) {
-    _accessToken = accessToken;
-    _refreshToken = refreshToken;
+  // Initialize tokens from secure storage
+  Future<void> _initializeTokens() async {
+    _accessToken = await _secureStorage.readAccessToken();
+    _refreshToken = await _secureStorage.readRefreshToken();
   }
 
-  void resetTokens() {
+  // Methods to update tokens
+  Future<void> setTokens({String? accessToken, String? refreshToken}) async {
+    _accessToken = accessToken;
+    _refreshToken = refreshToken;
+
+    if (accessToken != null) {
+      await _secureStorage.writeAccessToken(accessToken);
+    }
+    if (refreshToken != null) {
+      await _secureStorage.writeRefreshToken(refreshToken);
+    }
+  }
+
+  Future<void> resetTokens() async {
     _accessToken = null;
     _refreshToken = null;
+    await _secureStorage.deleteAccessToken();
+    await _secureStorage.deleteRefreshToken();
   }
 
   void setupInterceptors() {
@@ -61,44 +80,36 @@ class DioClient {
                 // Store the failed request
                 final RequestOptions requestOptions = error.requestOptions;
 
-                // Try to refresh the token
-                final response = await _dio.post(
-                  '/refresh-token', // Your refresh token endpoint
-                  data: {
-                    'refresh_token': _refreshToken,
+                // Try to refresh the token using AuthRemoteDataSource
+                final authDataSource = AuthRemoteDataSourceImpl();
+                await authDataSource.refreshToken();
+
+                // Get the new access token
+                final newAccessToken = await _secureStorage.readAccessToken();
+                if (newAccessToken == null) {
+                  throw Exception('Failed to get new access token');
+                }
+
+                // Retry the original request with new token
+                final opts = Options(
+                  method: requestOptions.method,
+                  headers: {
+                    'Authorization': 'Bearer $newAccessToken',
+                    ...requestOptions.headers,
                   },
                 );
 
-                if (response.statusCode == 200) {
-                  // Update tokens
-                  final newAccessToken = response.data['access_token'];
-                  final newRefreshToken = response.data['refresh_token'];
-                  setTokens(
-                    accessToken: newAccessToken,
-                    refreshToken: newRefreshToken,
-                  );
+                final retryResponse = await _dio.request(
+                  requestOptions.path,
+                  options: opts,
+                  data: requestOptions.data,
+                  queryParameters: requestOptions.queryParameters,
+                );
 
-                  // Retry the original request with new token
-                  final opts = Options(
-                    method: requestOptions.method,
-                    headers: {
-                      'Authorization': 'Bearer $newAccessToken',
-                      ...requestOptions.headers,
-                    },
-                  );
-
-                  final retryResponse = await _dio.request(
-                    requestOptions.path,
-                    options: opts,
-                    data: requestOptions.data,
-                    queryParameters: requestOptions.queryParameters,
-                  );
-
-                  return handler.resolve(retryResponse);
-                }
+                return handler.resolve(retryResponse);
               } catch (e) {
                 // Refresh token failed - user needs to login again
-                resetTokens();
+                await resetTokens();
                 // You might want to notify your auth state management here
                 // e.g., BlocProvider.of<AuthBloc>(context).add(LogoutEvent());
               }

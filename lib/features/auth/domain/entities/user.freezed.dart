@@ -23,7 +23,6 @@ mixin _$User {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
-  String get token => throw _privateConstructorUsedError;
 
   /// Serializes this User to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -39,7 +38,7 @@ abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res, User>;
   @useResult
-  $Res call({String id, String name, String email, String token});
+  $Res call({String id, String name, String email});
 }
 
 /// @nodoc
@@ -60,7 +59,6 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? id = null,
     Object? name = null,
     Object? email = null,
-    Object? token = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -75,10 +73,6 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
     ) as $Val);
   }
 }
@@ -90,7 +84,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       __$$UserImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name, String email, String token});
+  $Res call({String id, String name, String email});
 }
 
 /// @nodoc
@@ -108,7 +102,6 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
     Object? email = null,
-    Object? token = null,
   }) {
     return _then(_$UserImpl(
       id: null == id
@@ -123,10 +116,6 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -134,11 +123,7 @@ class __$$UserImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$UserImpl implements _User {
-  const _$UserImpl(
-      {required this.id,
-      required this.name,
-      required this.email,
-      required this.token});
+  const _$UserImpl({required this.id, required this.name, required this.email});
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
@@ -149,12 +134,10 @@ class _$UserImpl implements _User {
   final String name;
   @override
   final String email;
-  @override
-  final String token;
 
   @override
   String toString() {
-    return 'User(id: $id, name: $name, email: $email, token: $token)';
+    return 'User(id: $id, name: $name, email: $email)';
   }
 
   @override
@@ -164,13 +147,12 @@ class _$UserImpl implements _User {
             other is _$UserImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.email, email) || other.email == email) &&
-            (identical(other.token, token) || other.token == token));
+            (identical(other.email, email) || other.email == email));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, email, token);
+  int get hashCode => Object.hash(runtimeType, id, name, email);
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
@@ -192,8 +174,7 @@ abstract class _User implements User {
   const factory _User(
       {required final String id,
       required final String name,
-      required final String email,
-      required final String token}) = _$UserImpl;
+      required final String email}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
@@ -203,8 +184,6 @@ abstract class _User implements User {
   String get name;
   @override
   String get email;
-  @override
-  String get token;
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.

@@ -1,4 +1,6 @@
+import 'package:buitify_coffee/features/auth/data/models/login_model.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter/widgets.dart';
 import '../../../../core/error/failure.dart';
 import '../../domain/entities/user.dart';
 import '../../domain/repositories/auth_repository.dart';
@@ -10,15 +12,13 @@ class AuthRepositoryImpl implements AuthRepository {
   AuthRepositoryImpl(this.remoteDataSource);
 
   @override
-  Future<Either<Failure, User>> login({
-    required String email,
-    required String password,
-  }) async {
+  Future<Either<Failure, User>> login() async {
     try {
-      final result = await remoteDataSource.login(email, password);
-      print("result => $result");
-      return Right(
-          User(token: result.data?.token ?? '', id: '', name: 'Hoang', email: ''));
+      final result = await remoteDataSource.loginWithSpotify();
+      if (result.data == null) {
+        throw Exception("Login Failed");
+      }
+      return Right(result.data!.toEntity());
     } catch (e) {
       print(e);
       return const Left(ServerFailure("Login Failed"));

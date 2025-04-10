@@ -1,7 +1,9 @@
+import 'package:buitify_coffee/core/config/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_with_clean_architectore/features/auth/presentation/pages/auth_service.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+
 import '../bloc/auth_bloc.dart';
 
 class LoginPage extends StatefulWidget {
@@ -15,64 +17,56 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  final authService = AuthService();
-  String? _profileInfo;
-
-  Future<void> _login() async {
-    await authService.signInWithSpotify();
-    final profile = await authService.getUserProfile();
-
-    setState(() {
-      _profileInfo = profile != null
-          ? 'Name: ${profile['display_name']}\nEmail: ${profile['email']}'
-          : 'Failed to load profile';
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-          title:
-              const Text('Login', style: TextStyle(color: Color(0xFF8D623A))),
-          backgroundColor: const Color(0xFFE8DAB8)),
-      backgroundColor: const Color(0xFFE8DAB8),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            Image.asset('assets/images/cfmusic_logo.png'),
-            TextField(
-              controller: _emailController,
-              decoration: const InputDecoration(labelText: 'Email'),
-            ),
-            TextField(
-              controller: _passwordController,
-              obscureText: true,
-              decoration: const InputDecoration(labelText: 'Password'),
-            ),
-            const SizedBox(height: 16),
-            BlocConsumer<AuthBloc, AuthState>(
-              listener: (context, state) {
-                state.maybeWhen(
-                  success: (user) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Welcome ${user.name}')),
-                    );
-                  },
-                  failure: (message) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Error: $message')),
-                    );
-                  },
-                  orElse: () {},
-                );
-              },
-              builder: (context, state) {
-                return Column(
-                  children: [
-                    if (state is AuthLoading) const CircularProgressIndicator(),
-                    ElevatedButton(
+    return Container(
+      alignment: Alignment.center,
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/images/login_background_cf_ice.png'),
+          fit: BoxFit.fitWidth,
+          alignment: Alignment.bottomCenter,
+        ),
+        color: AppColor.backgroundGray,
+      ),
+      child: Stack(
+        children: [
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: Image.asset('assets/images/login_background_header.png'),
+          ),
+          BlocConsumer<AuthBloc, AuthState>(
+            listener: (context, state) {
+              state.maybeWhen(
+                success: (user) {
+                  context.go('/home'); //
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Welcome ${user.name}')),
+                  );
+                },
+                failure: (message) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Error: $message')),
+                  );
+                },
+                orElse: () {},
+              );
+            },
+            builder: (context, state) {
+              return Center(
+                  child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                spacing: 20,
+                children: [
+                  if (state is AuthLoading)
+                    const CircularProgressIndicator(
+                      color: AppColor.brownDark,
+                    ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 50.0),
+                    child: ElevatedButton(
                       onPressed: () {
                         context.read<AuthBloc>().add(
                               AuthEvent.login(
@@ -82,43 +76,33 @@ class _LoginPageState extends State<LoginPage> {
                             );
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF8D623A),
+                        backgroundColor: AppColor.button,
+                        minimumSize: const Size(double.infinity, 55),
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       ),
-                      child: const Text('Login',
-                          style: TextStyle(color: Colors.white)),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        spacing: 4,
+                        children: [
+                          SvgPicture.asset(
+                            'assets/svgs/spotify_icon.svg',
+                            colorFilter: const ColorFilter.mode(
+                              AppColor.textSecondary,
+                              BlendMode.srcIn,
+                            ),
+                          ),
+                          const Text('Login with Spotify',
+                              style: TextStyle(color: AppColor.textSecondary))
+                        ],
+                      ),
                     ),
-                    BlocListener<AuthBloc, AuthState>(
-                      listener: (context, state) {
-                        if (state is AuthSuccess) {
-                          context.go(
-                              '/home'); // ✅ Navigate to home after successful login
-                        } else if (state is AuthFailure) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text(state.message)),
-                          );
-                        }
-                      },
-                      child:
-                          Container(), // Keep an empty container to wrap around BlocListener
-                    ),
-                  ],
-                );
-              },
-            ),
-            TextButton(
-              onPressed: () {
-                context.go('/register');
-              },
-              child: const Text('Don\'t have an account? Register'),
-            ),
-            ElevatedButton(
-              onPressed: _login,
-              child: Text('Login with Spotify'),
-            ),
-            SizedBox(height: 20),
-            if (_profileInfo != null) Text(_profileInfo!),
-          ],
-        ),
+                  ),
+                  const SizedBox(height: 100),
+                ],
+              ));
+            },
+          ),
+        ],
       ),
     );
   }

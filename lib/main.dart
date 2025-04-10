@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_with_clean_architectore/core/config/env_config.dart';
-import 'package:flutter_bloc_with_clean_architectore/features/auth/data/datasources/auth_remote_data_source.dart';
-import 'package:flutter_bloc_with_clean_architectore/features/auth/data/repositories/auth_repository_impl.dart';
-import 'package:flutter_bloc_with_clean_architectore/features/auth/domain/repositories/auth_repository.dart';
-import 'package:flutter_bloc_with_clean_architectore/features/auth/domain/usecases/login_usecase.dart';
-import 'package:flutter_bloc_with_clean_architectore/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:buitify_coffee/core/config/env_config.dart';
+import 'package:buitify_coffee/features/auth/data/datasources/auth_remote_data_source.dart';
+import 'package:buitify_coffee/features/auth/data/repositories/auth_repository_impl.dart';
+import 'package:buitify_coffee/features/auth/domain/repositories/auth_repository.dart';
+import 'package:buitify_coffee/features/auth/domain/usecases/login_usecase.dart';
+import 'package:buitify_coffee/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import 'core/router/app_router.dart';

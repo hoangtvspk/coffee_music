@@ -1,4 +1,4 @@
-package bui.dev.buitify_coffee
+package bui.dev.buitify
 
 import io.flutter.embedding.android.FlutterActivity
 

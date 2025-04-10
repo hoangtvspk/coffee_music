@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_with_clean_architectore/features/auth/domain/entities/user.dart';
+import 'package:buitify_coffee/features/auth/domain/entities/user.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_bloc_with_clean_architectore/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:flutter_bloc_with_clean_architectore/features/auth/presentation/pages/login_page.dart';
+import 'package:buitify_coffee/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:buitify_coffee/features/auth/presentation/pages/login_page.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:go_router/go_router.dart';
 import 'dart:async';
@@ -11,10 +11,10 @@ import 'dart:async';
 class MockAuthBloc extends Mock implements AuthBloc {
   final _controller = StreamController<AuthState>.broadcast();
   AuthState _currentState = const AuthState.initial();
-  
+
   @override
   Stream<AuthState> get stream => _controller.stream;
-  
+
   @override
   AuthState get state => _currentState;
 
@@ -36,7 +36,6 @@ class MockNavigationService extends Mock {
 }
 
 class TestLoginPage extends StatelessWidget {
-
   const TestLoginPage({
     super.key,
   });
@@ -118,7 +117,8 @@ void main() {
     expect(find.text('Error: $errorMessage'), findsOneWidget);
   });
 
-  testWidgets('should call login event when login button is pressed with valid credentials',
+  testWidgets(
+      'should call login event when login button is pressed with valid credentials',
       (WidgetTester tester) async {
     // Arrange
     await tester.pumpWidget(createWidgetUnderTest());
@@ -141,16 +141,12 @@ void main() {
     const userName = 'Test User';
     await tester.pumpWidget(createWidgetUnderTest());
     mockAuthBloc.emit(
-      AuthState.success(User(
-        id: '1',
-        name: userName,
-        email: 'test@example.com',
-        token: 'test_token',
-      )),
+      AuthState.success(
+          User(id: '1', name: userName, email: 'test@example.com')),
     );
     await tester.pump();
 
     // Assert
     expect(find.text('Welcome $userName'), findsOneWidget);
   });
-} 
+}

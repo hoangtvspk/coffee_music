@@ -1,9 +1,9 @@
-import 'package:flutter_bloc_with_clean_architectore/core/utils/app_utils.dart';
-import 'package:flutter_bloc_with_clean_architectore/features/home/presentation/pages/home_page.dart';
-import 'package:flutter_bloc_with_clean_architectore/features/register/data/datasources/auth_remote_data_source.dart';
-import 'package:flutter_bloc_with_clean_architectore/features/register/domain/repositories/register_repository.dart';
-import 'package:flutter_bloc_with_clean_architectore/features/register/presentation/bloc/register_bloc.dart';
-import 'package:flutter_bloc_with_clean_architectore/features/register/presentation/pages/register_page.dart';
+import 'package:buitify_coffee/core/utils/app_utils.dart';
+import 'package:buitify_coffee/features/home/presentation/pages/home_page.dart';
+import 'package:buitify_coffee/features/register/data/datasources/auth_remote_data_source.dart';
+import 'package:buitify_coffee/features/register/domain/repositories/register_repository.dart';
+import 'package:buitify_coffee/features/register/presentation/bloc/register_bloc.dart';
+import 'package:buitify_coffee/features/register/presentation/pages/register_page.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:go_router/go_router.dart';
 import '../../features/auth/presentation/pages/login_page.dart' show LoginPage;

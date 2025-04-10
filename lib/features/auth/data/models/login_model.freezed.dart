@@ -23,7 +23,6 @@ mixin _$LoginModel {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
-  String get token => throw _privateConstructorUsedError;
 
   /// Serializes this LoginModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -41,7 +40,7 @@ abstract class $LoginModelCopyWith<$Res> {
           LoginModel value, $Res Function(LoginModel) then) =
       _$LoginModelCopyWithImpl<$Res, LoginModel>;
   @useResult
-  $Res call({String id, String name, String email, String token});
+  $Res call({String id, String name, String email});
 }
 
 /// @nodoc
@@ -62,7 +61,6 @@ class _$LoginModelCopyWithImpl<$Res, $Val extends LoginModel>
     Object? id = null,
     Object? name = null,
     Object? email = null,
-    Object? token = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -77,10 +75,6 @@ class _$LoginModelCopyWithImpl<$Res, $Val extends LoginModel>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
     ) as $Val);
   }
 }
@@ -93,7 +87,7 @@ abstract class _$$LoginModelImplCopyWith<$Res>
       __$$LoginModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name, String email, String token});
+  $Res call({String id, String name, String email});
 }
 
 /// @nodoc
@@ -112,7 +106,6 @@ class __$$LoginModelImplCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
     Object? email = null,
-    Object? token = null,
   }) {
     return _then(_$LoginModelImpl(
       id: null == id
@@ -127,10 +120,6 @@ class __$$LoginModelImplCopyWithImpl<$Res>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -139,10 +128,7 @@ class __$$LoginModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$LoginModelImpl implements _LoginModel {
   const _$LoginModelImpl(
-      {required this.id,
-      required this.name,
-      required this.email,
-      required this.token});
+      {required this.id, required this.name, required this.email});
 
   factory _$LoginModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$LoginModelImplFromJson(json);
@@ -153,12 +139,10 @@ class _$LoginModelImpl implements _LoginModel {
   final String name;
   @override
   final String email;
-  @override
-  final String token;
 
   @override
   String toString() {
-    return 'LoginModel(id: $id, name: $name, email: $email, token: $token)';
+    return 'LoginModel(id: $id, name: $name, email: $email)';
   }
 
   @override
@@ -168,13 +152,12 @@ class _$LoginModelImpl implements _LoginModel {
             other is _$LoginModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.email, email) || other.email == email) &&
-            (identical(other.token, token) || other.token == token));
+            (identical(other.email, email) || other.email == email));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, email, token);
+  int get hashCode => Object.hash(runtimeType, id, name, email);
 
   /// Create a copy of LoginModel
   /// with the given fields replaced by the non-null parameter values.
@@ -196,8 +179,7 @@ abstract class _LoginModel implements LoginModel {
   const factory _LoginModel(
       {required final String id,
       required final String name,
-      required final String email,
-      required final String token}) = _$LoginModelImpl;
+      required final String email}) = _$LoginModelImpl;
 
   factory _LoginModel.fromJson(Map<String, dynamic> json) =
       _$LoginModelImpl.fromJson;
@@ -208,8 +190,6 @@ abstract class _LoginModel implements LoginModel {
   String get name;
   @override
   String get email;
-  @override
-  String get token;
 
   /// Create a copy of LoginModel
   /// with the given fields replaced by the non-null parameter values.
