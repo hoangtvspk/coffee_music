@@ -1,4 +1,6 @@
+import 'package:buitify_coffee/core/constants/api_endpoints.dart';
 import 'package:buitify_coffee/core/storage/secure_storage.dart';
+import 'package:buitify_coffee/features/auth/domain/entities/user.dart';
 import 'package:flutter_appauth/flutter_appauth.dart';
 
 import '../../../../core/config/env_config.dart';
@@ -59,14 +61,17 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<BaseResponse<LoginModel>> getUserProfile() async {
     try {
-      final response = await dioClient.get(
-        'https://api.spotify.com/v1/me',
-      );
+      final response = await dioClient.get(ApiEndpoints.me);
       return BaseResponse(
           data: LoginModel(
               id: response.data['id'],
               name: response.data['display_name'],
-              email: response.data['email']));
+              email: response.data['email'],
+              images: (response.data['images'] as List)
+                  .map((image) => SpotifyImage.fromJson(image))
+                  .toList(),
+              country: response.data['country'],
+              product: response.data['product']));
     } catch (e) {
       throw Exception('Failed to fetch profile: $e');
     }

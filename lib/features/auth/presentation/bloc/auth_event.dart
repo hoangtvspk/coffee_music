@@ -7,4 +7,5 @@ class AuthEvent with _$AuthEvent {
     required String password,
   }) = LoginEvent;
   const factory AuthEvent.logout() = LogoutEvent;
+  const factory AuthEvent.getUserInfo() = GetUserInfoEvent;
 }

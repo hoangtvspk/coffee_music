@@ -6,10 +6,14 @@ part 'login_model.g.dart';
 
 @freezed
 class LoginModel with _$LoginModel {
-  const factory LoginModel(
-      {required String id,
-      required String name,
-      required String email}) = _LoginModel;
+  const factory LoginModel({
+    required String id,
+    required String name,
+    required String email,
+    required List<SpotifyImage> images,
+    required String country,
+    required String product,
+  }) = _LoginModel;
 
   factory LoginModel.fromJson(Map<String, dynamic> json) =>
       _$LoginModelFromJson(json);
@@ -17,6 +21,13 @@ class LoginModel with _$LoginModel {
 
 extension LoginModelX on LoginModel {
   User toEntity() {
-    return User(id: id, name: name, email: email);
+    return User(
+      id: id,
+      name: name,
+      email: email,
+      images: images,
+      country: country,
+      product: product,
+    );
   }
 }

@@ -35,4 +35,15 @@ class AuthRepositoryImpl implements AuthRepository {
       return const Left(ServerFailure("Logout Failed"));
     }
   }
+
+  @override
+  Future<Either<Failure, User>> getUser() async {
+    try {
+      final result = await remoteDataSource.getUserProfile();
+      return Right(result.data!.toEntity());
+    } catch (e) {
+      print(e);
+      return const Left(ServerFailure("Get User Failed"));
+    }
+  }
 }

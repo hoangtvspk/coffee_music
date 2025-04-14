@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:buitify_coffee/features/auth/domain/entities/user.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:buitify_coffee/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:buitify_coffee/features/auth/presentation/pages/login_page.dart';
+import 'package:buitify_coffee/features/auth/presentation/screens/login_screen.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:go_router/go_router.dart';
 import 'dart:async';
@@ -42,7 +42,7 @@ class TestLoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const LoginPage();
+    return const LoginScreen();
   }
 }
 
@@ -141,8 +141,13 @@ void main() {
     const userName = 'Test User';
     await tester.pumpWidget(createWidgetUnderTest());
     mockAuthBloc.emit(
-      AuthState.success(
-          User(id: '1', name: userName, email: 'test@example.com')),
+      AuthState.success(User(
+          id: '1',
+          name: userName,
+          email: 'test@example.com',
+          images: [],
+          country: '',
+          product: '')),
     );
     await tester.pump();
 

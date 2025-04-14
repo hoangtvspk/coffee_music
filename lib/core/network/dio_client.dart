@@ -10,6 +10,7 @@ class DioClient {
   final SecureStorage _secureStorage = SecureStorage();
   String? _accessToken;
   String? _refreshToken;
+  bool _isInitialized = false;
 
   // Private constructor
   DioClient._internal(this._dio) {
@@ -34,8 +35,15 @@ class DioClient {
 
   // Initialize tokens from secure storage
   Future<void> _initializeTokens() async {
-    _accessToken = await _secureStorage.readAccessToken();
-    _refreshToken = await _secureStorage.readRefreshToken();
+    try {
+      _accessToken = await _secureStorage.readAccessToken();
+      _refreshToken = await _secureStorage.readRefreshToken();
+      _isInitialized = true;
+    } catch (e) {
+      debugPrint('Error initializing tokens: $e');
+      _isInitialized =
+          true; // Still mark as initialized to prevent infinite waiting
+    }
   }
 
   // Methods to update tokens
@@ -61,7 +69,20 @@ class DioClient {
   void setupInterceptors() {
     _dio.interceptors.add(
       InterceptorsWrapper(
-        onRequest: (options, handler) {
+        onRequest: (options, handler) async {
+          // Wait for initialization if not done yet
+          if (!_isInitialized) {
+            await Future.delayed(const Duration(milliseconds: 100));
+            if (!_isInitialized) {
+              return handler.reject(
+                DioException(
+                  requestOptions: options,
+                  error: 'DioClient not initialized',
+                ),
+              );
+            }
+          }
+
           if (_accessToken != null) {
             options.headers['Authorization'] = 'Bearer $_accessToken';
           }
@@ -134,10 +155,10 @@ class DioClient {
 
     if (kDebugMode) {
       _dio.interceptors.add(LogInterceptor(
-        requestBody: true,
-        responseBody: true,
+        requestBody: false,
+        responseBody: false,
         requestHeader: true,
-        responseHeader: true,
+        responseHeader: false,
       ));
     }
   }
@@ -149,7 +170,11 @@ class DioClient {
     Options? options,
     CancelToken? cancelToken,
     ProgressCallback? onReceiveProgress,
-  }) {
+  }) async {
+    // Ensure initialization is complete
+    if (!_isInitialized) {
+      await _initializeTokens();
+    }
     return _dio.get(
       path,
       queryParameters: queryParameters,

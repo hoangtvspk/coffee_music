@@ -5,6 +5,7 @@ import 'package:buitify_coffee/features/auth/data/datasources/auth_remote_data_s
 import 'package:buitify_coffee/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:buitify_coffee/features/auth/domain/repositories/auth_repository.dart';
 import 'package:buitify_coffee/features/auth/domain/usecases/login_usecase.dart';
+import 'package:buitify_coffee/features/auth/domain/usecases/get_user_usecase.dart';
 import 'package:buitify_coffee/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
@@ -31,8 +32,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-            create: (context) => AuthBloc(LoginUseCase(authRepository))),
+        BlocProvider(create: (context) {
+          AuthBloc bloc = AuthBloc(
+            LoginUseCase(authRepository),
+            GetUserUseCase(authRepository),
+          );
+          bloc.add(const AuthEvent.getUserInfo());
+          return bloc;
+        })
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

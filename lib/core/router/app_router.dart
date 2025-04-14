@@ -1,12 +1,13 @@
 import 'package:buitify_coffee/core/utils/app_utils.dart';
-import 'package:buitify_coffee/features/home/presentation/pages/home_page.dart';
+import 'package:buitify_coffee/features/auth/presentation/screens/login_screen.dart';
+import 'package:buitify_coffee/features/home/presentation/bloc/home_bloc.dart';
+import 'package:buitify_coffee/features/home/presentation/screens/home_screen.dart';
 import 'package:buitify_coffee/features/register/data/datasources/auth_remote_data_source.dart';
 import 'package:buitify_coffee/features/register/domain/repositories/register_repository.dart';
 import 'package:buitify_coffee/features/register/presentation/bloc/register_bloc.dart';
 import 'package:buitify_coffee/features/register/presentation/pages/register_page.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:go_router/go_router.dart';
-import '../../features/auth/presentation/pages/login_page.dart' show LoginPage;
 import '../../features/register/data/repositories/auth_repository_impl.dart';
 import 'package:flutter/material.dart';
 import '../storage/secure_storage.dart';
@@ -44,11 +45,11 @@ GoRouter router = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) => const LoginPage(),
+      builder: (context, state) => const LoginScreen(),
     ),
     GoRoute(
       path: '/home',
-      builder: (context, state) => const HomePage(),
+      builder: (context, state) => const HomeScreen(),
     ),
     RouteUtils.createPageBloc<RegisterBloc, RegisterRepository,
         RegisterRemoteDataSource>(
