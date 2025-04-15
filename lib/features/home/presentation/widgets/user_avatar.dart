@@ -10,25 +10,29 @@ class UserAvatar extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) {
-        return CircleAvatar(
-          backgroundColor: AppColor.primary,
-          backgroundImage: state.maybeWhen(
-            success: (user) => user.images.isNotEmpty
-                ? NetworkImage(user.images.first.url)
-                : null,
-            orElse: () => null,
-          ),
-          child: state.maybeWhen(
-            loading: () => const CircularProgressIndicator(color: Colors.white),
-            success: (user) => user.images.isEmpty
-                ? Text(
-                    user.name[0].toUpperCase(),
-                    style: const TextStyle(color: Colors.white),
-                  )
-                : null,
-            orElse: () => const Text(
-              'U',
-              style: TextStyle(color: Colors.white),
+        return GestureDetector(
+          onTap: () => Scaffold.of(context).openDrawer(),
+          child: CircleAvatar(
+            backgroundColor: AppColor.primary,
+            backgroundImage: state.maybeWhen(
+              success: (user) => user.images.isNotEmpty
+                  ? NetworkImage(user.images.first.url)
+                  : null,
+              orElse: () => null,
+            ),
+            child: state.maybeWhen(
+              loading: () =>
+                  const CircularProgressIndicator(color: Colors.white),
+              success: (user) => user.images.isEmpty
+                  ? Text(
+                      user.name[0].toUpperCase(),
+                      style: const TextStyle(color: Colors.white),
+                    )
+                  : null,
+              orElse: () => const Text(
+                'U',
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ),
         );

@@ -14,4 +14,6 @@ extension AppColor on Colors {
   static const Color textQuinary = Color(0xFFDDDDDD);
   static const Color textSenary = Color(0xFFEEEEEE);
   static const Color button = Color(0xFF6C3E1D);
+
+  static const Color white = Color(0xFFFFFFFF);
 }

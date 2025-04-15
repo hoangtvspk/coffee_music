@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:buitify_coffee/core/config/env_config.dart';
+import 'package:buitify_coffee/core/config/app_theme.dart';
 import 'package:buitify_coffee/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:buitify_coffee/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:buitify_coffee/features/auth/domain/repositories/auth_repository.dart';
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
+        theme: AppTheme.darkTheme,
         color: const Color(0xFFE8DAB8),
         routerConfig: router,
       ),

@@ -1,3 +1,4 @@
+import 'package:buitify_coffee/features/home/presentation/widgets/walking_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:buitify_coffee/core/storage/secure_storage.dart';
@@ -11,6 +12,7 @@ import '../../../../core/utils/ui_utils.dart';
 import '../bloc/home_bloc.dart';
 import '../widgets/album_list.dart';
 import '../widgets/playlist_list.dart';
+import '../widgets/sidebar.dart';
 import '../../data/datasources/home_remote_data_source.dart';
 import '../../data/repositories/home_repository_impl.dart';
 import '../../domain/usecases/get_new_releases.dart';
@@ -90,197 +92,130 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         child: Scaffold(
           backgroundColor: AppColor.brownDark,
-          body: SafeArea(
-            child: BlocBuilder<HomeBloc, HomeState>(
-              builder: (context, state) {
-                return state.when(
-                  initial: () => const Center(
-                    child: CircularProgressIndicator(
-                      color: AppColor.primary,
+          drawer: const Sidebar(),
+          body: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                stops: const [0.0, 0.5, 1.0],
+                colors: [
+                  Colors.black.withValues(alpha: 0.2),
+                  Colors.black.withValues(alpha: 0.3),
+                  Colors.black.withValues(alpha: 0.9),
+                ],
+              ),
+            ),
+            child: SafeArea(
+              child: BlocBuilder<HomeBloc, HomeState>(
+                builder: (context, state) {
+                  return state.when(
+                    initial: () => const Center(
+                      child: CircularProgressIndicator(
+                        color: AppColor.primary,
+                      ),
                     ),
-                  ),
-                  loading: () => const Center(
-                    child: CircularProgressIndicator(
-                      color: AppColor.primary,
+                    loading: () => const Center(
+                      child: CircularProgressIndicator(
+                        color: AppColor.primary,
+                      ),
                     ),
-                  ),
-                  homeError: (message) => Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          message,
-                          style: const TextStyle(color: Colors.white),
-                        ),
-                        const SizedBox(height: 20),
-                        ElevatedButton(
-                          onPressed: () {
-                            context
-                                .read<HomeBloc>()
-                                .add(const HomeEvent.started());
-                          },
-                          child: const Text('Retry'),
-                        ),
-                      ],
+                    homeError: (message) => Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            message,
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                          const SizedBox(height: 20),
+                          ElevatedButton(
+                            onPressed: () {
+                              context
+                                  .read<HomeBloc>()
+                                  .add(const HomeEvent.started());
+                            },
+                            child: const Text('Retry'),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  loaded: (newReleases, userPlaylists) {
-                    print('New Releases: ${newReleases.length}');
-                    print('User Playlists: ${userPlaylists.length}');
-
-                    return CustomScrollView(
-                      slivers: [
-                        SliverAppBar(
-                          backgroundColor: Colors.transparent,
-                          floating: true,
-                          title: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
+                    loaded: (newReleases, userPlaylists) {
+                      return CustomScrollView(
+                        slivers: [
+                          SliverAppBar(
+                            backgroundColor: Colors.transparent,
+                            floating: true,
+                            leadingWidth: 30,
+                            centerTitle: false,
+                            title: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              spacing: 16,
                               children: [
-                                const UserAvatar(),
-                                const SizedBox(width: 8),
-                                Row(
-                                  children: [
-                                    CustomFilterChip(
-                                      label: 'All',
-                                      isSelected: true,
-                                      onTap: () {},
-                                    ),
-                                    const SizedBox(width: 8),
-                                    CustomFilterChip(
-                                      label: 'Music',
-                                      isSelected: false,
-                                      onTap: () {},
-                                    ),
-                                    const SizedBox(width: 8),
-                                    CustomFilterChip(
-                                      label: 'Podcasts',
-                                      isSelected: false,
-                                      onTap: () {},
-                                    ),
-                                  ],
+                                Image.asset(
+                                  'assets/images/buitify_text.png',
+                                  height: 30,
+                                ),
+                                const Expanded(
+                                  child: WalkingAnimation(
+                                    characterWidth: 40,
+                                    characterHeight: 40,
+                                  ),
                                 ),
                               ],
                             ),
                           ),
-                          actions: [
-                            IconButton(
-                              icon: const Icon(Icons.logout,
-                                  color: AppColor.textSecondary),
-                              onPressed: _showLogoutConfirmation,
-                            ),
-                          ],
-                        ),
-                        SliverList(
-                          delegate: SliverChildListDelegate([
-                            Padding(
-                              padding: const EdgeInsets.all(16),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text(
-                                    'Based on your recent listening',
+                          SliverList(
+                            delegate: SliverChildListDelegate([
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 16),
+                                child: Image.asset(
+                                  'assets/images/home_chill_banner.png',
+                                  height: 200,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              if (newReleases.isNotEmpty) ...[
+                                const Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 16),
+                                  child: Text(
+                                    'New Releases',
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  const SizedBox(height: 16),
-                                  SizedBox(
-                                    height: 200,
-                                    child: ListView.builder(
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount: 3,
-                                      itemBuilder: (context, index) {
-                                        return Container(
-                                          width: 160,
-                                          margin:
-                                              const EdgeInsets.only(right: 16),
-                                          decoration: BoxDecoration(
-                                            color: AppColor.primary
-                                                .withValues(alpha: 0.2),
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                          ),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Container(
-                                                height: 160,
-                                                width: 160,
-                                                decoration: BoxDecoration(
-                                                  color: AppColor.primary,
-                                                  borderRadius:
-                                                      BorderRadius.circular(8),
-                                                ),
-                                                child: const Center(
-                                                  child: Icon(
-                                                    Icons.music_note,
-                                                    color: Colors.white,
-                                                    size: 48,
-                                                  ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8),
-                                                child: Text(
-                                                  'Your Mix ${index + 1}',
-                                                  style: const TextStyle(
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        );
-                                      },
+                                ),
+                                const SizedBox(height: 16),
+                                AlbumList(albums: newReleases),
+                                const SizedBox(height: 24),
+                              ],
+                              if (userPlaylists.isNotEmpty) ...[
+                                const Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 16),
+                                  child: Text(
+                                    'Your Playlists',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                ],
-                              ),
-                            ),
-                            if (newReleases.isNotEmpty) ...[
-                              const Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 16),
-                                child: Text(
-                                  'New Releases',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
                                 ),
-                              ),
-                              const SizedBox(height: 16),
-                              AlbumList(albums: newReleases),
-                              const SizedBox(height: 24),
-                            ],
-                            if (userPlaylists.isNotEmpty) ...[
-                              const Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 16),
-                                child: Text(
-                                  'Your Playlists',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 16),
-                              PlaylistList(playlists: userPlaylists),
-                            ],
-                          ]),
-                        ),
-                      ],
-                    );
-                  },
-                );
-              },
+                                const SizedBox(height: 16),
+                                PlaylistList(playlists: userPlaylists),
+                              ],
+                            ]),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
+              ),
             ),
           ),
         ),
