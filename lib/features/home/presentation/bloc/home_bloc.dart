@@ -1,5 +1,7 @@
+import 'package:buitify_coffee/core/error/failure.dart';
 import 'package:buitify_coffee/features/home/domain/entities/track/track.dart';
 import 'package:buitify_coffee/features/home/domain/usecases/get_several_track.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../domain/entities/album/album.dart';
@@ -17,6 +19,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final GetUserPlaylists _getUserPlaylists;
   final GetSeveralTrack _getSeveralTrack;
 
+  Either<Failure, List<Album>>? _cacheAlbumResult;
+  Either<Failure, List<Playlist>>? _cachePlaylistResult;
+  Either<Failure, Track>? _cacheTrackResult;
+
   HomeBloc({
     required GetNewReleases getNewReleases,
     required GetUserPlaylists getUserPlaylists,
@@ -28,17 +34,25 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<HomeEvent>((event, emit) async {
       await event.when(
         started: () async {
-          emit(const HomeState.loading());
+          if (_cacheAlbumResult == null ||
+              _cachePlaylistResult == null ||
+              _cacheTrackResult == null) {
+            emit(const HomeState.loading());
+          }
         },
         getNewReleases: (offset, limit) async {
-          emit(const HomeState.loading());
-          final result = await _getNewReleases(
-            PaginationParams(
-              offset: offset,
-              limit: limit,
-            ),
-          );
-          result.fold(
+          if (_cacheAlbumResult == null) {
+            emit(const HomeState.loading());
+            final result = await _getNewReleases(
+              PaginationParams(
+                offset: offset,
+                limit: limit,
+              ),
+            );
+            _cacheAlbumResult = result;
+          }
+
+          _cacheAlbumResult!.fold(
             (failure) => emit(HomeState.homeError(failure.message)),
             (success) => emit(HomeState.loaded(
               newReleases: success,
@@ -54,15 +68,19 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           );
         },
         getUserPlaylists: (offset, limit, userId) async {
-          emit(const HomeState.loading());
-          final result = await _getUserPlaylists(
-            UserPaginationParams(
-              offset: offset,
-              limit: limit,
-              userId: userId,
-            ),
-          );
-          result.fold(
+          if (_cachePlaylistResult == null) {
+            emit(const HomeState.loading());
+            final result = await _getUserPlaylists(
+              UserPaginationParams(
+                offset: offset,
+                limit: limit,
+                userId: userId,
+              ),
+            );
+            _cachePlaylistResult = result;
+          }
+
+          _cachePlaylistResult!.fold(
             (failure) {
               emit(HomeState.homeError(failure.message));
             },
@@ -82,10 +100,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           );
         },
         getTracks: (ids) async {
-          emit(const HomeState.loading());
-          final result = await _getSeveralTrack(ids);
-          print("result: $result");
-          result.fold(
+          if (_cacheTrackResult == null) {
+            emit(const HomeState.loading());
+            final result = await _getSeveralTrack(ids);
+            _cacheTrackResult = result;
+          }
+          _cacheTrackResult!.fold(
             (failure) {
               emit(HomeState.homeError(failure.message));
             },

@@ -1,19 +1,26 @@
 import 'package:buitify_coffee/core/utils/app_utils.dart';
+import 'package:buitify_coffee/features/album_detail/data/datasources/album_detail_remote_data_source.dart';
+import 'package:buitify_coffee/features/album_detail/data/repositories/albums_detail_repository_impl.dart';
 import 'package:buitify_coffee/features/auth/presentation/screens/login_screen.dart';
 import 'package:buitify_coffee/features/main/presentation/screens/main_screen.dart';
 import 'package:buitify_coffee/features/register/data/datasources/auth_remote_data_source.dart';
 import 'package:buitify_coffee/features/register/domain/repositories/register_repository.dart';
 import 'package:buitify_coffee/features/register/presentation/bloc/register_bloc.dart';
 import 'package:buitify_coffee/features/register/presentation/pages/register_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:go_router/go_router.dart';
+import '../../features/album_detail/domain/usecases/get_album_info.dart';
+import '../../features/album_detail/domain/usecases/get_album_tracks.dart';
+import '../../features/album_detail/presentation/bloc/album_track/album_tracks_bloc.dart';
+import '../../features/album_detail/presentation/screens/album_detail_screen.dart';
 import '../../features/register/data/repositories/auth_repository_impl.dart';
 import 'package:flutter/material.dart';
 import '../storage/secure_storage.dart';
 import 'package:dio/dio.dart';
 
 GoRouter router = GoRouter(
-  initialLocation: '/',
+  initialLocation: '/main',
   debugLogDiagnostics: true,
   errorBuilder: (context, state) => Scaffold(
     body: Center(
@@ -112,6 +119,58 @@ GoRouter router = GoRouter(
       createRepository: (dataSource) => RegisterRepositoryImpl(dataSource),
       bloc: (repository) => RegisterBloc(registerRepository: repository),
       child: const RegisterPage(),
+    ),
+    GoRoute(
+      path: '/album/:albumId',
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+          key: state.pageKey,
+          child: BlocProvider(
+            create: (context) => AlbumTracksBloc(
+              getAlbumTracks: GetAlbumTracks(
+                AlbumDetailRepositoryImpl(
+                  AlbumDetailRemoteDataSourceImpl(),
+                ),
+              ),
+              getAlbumInfo: GetAlbumInfo(
+                AlbumDetailRepositoryImpl(
+                  AlbumDetailRemoteDataSourceImpl(),
+                ),
+              ),
+            ),
+            child: AlbumDetailScreen(
+              albumId: state.pathParameters['albumId'] ?? '',
+            ),
+          ),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            const begin = Offset(0.0, 0.1);
+            const end = Offset.zero;
+            const curve = Curves.easeOutCubic;
+
+            var tween =
+                Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+            var offsetAnimation = animation.drive(tween);
+
+            return FadeTransition(
+              opacity: animation,
+              child: SlideTransition(
+                position: offsetAnimation,
+                child: ScaleTransition(
+                  scale: Tween<double>(
+                    begin: 0.95,
+                    end: 1.0,
+                  ).animate(CurvedAnimation(
+                    parent: animation,
+                    curve: curve,
+                  )),
+                  child: child,
+                ),
+              ),
+            );
+          },
+          transitionDuration: const Duration(milliseconds: 500),
+        );
+      },
     ),
   ],
 );

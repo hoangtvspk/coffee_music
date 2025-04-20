@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '../../../../../core/entities/spotify_image.dart';
+import '../../../../../core/entities/spotify_image/spotify_image.dart';
 
 part 'playlist.freezed.dart';
 part 'playlist.g.dart';

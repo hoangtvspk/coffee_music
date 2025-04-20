@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:flutter/foundation.dart';
 import 'dart:async';
 import 'package:buitify_coffee/core/config/env_config.dart';
@@ -38,6 +39,10 @@ class DioClient {
           connectTimeout: const Duration(seconds: 30),
           receiveTimeout: const Duration(seconds: 30),
           sendTimeout: const Duration(seconds: 30),
+          validateStatus: (status) {
+            return status != null &&
+                (status >= 200 && status < 300 || status == 304);
+          },
         ),
       ),
     );
@@ -149,7 +154,7 @@ class DioClient {
 
             try {
               if (_refreshToken == null) {
-                throw Exception('No refresh token available');
+                throw Exception('Login session expired');
               }
 
               // Try to refresh the token using AuthRemoteDataSource
@@ -159,7 +164,7 @@ class DioClient {
               // Get the new access token
               _accessToken = await _secureStorage.readAccessToken();
               if (_accessToken == null) {
-                throw Exception('Failed to get new access token');
+                throw Exception('Login session expired');
               }
 
               // Process all pending requests with new token
@@ -190,7 +195,7 @@ class DioClient {
                 request.completer.completeError(
                   DioException(
                     requestOptions: request.requestOptions,
-                    error: 'Token refresh failed',
+                    error: 'Login session expired',
                   ),
                 );
               }
@@ -199,7 +204,7 @@ class DioClient {
               return handler.reject(
                 DioException(
                   requestOptions: error.requestOptions,
-                  error: 'Token refresh failed',
+                  error: 'Login session expired',
                 ),
               );
             }
@@ -230,6 +235,35 @@ class DioClient {
       ));
     }
   }
+
+  static final options = CacheOptions(
+    // A default store is required for interceptor.
+    store: MemCacheStore(),
+
+    // All subsequent fields are optional to get a standard behaviour.
+
+    // Default.
+    policy: CachePolicy.request,
+    // Returns a cached response on error for given status codes.
+    // Defaults to `[]`.
+    hitCacheOnErrorCodes: [500],
+    // Allows to return a cached response on network errors (e.g. offline usage).
+    // Defaults to `false`.
+    hitCacheOnNetworkFailure: true,
+    // Overrides any HTTP directive to delete entry past this duration.
+    // Useful only when origin server has no cache config or custom behaviour is desired.
+    // Defaults to `null`.
+    maxStale: const Duration(days: 7),
+    // Default. Allows 3 cache sets and ease cleanup.
+    priority: CachePriority.normal,
+    // Default. Body and headers encryption with your own algorithm.
+    cipher: null,
+    // Default. Key builder to retrieve requests.
+    keyBuilder: CacheOptions.defaultCacheKeyBuilder,
+    // Default. Allows to cache POST requests.
+    // Assigning a [keyBuilder] is strongly recommended when `true`.
+    allowPostMethod: false,
+  );
 
   // Expose Dio methods
   Future<Response<T>> get<T>(

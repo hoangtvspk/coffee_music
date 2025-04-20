@@ -1,10 +1,10 @@
 import 'package:buitify_coffee/features/home/data/models/track/track_model.dart';
-
 import '../../../../core/constants/api_endpoints.dart';
 import '../../../../core/models/base_response.dart';
 import '../../../../core/network/dio_client.dart';
 import '../models/album/album_model.dart';
 import '../models/playlist/playlist_model.dart';
+import 'package:dio/dio.dart';
 
 abstract class HomeRemoteDataSource {
   Future<BaseResponse<List<AlbumModel>>> getNewReleases(
@@ -28,6 +28,13 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
           'limit': limit,
           'country': 'US',
         },
+        options: Options(
+          extra: {
+            'cache': true,
+            'cacheKey': 'new_releases_${offset}_$limit',
+            'maxStale': const Duration(days: 1),
+          },
+        ),
       );
 
       final albums = (response.data['albums']['items'] as List)
@@ -49,6 +56,13 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
           'offset': offset,
           'limit': limit,
         },
+        options: Options(
+          extra: {
+            'cache': true,
+            'cacheKey': 'user_playlists_${userId}_${offset}_$limit',
+            'maxStale': const Duration(days: 1),
+          },
+        ),
       );
 
       final items = response.data['items'] as List;
@@ -73,6 +87,13 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
     try {
       final response = await dioClient.get(
         ApiEndpoints.severalTracks(ids),
+        options: Options(
+          extra: {
+            'cache': true,
+            'cacheKey': 'several_tracks_$ids',
+            'maxStale': const Duration(days: 1),
+          },
+        ),
       );
 
       print("Raw response data: ${response.data}");

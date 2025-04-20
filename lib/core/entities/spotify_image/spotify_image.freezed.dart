@@ -20,11 +20,8 @@ SpotifyImage _$SpotifyImageFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$SpotifyImage {
-  @JsonKey(name: 'url')
   String get url => throw _privateConstructorUsedError;
-  @JsonKey(name: 'height')
   int get height => throw _privateConstructorUsedError;
-  @JsonKey(name: 'width')
   int get width => throw _privateConstructorUsedError;
 
   /// Serializes this SpotifyImage to a JSON map.
@@ -43,10 +40,7 @@ abstract class $SpotifyImageCopyWith<$Res> {
           SpotifyImage value, $Res Function(SpotifyImage) then) =
       _$SpotifyImageCopyWithImpl<$Res, SpotifyImage>;
   @useResult
-  $Res call(
-      {@JsonKey(name: 'url') String url,
-      @JsonKey(name: 'height') int height,
-      @JsonKey(name: 'width') int width});
+  $Res call({String url, int height, int width});
 }
 
 /// @nodoc
@@ -93,10 +87,7 @@ abstract class _$$SpotifyImageImplCopyWith<$Res>
       __$$SpotifyImageImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {@JsonKey(name: 'url') String url,
-      @JsonKey(name: 'height') int height,
-      @JsonKey(name: 'width') int width});
+  $Res call({String url, int height, int width});
 }
 
 /// @nodoc
@@ -135,28 +126,33 @@ class __$$SpotifyImageImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$SpotifyImageImpl implements _SpotifyImage {
+class _$SpotifyImageImpl with DiagnosticableTreeMixin implements _SpotifyImage {
   const _$SpotifyImageImpl(
-      {@JsonKey(name: 'url') required this.url,
-      @JsonKey(name: 'height') required this.height,
-      @JsonKey(name: 'width') required this.width});
+      {required this.url, required this.height, required this.width});
 
   factory _$SpotifyImageImpl.fromJson(Map<String, dynamic> json) =>
       _$$SpotifyImageImplFromJson(json);
 
   @override
-  @JsonKey(name: 'url')
   final String url;
   @override
-  @JsonKey(name: 'height')
   final int height;
   @override
-  @JsonKey(name: 'width')
   final int width;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'SpotifyImage(url: $url, height: $height, width: $width)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'SpotifyImage'))
+      ..add(DiagnosticsProperty('url', url))
+      ..add(DiagnosticsProperty('height', height))
+      ..add(DiagnosticsProperty('width', width));
   }
 
   @override
@@ -191,21 +187,18 @@ class _$SpotifyImageImpl implements _SpotifyImage {
 
 abstract class _SpotifyImage implements SpotifyImage {
   const factory _SpotifyImage(
-      {@JsonKey(name: 'url') required final String url,
-      @JsonKey(name: 'height') required final int height,
-      @JsonKey(name: 'width') required final int width}) = _$SpotifyImageImpl;
+      {required final String url,
+      required final int height,
+      required final int width}) = _$SpotifyImageImpl;
 
   factory _SpotifyImage.fromJson(Map<String, dynamic> json) =
       _$SpotifyImageImpl.fromJson;
 
   @override
-  @JsonKey(name: 'url')
   String get url;
   @override
-  @JsonKey(name: 'height')
   int get height;
   @override
-  @JsonKey(name: 'width')
   int get width;
 
   /// Create a copy of SpotifyImage

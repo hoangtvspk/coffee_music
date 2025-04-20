@@ -1,7 +1,7 @@
+import 'package:buitify_coffee/core/entities/artist/artist_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../../../../core/entities/spotify_image/spotify_image.dart';
 import '../../../domain/entities/album/album.dart';
-import '../../../../../core/entities/artist/artist_model.dart';
 
 part 'album_model.freezed.dart';
 part 'album_model.g.dart';

@@ -5,6 +5,7 @@ class ApiEndpoints {
   // Album endpoints
   static String get albums => 'albums';
   static String albumTracks(String albumId) => 'albums/$albumId/tracks';
+  static String album(String albumId) => 'albums/$albumId';
   static String get newReleases => 'browse/new-releases';
   static String get savedAlbums => 'me/albums';
 
