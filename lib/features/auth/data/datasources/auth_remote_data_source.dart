@@ -73,7 +73,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
               country: response.data['country'],
               product: response.data['product']));
     } catch (e) {
-      throw Exception('Failed to fetch profile: $e');
+      rethrow;
     }
   }
 

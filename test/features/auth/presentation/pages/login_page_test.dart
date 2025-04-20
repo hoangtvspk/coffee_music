@@ -18,6 +18,7 @@ class MockAuthBloc extends Mock implements AuthBloc {
   @override
   AuthState get state => _currentState;
 
+  @override
   void emit(AuthState state) {
     _currentState = state;
     _controller.add(state);
@@ -131,7 +132,7 @@ void main() {
 
     // Assert
     verify(() => mockAuthBloc.add(
-          AuthEvent.login(email: 'test@example.com', password: 'password123'),
+          const AuthEvent.login(email: 'test@example.com', password: 'password123'),
         )).called(1);
   });
 
@@ -141,7 +142,7 @@ void main() {
     const userName = 'Test User';
     await tester.pumpWidget(createWidgetUnderTest());
     mockAuthBloc.emit(
-      AuthState.success(User(
+      const AuthState.success(User(
           id: '1',
           name: userName,
           email: 'test@example.com',

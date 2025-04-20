@@ -6,7 +6,8 @@ extension AppColor on Colors {
   static const Color brownDark = Color(0xFF6C3E1D);
   static const Color tertiary = Color(0xFFD39D6D);
   static const Color background = Color(0xFFF5F5F5);
-  static const Color backgroundGray = Color(0xFF161514);
+  static const Color gray = Color(0xFF161514);
+  static const Color grayLight = Color(0xFF343331);
   static const Color text = Color(0xFF333333);
   static const Color textSecondary = Color(0xFFD39D6D);
   static const Color textTertiary = Color(0xFF999999);

@@ -4,6 +4,9 @@ run-dev:
 run-prod:
 	flutter run --flavor prod --dart-define=ENVIRONMENT=prod
 
+run-release:
+	flutter run --flavor prod --dart-define=ENVIRONMENT=prod --release
+
 build-dev:
 	flutter build --flavor dev --dart-define=ENVIRONMENT=dev
 

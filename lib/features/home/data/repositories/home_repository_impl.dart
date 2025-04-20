@@ -1,3 +1,5 @@
+import 'package:buitify_coffee/features/home/data/models/track/track_model.dart';
+import 'package:buitify_coffee/features/home/domain/entities/track/track.dart';
 import 'package:dartz/dartz.dart';
 import '../../../../core/error/failure.dart';
 import '../../domain/entities/album/album.dart';
@@ -35,6 +37,16 @@ class HomeRepositoryImpl implements HomeRepository {
           result.data?.map((model) => model.toEntity()).toList() ?? []);
     } catch (e) {
       return const Right([]);
+    }
+  }
+
+  @override
+  Future<Either<Failure, Track>> getSeveralTracks({required String ids}) async {
+    try {
+      final result = await remoteDataSource.getSeveralTracks(ids: ids);
+      return Right(result.data?.toEntity() ?? const Track());
+    } catch (e) {
+      return const Right(Track());
     }
   }
 }

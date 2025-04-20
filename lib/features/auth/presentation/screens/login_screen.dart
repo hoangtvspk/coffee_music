@@ -3,7 +3,6 @@ import 'package:buitify_coffee/core/utils/snackbar_utils.dart';
 import 'package:buitify_coffee/core/widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
 import '../bloc/auth_bloc.dart';
@@ -31,7 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
             fit: BoxFit.fitWidth,
             alignment: Alignment.bottomCenter,
           ),
-          color: AppColor.backgroundGray,
+          color: AppColor.gray,
         ),
         child: Stack(
           children: [
@@ -54,7 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   failure: (message) {
                     SnackbarUtils.showSnackbar(
                       context: context,
-                      message: 'Error: $message',
+                      message: message,
                       isError: true,
                     );
                   },

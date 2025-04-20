@@ -9,7 +9,7 @@ class UiUtils {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: AppColor.backgroundGray,
+          backgroundColor: AppColor.gray,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
             side: const BorderSide(color: AppColor.primary),

@@ -12,7 +12,7 @@ class Sidebar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: const Color.fromARGB(255, 87, 44, 14),
+      backgroundColor: AppColor.gray,
       width: MediaQuery.of(context).size.width * 0.9,
       child: Padding(
         padding:

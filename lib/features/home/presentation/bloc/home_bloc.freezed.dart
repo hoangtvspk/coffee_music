@@ -22,6 +22,7 @@ mixin _$HomeEvent {
     required TResult Function(int offset, int limit) getNewReleases,
     required TResult Function(int offset, int limit, String userId)
         getUserPlaylists,
+    required TResult Function(String ids) getTracks,
     required TResult Function(String message) homeError,
   }) =>
       throw _privateConstructorUsedError;
@@ -30,6 +31,7 @@ mixin _$HomeEvent {
     TResult? Function()? started,
     TResult? Function(int offset, int limit)? getNewReleases,
     TResult? Function(int offset, int limit, String userId)? getUserPlaylists,
+    TResult? Function(String ids)? getTracks,
     TResult? Function(String message)? homeError,
   }) =>
       throw _privateConstructorUsedError;
@@ -38,6 +40,7 @@ mixin _$HomeEvent {
     TResult Function()? started,
     TResult Function(int offset, int limit)? getNewReleases,
     TResult Function(int offset, int limit, String userId)? getUserPlaylists,
+    TResult Function(String ids)? getTracks,
     TResult Function(String message)? homeError,
     required TResult orElse(),
   }) =>
@@ -47,6 +50,7 @@ mixin _$HomeEvent {
     required TResult Function(_Started value) started,
     required TResult Function(_GetNewReleases value) getNewReleases,
     required TResult Function(_GetUserPlaylists value) getUserPlaylists,
+    required TResult Function(_GetTracks value) getTracks,
     required TResult Function(_HomeError value) homeError,
   }) =>
       throw _privateConstructorUsedError;
@@ -55,6 +59,7 @@ mixin _$HomeEvent {
     TResult? Function(_Started value)? started,
     TResult? Function(_GetNewReleases value)? getNewReleases,
     TResult? Function(_GetUserPlaylists value)? getUserPlaylists,
+    TResult? Function(_GetTracks value)? getTracks,
     TResult? Function(_HomeError value)? homeError,
   }) =>
       throw _privateConstructorUsedError;
@@ -63,6 +68,7 @@ mixin _$HomeEvent {
     TResult Function(_Started value)? started,
     TResult Function(_GetNewReleases value)? getNewReleases,
     TResult Function(_GetUserPlaylists value)? getUserPlaylists,
+    TResult Function(_GetTracks value)? getTracks,
     TResult Function(_HomeError value)? homeError,
     required TResult orElse(),
   }) =>
@@ -134,6 +140,7 @@ class _$StartedImpl implements _Started {
     required TResult Function(int offset, int limit) getNewReleases,
     required TResult Function(int offset, int limit, String userId)
         getUserPlaylists,
+    required TResult Function(String ids) getTracks,
     required TResult Function(String message) homeError,
   }) {
     return started();
@@ -145,6 +152,7 @@ class _$StartedImpl implements _Started {
     TResult? Function()? started,
     TResult? Function(int offset, int limit)? getNewReleases,
     TResult? Function(int offset, int limit, String userId)? getUserPlaylists,
+    TResult? Function(String ids)? getTracks,
     TResult? Function(String message)? homeError,
   }) {
     return started?.call();
@@ -156,6 +164,7 @@ class _$StartedImpl implements _Started {
     TResult Function()? started,
     TResult Function(int offset, int limit)? getNewReleases,
     TResult Function(int offset, int limit, String userId)? getUserPlaylists,
+    TResult Function(String ids)? getTracks,
     TResult Function(String message)? homeError,
     required TResult orElse(),
   }) {
@@ -171,6 +180,7 @@ class _$StartedImpl implements _Started {
     required TResult Function(_Started value) started,
     required TResult Function(_GetNewReleases value) getNewReleases,
     required TResult Function(_GetUserPlaylists value) getUserPlaylists,
+    required TResult Function(_GetTracks value) getTracks,
     required TResult Function(_HomeError value) homeError,
   }) {
     return started(this);
@@ -182,6 +192,7 @@ class _$StartedImpl implements _Started {
     TResult? Function(_Started value)? started,
     TResult? Function(_GetNewReleases value)? getNewReleases,
     TResult? Function(_GetUserPlaylists value)? getUserPlaylists,
+    TResult? Function(_GetTracks value)? getTracks,
     TResult? Function(_HomeError value)? homeError,
   }) {
     return started?.call(this);
@@ -193,6 +204,7 @@ class _$StartedImpl implements _Started {
     TResult Function(_Started value)? started,
     TResult Function(_GetNewReleases value)? getNewReleases,
     TResult Function(_GetUserPlaylists value)? getUserPlaylists,
+    TResult Function(_GetTracks value)? getTracks,
     TResult Function(_HomeError value)? homeError,
     required TResult orElse(),
   }) {
@@ -290,6 +302,7 @@ class _$GetNewReleasesImpl implements _GetNewReleases {
     required TResult Function(int offset, int limit) getNewReleases,
     required TResult Function(int offset, int limit, String userId)
         getUserPlaylists,
+    required TResult Function(String ids) getTracks,
     required TResult Function(String message) homeError,
   }) {
     return getNewReleases(offset, limit);
@@ -301,6 +314,7 @@ class _$GetNewReleasesImpl implements _GetNewReleases {
     TResult? Function()? started,
     TResult? Function(int offset, int limit)? getNewReleases,
     TResult? Function(int offset, int limit, String userId)? getUserPlaylists,
+    TResult? Function(String ids)? getTracks,
     TResult? Function(String message)? homeError,
   }) {
     return getNewReleases?.call(offset, limit);
@@ -312,6 +326,7 @@ class _$GetNewReleasesImpl implements _GetNewReleases {
     TResult Function()? started,
     TResult Function(int offset, int limit)? getNewReleases,
     TResult Function(int offset, int limit, String userId)? getUserPlaylists,
+    TResult Function(String ids)? getTracks,
     TResult Function(String message)? homeError,
     required TResult orElse(),
   }) {
@@ -327,6 +342,7 @@ class _$GetNewReleasesImpl implements _GetNewReleases {
     required TResult Function(_Started value) started,
     required TResult Function(_GetNewReleases value) getNewReleases,
     required TResult Function(_GetUserPlaylists value) getUserPlaylists,
+    required TResult Function(_GetTracks value) getTracks,
     required TResult Function(_HomeError value) homeError,
   }) {
     return getNewReleases(this);
@@ -338,6 +354,7 @@ class _$GetNewReleasesImpl implements _GetNewReleases {
     TResult? Function(_Started value)? started,
     TResult? Function(_GetNewReleases value)? getNewReleases,
     TResult? Function(_GetUserPlaylists value)? getUserPlaylists,
+    TResult? Function(_GetTracks value)? getTracks,
     TResult? Function(_HomeError value)? homeError,
   }) {
     return getNewReleases?.call(this);
@@ -349,6 +366,7 @@ class _$GetNewReleasesImpl implements _GetNewReleases {
     TResult Function(_Started value)? started,
     TResult Function(_GetNewReleases value)? getNewReleases,
     TResult Function(_GetUserPlaylists value)? getUserPlaylists,
+    TResult Function(_GetTracks value)? getTracks,
     TResult Function(_HomeError value)? homeError,
     required TResult orElse(),
   }) {
@@ -465,6 +483,7 @@ class _$GetUserPlaylistsImpl implements _GetUserPlaylists {
     required TResult Function(int offset, int limit) getNewReleases,
     required TResult Function(int offset, int limit, String userId)
         getUserPlaylists,
+    required TResult Function(String ids) getTracks,
     required TResult Function(String message) homeError,
   }) {
     return getUserPlaylists(offset, limit, userId);
@@ -476,6 +495,7 @@ class _$GetUserPlaylistsImpl implements _GetUserPlaylists {
     TResult? Function()? started,
     TResult? Function(int offset, int limit)? getNewReleases,
     TResult? Function(int offset, int limit, String userId)? getUserPlaylists,
+    TResult? Function(String ids)? getTracks,
     TResult? Function(String message)? homeError,
   }) {
     return getUserPlaylists?.call(offset, limit, userId);
@@ -487,6 +507,7 @@ class _$GetUserPlaylistsImpl implements _GetUserPlaylists {
     TResult Function()? started,
     TResult Function(int offset, int limit)? getNewReleases,
     TResult Function(int offset, int limit, String userId)? getUserPlaylists,
+    TResult Function(String ids)? getTracks,
     TResult Function(String message)? homeError,
     required TResult orElse(),
   }) {
@@ -502,6 +523,7 @@ class _$GetUserPlaylistsImpl implements _GetUserPlaylists {
     required TResult Function(_Started value) started,
     required TResult Function(_GetNewReleases value) getNewReleases,
     required TResult Function(_GetUserPlaylists value) getUserPlaylists,
+    required TResult Function(_GetTracks value) getTracks,
     required TResult Function(_HomeError value) homeError,
   }) {
     return getUserPlaylists(this);
@@ -513,6 +535,7 @@ class _$GetUserPlaylistsImpl implements _GetUserPlaylists {
     TResult? Function(_Started value)? started,
     TResult? Function(_GetNewReleases value)? getNewReleases,
     TResult? Function(_GetUserPlaylists value)? getUserPlaylists,
+    TResult? Function(_GetTracks value)? getTracks,
     TResult? Function(_HomeError value)? homeError,
   }) {
     return getUserPlaylists?.call(this);
@@ -524,6 +547,7 @@ class _$GetUserPlaylistsImpl implements _GetUserPlaylists {
     TResult Function(_Started value)? started,
     TResult Function(_GetNewReleases value)? getNewReleases,
     TResult Function(_GetUserPlaylists value)? getUserPlaylists,
+    TResult Function(_GetTracks value)? getTracks,
     TResult Function(_HomeError value)? homeError,
     required TResult orElse(),
   }) {
@@ -548,6 +572,165 @@ abstract class _GetUserPlaylists implements HomeEvent {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GetUserPlaylistsImplCopyWith<_$GetUserPlaylistsImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GetTracksImplCopyWith<$Res> {
+  factory _$$GetTracksImplCopyWith(
+          _$GetTracksImpl value, $Res Function(_$GetTracksImpl) then) =
+      __$$GetTracksImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String ids});
+}
+
+/// @nodoc
+class __$$GetTracksImplCopyWithImpl<$Res>
+    extends _$HomeEventCopyWithImpl<$Res, _$GetTracksImpl>
+    implements _$$GetTracksImplCopyWith<$Res> {
+  __$$GetTracksImplCopyWithImpl(
+      _$GetTracksImpl _value, $Res Function(_$GetTracksImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HomeEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? ids = null,
+  }) {
+    return _then(_$GetTracksImpl(
+      ids: null == ids
+          ? _value.ids
+          : ids // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GetTracksImpl implements _GetTracks {
+  const _$GetTracksImpl({required this.ids});
+
+  @override
+  final String ids;
+
+  @override
+  String toString() {
+    return 'HomeEvent.getTracks(ids: $ids)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GetTracksImpl &&
+            (identical(other.ids, ids) || other.ids == ids));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, ids);
+
+  /// Create a copy of HomeEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GetTracksImplCopyWith<_$GetTracksImpl> get copyWith =>
+      __$$GetTracksImplCopyWithImpl<_$GetTracksImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(int offset, int limit) getNewReleases,
+    required TResult Function(int offset, int limit, String userId)
+        getUserPlaylists,
+    required TResult Function(String ids) getTracks,
+    required TResult Function(String message) homeError,
+  }) {
+    return getTracks(ids);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(int offset, int limit)? getNewReleases,
+    TResult? Function(int offset, int limit, String userId)? getUserPlaylists,
+    TResult? Function(String ids)? getTracks,
+    TResult? Function(String message)? homeError,
+  }) {
+    return getTracks?.call(ids);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(int offset, int limit)? getNewReleases,
+    TResult Function(int offset, int limit, String userId)? getUserPlaylists,
+    TResult Function(String ids)? getTracks,
+    TResult Function(String message)? homeError,
+    required TResult orElse(),
+  }) {
+    if (getTracks != null) {
+      return getTracks(ids);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_GetNewReleases value) getNewReleases,
+    required TResult Function(_GetUserPlaylists value) getUserPlaylists,
+    required TResult Function(_GetTracks value) getTracks,
+    required TResult Function(_HomeError value) homeError,
+  }) {
+    return getTracks(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_GetNewReleases value)? getNewReleases,
+    TResult? Function(_GetUserPlaylists value)? getUserPlaylists,
+    TResult? Function(_GetTracks value)? getTracks,
+    TResult? Function(_HomeError value)? homeError,
+  }) {
+    return getTracks?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_GetNewReleases value)? getNewReleases,
+    TResult Function(_GetUserPlaylists value)? getUserPlaylists,
+    TResult Function(_GetTracks value)? getTracks,
+    TResult Function(_HomeError value)? homeError,
+    required TResult orElse(),
+  }) {
+    if (getTracks != null) {
+      return getTracks(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetTracks implements HomeEvent {
+  const factory _GetTracks({required final String ids}) = _$GetTracksImpl;
+
+  String get ids;
+
+  /// Create a copy of HomeEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$GetTracksImplCopyWith<_$GetTracksImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -623,6 +806,7 @@ class _$HomeErrorImpl implements _HomeError {
     required TResult Function(int offset, int limit) getNewReleases,
     required TResult Function(int offset, int limit, String userId)
         getUserPlaylists,
+    required TResult Function(String ids) getTracks,
     required TResult Function(String message) homeError,
   }) {
     return homeError(message);
@@ -634,6 +818,7 @@ class _$HomeErrorImpl implements _HomeError {
     TResult? Function()? started,
     TResult? Function(int offset, int limit)? getNewReleases,
     TResult? Function(int offset, int limit, String userId)? getUserPlaylists,
+    TResult? Function(String ids)? getTracks,
     TResult? Function(String message)? homeError,
   }) {
     return homeError?.call(message);
@@ -645,6 +830,7 @@ class _$HomeErrorImpl implements _HomeError {
     TResult Function()? started,
     TResult Function(int offset, int limit)? getNewReleases,
     TResult Function(int offset, int limit, String userId)? getUserPlaylists,
+    TResult Function(String ids)? getTracks,
     TResult Function(String message)? homeError,
     required TResult orElse(),
   }) {
@@ -660,6 +846,7 @@ class _$HomeErrorImpl implements _HomeError {
     required TResult Function(_Started value) started,
     required TResult Function(_GetNewReleases value) getNewReleases,
     required TResult Function(_GetUserPlaylists value) getUserPlaylists,
+    required TResult Function(_GetTracks value) getTracks,
     required TResult Function(_HomeError value) homeError,
   }) {
     return homeError(this);
@@ -671,6 +858,7 @@ class _$HomeErrorImpl implements _HomeError {
     TResult? Function(_Started value)? started,
     TResult? Function(_GetNewReleases value)? getNewReleases,
     TResult? Function(_GetUserPlaylists value)? getUserPlaylists,
+    TResult? Function(_GetTracks value)? getTracks,
     TResult? Function(_HomeError value)? homeError,
   }) {
     return homeError?.call(this);
@@ -682,6 +870,7 @@ class _$HomeErrorImpl implements _HomeError {
     TResult Function(_Started value)? started,
     TResult Function(_GetNewReleases value)? getNewReleases,
     TResult Function(_GetUserPlaylists value)? getUserPlaylists,
+    TResult Function(_GetTracks value)? getTracks,
     TResult Function(_HomeError value)? homeError,
     required TResult orElse(),
   }) {
@@ -712,7 +901,7 @@ mixin _$HomeState {
     required TResult Function() loading,
     required TResult Function(String message) homeError,
     required TResult Function(
-            List<Album> newReleases, List<Playlist> userPlaylists)
+            List<Album> newReleases, List<Playlist> userPlaylists, Track tracks)
         loaded,
   }) =>
       throw _privateConstructorUsedError;
@@ -721,7 +910,8 @@ mixin _$HomeState {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(String message)? homeError,
-    TResult? Function(List<Album> newReleases, List<Playlist> userPlaylists)?
+    TResult? Function(List<Album> newReleases, List<Playlist> userPlaylists,
+            Track tracks)?
         loaded,
   }) =>
       throw _privateConstructorUsedError;
@@ -730,7 +920,8 @@ mixin _$HomeState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String message)? homeError,
-    TResult Function(List<Album> newReleases, List<Playlist> userPlaylists)?
+    TResult Function(List<Album> newReleases, List<Playlist> userPlaylists,
+            Track tracks)?
         loaded,
     required TResult orElse(),
   }) =>
@@ -827,7 +1018,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function() loading,
     required TResult Function(String message) homeError,
     required TResult Function(
-            List<Album> newReleases, List<Playlist> userPlaylists)
+            List<Album> newReleases, List<Playlist> userPlaylists, Track tracks)
         loaded,
   }) {
     return initial();
@@ -839,7 +1030,8 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(String message)? homeError,
-    TResult? Function(List<Album> newReleases, List<Playlist> userPlaylists)?
+    TResult? Function(List<Album> newReleases, List<Playlist> userPlaylists,
+            Track tracks)?
         loaded,
   }) {
     return initial?.call();
@@ -851,7 +1043,8 @@ class _$InitialImpl implements _Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String message)? homeError,
-    TResult Function(List<Album> newReleases, List<Playlist> userPlaylists)?
+    TResult Function(List<Album> newReleases, List<Playlist> userPlaylists,
+            Track tracks)?
         loaded,
     required TResult orElse(),
   }) {
@@ -948,7 +1141,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function() loading,
     required TResult Function(String message) homeError,
     required TResult Function(
-            List<Album> newReleases, List<Playlist> userPlaylists)
+            List<Album> newReleases, List<Playlist> userPlaylists, Track tracks)
         loaded,
   }) {
     return loading();
@@ -960,7 +1153,8 @@ class _$LoadingImpl implements _Loading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(String message)? homeError,
-    TResult? Function(List<Album> newReleases, List<Playlist> userPlaylists)?
+    TResult? Function(List<Album> newReleases, List<Playlist> userPlaylists,
+            Track tracks)?
         loaded,
   }) {
     return loading?.call();
@@ -972,7 +1166,8 @@ class _$LoadingImpl implements _Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String message)? homeError,
-    TResult Function(List<Album> newReleases, List<Playlist> userPlaylists)?
+    TResult Function(List<Album> newReleases, List<Playlist> userPlaylists,
+            Track tracks)?
         loaded,
     required TResult orElse(),
   }) {
@@ -1097,7 +1292,7 @@ class _$HomeStateErrorImpl implements _HomeStateError {
     required TResult Function() loading,
     required TResult Function(String message) homeError,
     required TResult Function(
-            List<Album> newReleases, List<Playlist> userPlaylists)
+            List<Album> newReleases, List<Playlist> userPlaylists, Track tracks)
         loaded,
   }) {
     return homeError(message);
@@ -1109,7 +1304,8 @@ class _$HomeStateErrorImpl implements _HomeStateError {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(String message)? homeError,
-    TResult? Function(List<Album> newReleases, List<Playlist> userPlaylists)?
+    TResult? Function(List<Album> newReleases, List<Playlist> userPlaylists,
+            Track tracks)?
         loaded,
   }) {
     return homeError?.call(message);
@@ -1121,7 +1317,8 @@ class _$HomeStateErrorImpl implements _HomeStateError {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String message)? homeError,
-    TResult Function(List<Album> newReleases, List<Playlist> userPlaylists)?
+    TResult Function(List<Album> newReleases, List<Playlist> userPlaylists,
+            Track tracks)?
         loaded,
     required TResult orElse(),
   }) {
@@ -1187,7 +1384,10 @@ abstract class _$$LoadedImplCopyWith<$Res> {
           _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
       __$$LoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<Album> newReleases, List<Playlist> userPlaylists});
+  $Res call(
+      {List<Album> newReleases, List<Playlist> userPlaylists, Track tracks});
+
+  $TrackCopyWith<$Res> get tracks;
 }
 
 /// @nodoc
@@ -1205,6 +1405,7 @@ class __$$LoadedImplCopyWithImpl<$Res>
   $Res call({
     Object? newReleases = null,
     Object? userPlaylists = null,
+    Object? tracks = null,
   }) {
     return _then(_$LoadedImpl(
       newReleases: null == newReleases
@@ -1215,7 +1416,21 @@ class __$$LoadedImplCopyWithImpl<$Res>
           ? _value._userPlaylists
           : userPlaylists // ignore: cast_nullable_to_non_nullable
               as List<Playlist>,
+      tracks: null == tracks
+          ? _value.tracks
+          : tracks // ignore: cast_nullable_to_non_nullable
+              as Track,
     ));
+  }
+
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $TrackCopyWith<$Res> get tracks {
+    return $TrackCopyWith<$Res>(_value.tracks, (value) {
+      return _then(_value.copyWith(tracks: value));
+    });
   }
 }
 
@@ -1224,7 +1439,8 @@ class __$$LoadedImplCopyWithImpl<$Res>
 class _$LoadedImpl implements _Loaded {
   const _$LoadedImpl(
       {required final List<Album> newReleases,
-      required final List<Playlist> userPlaylists})
+      required final List<Playlist> userPlaylists,
+      required this.tracks})
       : _newReleases = newReleases,
         _userPlaylists = userPlaylists;
 
@@ -1245,8 +1461,11 @@ class _$LoadedImpl implements _Loaded {
   }
 
   @override
+  final Track tracks;
+
+  @override
   String toString() {
-    return 'HomeState.loaded(newReleases: $newReleases, userPlaylists: $userPlaylists)';
+    return 'HomeState.loaded(newReleases: $newReleases, userPlaylists: $userPlaylists, tracks: $tracks)';
   }
 
   @override
@@ -1257,14 +1476,16 @@ class _$LoadedImpl implements _Loaded {
             const DeepCollectionEquality()
                 .equals(other._newReleases, _newReleases) &&
             const DeepCollectionEquality()
-                .equals(other._userPlaylists, _userPlaylists));
+                .equals(other._userPlaylists, _userPlaylists) &&
+            (identical(other.tracks, tracks) || other.tracks == tracks));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_newReleases),
-      const DeepCollectionEquality().hash(_userPlaylists));
+      const DeepCollectionEquality().hash(_userPlaylists),
+      tracks);
 
   /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
@@ -1281,10 +1502,10 @@ class _$LoadedImpl implements _Loaded {
     required TResult Function() loading,
     required TResult Function(String message) homeError,
     required TResult Function(
-            List<Album> newReleases, List<Playlist> userPlaylists)
+            List<Album> newReleases, List<Playlist> userPlaylists, Track tracks)
         loaded,
   }) {
-    return loaded(newReleases, userPlaylists);
+    return loaded(newReleases, userPlaylists, tracks);
   }
 
   @override
@@ -1293,10 +1514,11 @@ class _$LoadedImpl implements _Loaded {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(String message)? homeError,
-    TResult? Function(List<Album> newReleases, List<Playlist> userPlaylists)?
+    TResult? Function(List<Album> newReleases, List<Playlist> userPlaylists,
+            Track tracks)?
         loaded,
   }) {
-    return loaded?.call(newReleases, userPlaylists);
+    return loaded?.call(newReleases, userPlaylists, tracks);
   }
 
   @override
@@ -1305,12 +1527,13 @@ class _$LoadedImpl implements _Loaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String message)? homeError,
-    TResult Function(List<Album> newReleases, List<Playlist> userPlaylists)?
+    TResult Function(List<Album> newReleases, List<Playlist> userPlaylists,
+            Track tracks)?
         loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(newReleases, userPlaylists);
+      return loaded(newReleases, userPlaylists, tracks);
     }
     return orElse();
   }
@@ -1356,10 +1579,12 @@ class _$LoadedImpl implements _Loaded {
 abstract class _Loaded implements HomeState {
   const factory _Loaded(
       {required final List<Album> newReleases,
-      required final List<Playlist> userPlaylists}) = _$LoadedImpl;
+      required final List<Playlist> userPlaylists,
+      required final Track tracks}) = _$LoadedImpl;
 
   List<Album> get newReleases;
   List<Playlist> get userPlaylists;
+  Track get tracks;
 
   /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.

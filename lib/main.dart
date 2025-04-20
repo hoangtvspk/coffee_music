@@ -1,3 +1,4 @@
+import 'package:buitify_coffee/core/storage/secure_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:buitify_coffee/core/config/env_config.dart';
@@ -38,7 +39,14 @@ class MyApp extends StatelessWidget {
             LoginUseCase(authRepository),
             GetUserUseCase(authRepository),
           );
-          bloc.add(const AuthEvent.getUserInfo());
+          void checkAuth() async {
+            final accessToken = await SecureStorage().readAccessToken();
+            if (accessToken != null) {
+              bloc.add(const AuthEvent.getUserInfo());
+            }
+          }
+
+          checkAuth();
           return bloc;
         })
       ],

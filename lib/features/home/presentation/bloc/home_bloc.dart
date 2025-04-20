@@ -1,3 +1,5 @@
+import 'package:buitify_coffee/features/home/domain/entities/track/track.dart';
+import 'package:buitify_coffee/features/home/domain/usecases/get_several_track.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../domain/entities/album/album.dart';
@@ -13,47 +15,20 @@ part 'home_state.dart';
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final GetNewReleases _getNewReleases;
   final GetUserPlaylists _getUserPlaylists;
+  final GetSeveralTrack _getSeveralTrack;
 
   HomeBloc({
     required GetNewReleases getNewReleases,
     required GetUserPlaylists getUserPlaylists,
+    required GetSeveralTrack getSeveralTrack,
   })  : _getNewReleases = getNewReleases,
         _getUserPlaylists = getUserPlaylists,
+        _getSeveralTrack = getSeveralTrack,
         super(const HomeState.initial()) {
     on<HomeEvent>((event, emit) async {
       await event.when(
         started: () async {
           emit(const HomeState.loading());
-
-          try {
-            final newReleasesResult = await _getNewReleases(
-              const PaginationParams(limit: 20),
-            );
-            // Handle each result independently
-            final newReleases = newReleasesResult.fold(
-              (failure) {
-                print('HomeBloc: New releases failed: ${failure.message}');
-                return <Album>[];
-              },
-              (success) {
-                print(
-                    'HomeBloc: New releases success: ${success.length} items');
-                return success;
-              },
-            );
-
-            print('HomeBloc: Emitting loaded state with new releases');
-            emit(HomeState.loaded(
-              newReleases: newReleases,
-              userPlaylists: state.maybeWhen(
-                loaded: (_, playlists) => playlists,
-                orElse: () => [],
-              ),
-            ));
-          } catch (e) {
-            print('HomeBloc: Error in started event: $e');
-            emit(HomeState.homeError(e.toString()));
-          }
         },
         getNewReleases: (offset, limit) async {
           emit(const HomeState.loading());
@@ -68,14 +43,17 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             (success) => emit(HomeState.loaded(
               newReleases: success,
               userPlaylists: state.maybeWhen(
-                loaded: (_, playlists) => playlists,
+                loaded: (albums, playlists, _) => playlists,
                 orElse: () => [],
+              ),
+              tracks: state.maybeWhen(
+                loaded: (albums, playlists, tracks) => tracks,
+                orElse: () => const Track(),
               ),
             )),
           );
         },
         getUserPlaylists: (offset, limit, userId) async {
-          print('HomeBloc: Getting user playlists for user $userId');
           emit(const HomeState.loading());
           final result = await _getUserPlaylists(
             UserPaginationParams(
@@ -86,18 +64,42 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           );
           result.fold(
             (failure) {
-              print(
-                  'HomeBloc: Failed to get user playlists: ${failure.message}');
               emit(HomeState.homeError(failure.message));
             },
             (success) {
-              print('HomeBloc: Got ${success.length} user playlists');
               emit(HomeState.loaded(
                 newReleases: state.maybeWhen(
-                  loaded: (albums, _) => albums,
+                  loaded: (albums, playlists, _) => albums,
                   orElse: () => [],
                 ),
                 userPlaylists: success,
+                tracks: state.maybeWhen(
+                  loaded: (_, __, tracks) => tracks,
+                  orElse: () => const Track(),
+                ),
+              ));
+            },
+          );
+        },
+        getTracks: (ids) async {
+          emit(const HomeState.loading());
+          final result = await _getSeveralTrack(ids);
+          print("result: $result");
+          result.fold(
+            (failure) {
+              emit(HomeState.homeError(failure.message));
+            },
+            (success) {
+              emit(HomeState.loaded(
+                newReleases: state.maybeWhen(
+                  loaded: (albums, playlists, _) => albums,
+                  orElse: () => [],
+                ),
+                userPlaylists: state.maybeWhen(
+                  loaded: (_, playlists, __) => playlists,
+                  orElse: () => [],
+                ),
+                tracks: success,
               ));
             },
           );

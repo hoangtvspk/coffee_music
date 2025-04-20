@@ -8,5 +8,6 @@ class HomeState with _$HomeState {
   const factory HomeState.loaded({
     required List<Album> newReleases,
     required List<Playlist> userPlaylists,
+    required Track tracks,
   }) = _Loaded;
 }

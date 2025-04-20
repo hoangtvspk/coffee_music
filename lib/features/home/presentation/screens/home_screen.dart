@@ -1,3 +1,5 @@
+import 'package:buitify_coffee/features/home/domain/usecases/get_several_track.dart';
+import 'package:buitify_coffee/features/home/presentation/widgets/home_banner.dart';
 import 'package:buitify_coffee/features/home/presentation/widgets/walking_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,9 +7,6 @@ import 'package:buitify_coffee/core/storage/secure_storage.dart';
 import 'package:go_router/go_router.dart';
 import 'package:buitify_coffee/features/auth/presentation/bloc/auth_bloc.dart';
 import '../../../../core/config/app_color.dart';
-import '../widgets/category_card.dart';
-import '../widgets/custom_filter_chip.dart';
-import '../widgets/user_avatar.dart';
 import '../../../../core/utils/ui_utils.dart';
 import '../bloc/home_bloc.dart';
 import '../widgets/album_list.dart';
@@ -50,6 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
     _homeBloc = HomeBloc(
       getNewReleases: GetNewReleases(repository),
       getUserPlaylists: GetUserPlaylists(repository),
+      getSeveralTrack: GetSeveralTrack(repository),
     )..add(const HomeEvent.started());
   }
 
@@ -79,19 +79,26 @@ class _HomeScreenState extends State<HomeScreen> {
           state.maybeWhen(
             initial: () => context.go('/'),
             success: (user) {
-              print(
-                  'HomeScreen: Got user info, fetching playlists for user ${user.id}');
+              _homeBloc.add(const HomeEvent.getNewReleases(
+                offset: 0,
+                limit: 20,
+              ));
               _homeBloc.add(HomeEvent.getUserPlaylists(
                 offset: 0,
                 limit: 20,
                 userId: user.id,
+              ));
+
+              _homeBloc.add(const HomeEvent.getTracks(
+                ids:
+                    '7ouMYWpwJ422jRcDASZB7P,4VqPOruhp5EdPBeR92t6lQ,2takcwOaAZWiXQijPHIx7B',
               ));
             },
             orElse: () {},
           );
         },
         child: Scaffold(
-          backgroundColor: AppColor.brownDark,
+          backgroundColor: AppColor.grayLight,
           drawer: const Sidebar(),
           body: Container(
             decoration: BoxDecoration(
@@ -140,7 +147,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                     ),
-                    loaded: (newReleases, userPlaylists) {
+                    loaded: (newReleases, userPlaylists, tracks) {
                       return CustomScrollView(
                         slivers: [
                           SliverAppBar(
@@ -168,14 +175,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           SliverList(
                             delegate: SliverChildListDelegate([
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 16),
-                                child: Image.asset(
-                                  'assets/images/home_chill_banner.png',
-                                  height: 200,
-                                  fit: BoxFit.cover,
-                                ),
+                              const Padding(
+                                padding: EdgeInsets.symmetric(vertical: 16),
+                                child: HomeBanner(),
                               ),
                               if (newReleases.isNotEmpty) ...[
                                 const Padding(
@@ -207,6 +209,23 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 const SizedBox(height: 16),
                                 PlaylistList(playlists: userPlaylists),
+                                const SizedBox(height: 24),
+                              ],
+                              if (tracks.albums.isNotEmpty) ...[
+                                const Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 16),
+                                  child: Text(
+                                    'Several Tracks',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 16),
+                                AlbumList(albums: tracks.albums),
+                                const SizedBox(height: 24),
                               ],
                             ]),
                           ),

@@ -18,6 +18,11 @@ class HomeEvent with _$HomeEvent {
     required String userId,
   }) = _GetUserPlaylists;
 
+  // Tracks
+  const factory HomeEvent.getTracks({
+    required String ids,
+  }) = _GetTracks;
+
   // Error Handling
   const factory HomeEvent.homeError(String message) = _HomeError;
 }

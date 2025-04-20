@@ -1,8 +1,17 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'dart:async';
 import 'package:buitify_coffee/core/config/env_config.dart';
 import 'package:buitify_coffee/core/storage/secure_storage.dart';
 import 'package:buitify_coffee/features/auth/data/datasources/auth_remote_data_source.dart';
+
+// Class to handle retry requests
+class _RetryRequest {
+  final RequestOptions requestOptions;
+  final Completer<Response> completer;
+
+  _RetryRequest(this.requestOptions, this.completer);
+}
 
 class DioClient {
   static DioClient? _instance;
@@ -11,6 +20,8 @@ class DioClient {
   String? _accessToken;
   String? _refreshToken;
   bool _isInitialized = false;
+  bool _isRefreshing = false;
+  List<_RetryRequest> _pendingRequests = [];
 
   // Private constructor
   DioClient._internal(this._dio) {
@@ -23,7 +34,7 @@ class DioClient {
     _instance ??= DioClient._internal(
       Dio(
         BaseOptions(
-          baseUrl: EnvConfig.baseUrl, // Replace with your API base URL
+          baseUrl: EnvConfig.baseUrl,
           connectTimeout: const Duration(seconds: 30),
           receiveTimeout: const Duration(seconds: 30),
           sendTimeout: const Duration(seconds: 30),
@@ -41,8 +52,7 @@ class DioClient {
       _isInitialized = true;
     } catch (e) {
       debugPrint('Error initializing tokens: $e');
-      _isInitialized =
-          true; // Still mark as initialized to prevent infinite waiting
+      _isInitialized = true;
     }
   }
 
@@ -66,7 +76,33 @@ class DioClient {
     await _secureStorage.deleteRefreshToken();
   }
 
+  Future<void> _processPendingRequests() async {
+    final requests = [..._pendingRequests];
+    _pendingRequests.clear();
+
+    for (final request in requests) {
+      try {
+        final response = await _dio.request(
+          request.requestOptions.path,
+          data: request.requestOptions.data,
+          queryParameters: request.requestOptions.queryParameters,
+          options: Options(
+            method: request.requestOptions.method,
+            headers: {
+              'Authorization': 'Bearer $_accessToken',
+              ...request.requestOptions.headers,
+            },
+          ),
+        );
+        request.completer.complete(response);
+      } catch (e) {
+        request.completer.completeError(e);
+      }
+    }
+  }
+
   void setupInterceptors() {
+    _dio.interceptors.clear();
     _dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) async {
@@ -96,44 +132,76 @@ class DioClient {
         onError: (DioException error, handler) async {
           if (error.response?.statusCode == 401) {
             // Token expired or invalid
-            if (_refreshToken != null) {
+            final options = error.requestOptions;
+
+            if (_isRefreshing) {
+              // If already refreshing, add to pending queue
               try {
-                // Store the failed request
-                final RequestOptions requestOptions = error.requestOptions;
-
-                // Try to refresh the token using AuthRemoteDataSource
-                final authDataSource = AuthRemoteDataSourceImpl();
-                await authDataSource.refreshToken();
-
-                // Get the new access token
-                final newAccessToken = await _secureStorage.readAccessToken();
-                if (newAccessToken == null) {
-                  throw Exception('Failed to get new access token');
-                }
-
-                // Retry the original request with new token
-                final opts = Options(
-                  method: requestOptions.method,
-                  headers: {
-                    'Authorization': 'Bearer $newAccessToken',
-                    ...requestOptions.headers,
-                  },
-                );
-
-                final retryResponse = await _dio.request(
-                  requestOptions.path,
-                  options: opts,
-                  data: requestOptions.data,
-                  queryParameters: requestOptions.queryParameters,
-                );
-
-                return handler.resolve(retryResponse);
+                final completer = Completer<Response>();
+                _pendingRequests.add(_RetryRequest(options, completer));
+                return handler.resolve(await completer.future);
               } catch (e) {
-                // Refresh token failed - user needs to login again
-                await resetTokens();
-                // You might want to notify your auth state management here
-                // e.g., BlocProvider.of<AuthBloc>(context).add(LogoutEvent());
+                return handler.reject(error);
               }
+            }
+
+            _isRefreshing = true;
+
+            try {
+              if (_refreshToken == null) {
+                throw Exception('No refresh token available');
+              }
+
+              // Try to refresh the token using AuthRemoteDataSource
+              final authDataSource = AuthRemoteDataSourceImpl();
+              await authDataSource.refreshToken();
+
+              // Get the new access token
+              _accessToken = await _secureStorage.readAccessToken();
+              if (_accessToken == null) {
+                throw Exception('Failed to get new access token');
+              }
+
+              // Process all pending requests with new token
+              await _processPendingRequests();
+
+              // Retry the original request with new token
+              final response = await _dio.request(
+                options.path,
+                data: options.data,
+                queryParameters: options.queryParameters,
+                options: Options(
+                  method: options.method,
+                  headers: {
+                    'Authorization': 'Bearer $_accessToken',
+                    ...options.headers,
+                  },
+                ),
+              );
+
+              _isRefreshing = false;
+              return handler.resolve(response);
+            } catch (e) {
+              _isRefreshing = false;
+              // Refresh token failed - clear all tokens and reject
+              await resetTokens();
+              // Reject all pending requests
+              for (final request in _pendingRequests) {
+                request.completer.completeError(
+                  DioException(
+                    requestOptions: request.requestOptions,
+                    error: 'Token refresh failed',
+                  ),
+                );
+              }
+              _pendingRequests.clear();
+
+              return handler.reject(
+                DioException(
+                  requestOptions: error.requestOptions,
+                  error: 'Token refresh failed',
+                ),
+              );
             }
           }
 
@@ -155,10 +223,10 @@ class DioClient {
 
     if (kDebugMode) {
       _dio.interceptors.add(LogInterceptor(
-        requestBody: false,
-        responseBody: false,
+        requestBody: true,
+        responseBody: true,
         requestHeader: true,
-        responseHeader: false,
+        responseHeader: true,
       ));
     }
   }

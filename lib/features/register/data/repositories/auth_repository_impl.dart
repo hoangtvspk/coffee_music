@@ -24,7 +24,6 @@ class RegisterRepositoryImpl implements RegisterRepository {
       );
       return const Right(null);
     } catch (e) {
-      print(e);
       return const Left(ServerFailure("Registration Failed"));
     }
   }

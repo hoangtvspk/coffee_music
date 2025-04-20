@@ -1,6 +1,5 @@
 import 'package:buitify_coffee/core/utils/app_utils.dart';
 import 'package:buitify_coffee/features/auth/presentation/screens/login_screen.dart';
-import 'package:buitify_coffee/features/home/presentation/bloc/home_bloc.dart';
 import 'package:buitify_coffee/features/home/presentation/screens/home_screen.dart';
 import 'package:buitify_coffee/features/register/data/datasources/auth_remote_data_source.dart';
 import 'package:buitify_coffee/features/register/domain/repositories/register_repository.dart';
@@ -11,6 +10,7 @@ import 'package:go_router/go_router.dart';
 import '../../features/register/data/repositories/auth_repository_impl.dart';
 import 'package:flutter/material.dart';
 import '../storage/secure_storage.dart';
+import 'package:dio/dio.dart';
 
 GoRouter router = GoRouter(
   initialLocation: '/',
@@ -18,7 +18,14 @@ GoRouter router = GoRouter(
     final token = await SecureStorage().readAccessToken();
     final isAuth = token != null;
 
-    print("isAuth $isAuth");
+    // Handle token expiration from DioClient
+    if (state.extra is DioException) {
+      final error = state.extra as DioException;
+      if (error.error == 'Token refresh failed' ||
+          error.error == 'No refresh token available') {
+        return '/';
+      }
+    }
     FlutterNativeSplash.remove();
     if (state.path == null) {
       if (isAuth) {

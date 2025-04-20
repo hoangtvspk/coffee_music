@@ -47,7 +47,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         (failure) async => emit(AuthState.failure(failure.message)),
         (user) async {
           if (!emit.isDone) {
-            print("user $user");
             emit(AuthState.success(user));
           }
         },
