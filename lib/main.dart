@@ -1,4 +1,5 @@
 import 'package:buitify_coffee/core/storage/secure_storage.dart';
+import 'package:buitify_coffee/features/main/presentation/bloc/main_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:buitify_coffee/core/config/env_config.dart';
@@ -34,6 +35,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(
+          create: (context) => MainBloc(router),
+        ),
         BlocProvider(create: (context) {
           AuthBloc bloc = AuthBloc(
             LoginUseCase(authRepository),

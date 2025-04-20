@@ -48,7 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       context: context,
                       message: 'Welcome ${user.name}',
                     );
-                    context.go('/home');
+                    context.go('/main?tab=home');
                   },
                   failure: (message) {
                     SnackbarUtils.showSnackbar(

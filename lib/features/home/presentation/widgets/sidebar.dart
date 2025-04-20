@@ -72,7 +72,7 @@ class Sidebar extends StatelessWidget {
                   icon: Icons.home,
                   label: 'Home',
                   onTap: () {
-                    context.go('/');
+                    context.go('/main?tab=home');
                     Navigator.pop(context); // Close drawer after navigation
                   },
                 ),
@@ -81,7 +81,7 @@ class Sidebar extends StatelessWidget {
                   icon: Icons.search,
                   label: 'Search',
                   onTap: () {
-                    context.go('/search');
+                    context.go('/main?tab=search');
                     Navigator.pop(context);
                   },
                 ),
@@ -90,7 +90,7 @@ class Sidebar extends StatelessWidget {
                   icon: Icons.library_music,
                   label: 'Your Library',
                   onTap: () {
-                    context.go('/library');
+                    context.go('/main?tab=library');
                     Navigator.pop(context);
                   },
                 )
@@ -109,7 +109,7 @@ class Sidebar extends StatelessWidget {
                     icon: Icons.settings,
                     label: 'Settings',
                     onTap: () {
-                      context.go('/settings');
+                      context.go('/main?tab=settings');
                       Navigator.pop(context);
                     },
                   ),

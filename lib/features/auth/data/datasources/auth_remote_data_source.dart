@@ -29,7 +29,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
   String? _accessToken;
   String? _refreshToken;
-  DateTime? _accessTokenExpirationDateTime;
 
   @override
   Future<BaseResponse<LoginModel>> loginWithSpotify() async {
@@ -49,7 +48,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
       _accessToken = result.accessToken;
       _refreshToken = result.refreshToken;
-      _accessTokenExpirationDateTime = result.accessTokenExpirationDateTime;
       dioClient.setTokens(
           accessToken: _accessToken, refreshToken: _refreshToken);
       return getUserProfile();
@@ -105,7 +103,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
       _accessToken = result.accessToken;
       _refreshToken = result.refreshToken;
-      _accessTokenExpirationDateTime = result.accessTokenExpirationDateTime;
 
       dioClient.setTokens(
         accessToken: _accessToken,

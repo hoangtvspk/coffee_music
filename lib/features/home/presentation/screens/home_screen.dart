@@ -72,169 +72,186 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => _homeBloc,
-      child: BlocListener<AuthBloc, AuthState>(
-        listener: (context, state) {
-          state.maybeWhen(
-            initial: () => context.go('/'),
-            success: (user) {
-              _homeBloc.add(const HomeEvent.getNewReleases(
-                offset: 0,
-                limit: 20,
-              ));
-              _homeBloc.add(HomeEvent.getUserPlaylists(
-                offset: 0,
-                limit: 20,
-                userId: user.id,
-              ));
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<AuthBloc, AuthState>(
+          listener: (context, state) {
+            state.maybeWhen(
+              initial: () => context.go('/'),
+              failure: (message) {
+                // Clear tokens and redirect to login
+                SecureStorage().deleteAll();
+                context.go('/');
+              },
+              success: (user) {
+                _homeBloc.add(const HomeEvent.getNewReleases(
+                  offset: 0,
+                  limit: 20,
+                ));
+                _homeBloc.add(HomeEvent.getUserPlaylists(
+                  offset: 0,
+                  limit: 20,
+                  userId: user.id,
+                ));
 
-              _homeBloc.add(const HomeEvent.getTracks(
-                ids:
-                    '7ouMYWpwJ422jRcDASZB7P,4VqPOruhp5EdPBeR92t6lQ,2takcwOaAZWiXQijPHIx7B',
-              ));
-            },
-            orElse: () {},
-          );
-        },
-        child: Scaffold(
-          backgroundColor: AppColor.grayLight,
-          drawer: const Sidebar(),
-          body: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                stops: const [0.0, 0.5, 1.0],
-                colors: [
-                  Colors.black.withValues(alpha: 0.2),
-                  Colors.black.withValues(alpha: 0.3),
-                  Colors.black.withValues(alpha: 0.9),
-                ],
-              ),
+                _homeBloc.add(const HomeEvent.getTracks(
+                  ids:
+                      '7ouMYWpwJ422jRcDASZB7P,4VqPOruhp5EdPBeR92t6lQ,2takcwOaAZWiXQijPHIx7B',
+                ));
+              },
+              orElse: () {},
+            );
+          },
+        ),
+      ],
+      child: Scaffold(
+        backgroundColor: AppColor.grayLight,
+        drawer: const Sidebar(),
+        body: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              stops: const [0.0, 0.5, 1.0],
+              colors: [
+                Colors.black.withValues(alpha: 0.2),
+                Colors.black.withValues(alpha: 0.3),
+                Colors.black.withValues(alpha: 0.9),
+              ],
             ),
-            child: SafeArea(
-              child: BlocBuilder<HomeBloc, HomeState>(
-                builder: (context, state) {
-                  return state.when(
-                    initial: () => const Center(
-                      child: CircularProgressIndicator(
-                        color: AppColor.primary,
+          ),
+          child: SafeArea(
+            child: CustomScrollView(
+              slivers: [
+                SliverAppBar(
+                  backgroundColor: Colors.transparent,
+                  floating: true,
+                  leadingWidth: 30,
+                  centerTitle: false,
+                  title: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    spacing: 16,
+                    children: [
+                      Image.asset(
+                        'assets/images/buitify_text.png',
+                        height: 30,
                       ),
-                    ),
-                    loading: () => const Center(
-                      child: CircularProgressIndicator(
-                        color: AppColor.primary,
+                      const Expanded(
+                        child: WalkingAnimation(
+                          characterWidth: 40,
+                          characterHeight: 40,
+                        ),
                       ),
+                    ],
+                  ),
+                ),
+                SliverList(
+                  delegate: SliverChildListDelegate([
+                    const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 16),
+                      child: HomeBanner(),
                     ),
-                    homeError: (message) => Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            message,
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                          const SizedBox(height: 20),
-                          ElevatedButton(
-                            onPressed: () {
-                              context
-                                  .read<HomeBloc>()
-                                  .add(const HomeEvent.started());
-                            },
-                            child: const Text('Retry'),
-                          ),
-                        ],
-                      ),
-                    ),
-                    loaded: (newReleases, userPlaylists, tracks) {
-                      return CustomScrollView(
-                        slivers: [
-                          SliverAppBar(
-                            backgroundColor: Colors.transparent,
-                            floating: true,
-                            leadingWidth: 30,
-                            centerTitle: false,
-                            title: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              spacing: 16,
-                              children: [
-                                Image.asset(
-                                  'assets/images/buitify_text.png',
-                                  height: 30,
-                                ),
-                                const Expanded(
-                                  child: WalkingAnimation(
-                                    characterWidth: 40,
-                                    characterHeight: 40,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SliverList(
-                            delegate: SliverChildListDelegate([
-                              const Padding(
-                                padding: EdgeInsets.symmetric(vertical: 16),
-                                child: HomeBanner(),
+                    BlocProvider(
+                      create: (context) => _homeBloc,
+                      child: BlocBuilder<HomeBloc, HomeState>(
+                        builder: (context, state) {
+                          return state.when(
+                            initial: () => const Center(
+                              child: CircularProgressIndicator(
+                                color: AppColor.primary,
                               ),
-                              if (newReleases.isNotEmpty) ...[
-                                const Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 16),
-                                  child: Text(
-                                    'New Releases',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                            ),
+                            loading: () => const Center(
+                              child: CircularProgressIndicator(
+                                color: AppColor.primary,
+                              ),
+                            ),
+                            homeError: (message) => Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    message,
+                                    style: const TextStyle(color: Colors.white),
                                   ),
-                                ),
-                                const SizedBox(height: 16),
-                                AlbumList(albums: newReleases),
-                                const SizedBox(height: 24),
-                              ],
-                              if (userPlaylists.isNotEmpty) ...[
-                                const Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 16),
-                                  child: Text(
-                                    'Your Playlists',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                  const SizedBox(height: 20),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      context
+                                          .read<HomeBloc>()
+                                          .add(const HomeEvent.started());
+                                    },
+                                    child: const Text('Retry'),
                                   ),
-                                ),
-                                const SizedBox(height: 16),
-                                PlaylistList(playlists: userPlaylists),
-                                const SizedBox(height: 24),
-                              ],
-                              if (tracks.albums.isNotEmpty) ...[
-                                const Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 16),
-                                  child: Text(
-                                    'Several Tracks',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
+                                ],
+                              ),
+                            ),
+                            loaded: (newReleases, userPlaylists, tracks) {
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  if (newReleases.isNotEmpty) ...[
+                                    const Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 16),
+                                      child: Text(
+                                        'New Releases',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                ),
-                                const SizedBox(height: 16),
-                                AlbumList(albums: tracks.albums),
-                                const SizedBox(height: 24),
-                              ],
-                            ]),
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                },
-              ),
+                                    const SizedBox(height: 16),
+                                    AlbumList(albums: newReleases),
+                                    const SizedBox(height: 24),
+                                  ],
+                                  if (userPlaylists.isNotEmpty) ...[
+                                    const Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 16),
+                                      child: Text(
+                                        'Your Playlists',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 16),
+                                    PlaylistList(playlists: userPlaylists),
+                                    const SizedBox(height: 24),
+                                  ],
+                                  if (tracks.albums.isNotEmpty) ...[
+                                    const Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 16),
+                                      child: Text(
+                                        'Several Tracks',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 16),
+                                    AlbumList(albums: tracks.albums),
+                                    const SizedBox(height: 24),
+                                  ],
+                                ],
+                              );
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                  ]),
+                ),
+              ],
             ),
           ),
         ),
