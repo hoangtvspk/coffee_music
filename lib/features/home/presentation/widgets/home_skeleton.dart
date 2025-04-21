@@ -25,13 +25,13 @@ class HomeSkeleton extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               SizedBox(
-                height: 200,
+                height: 160,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: 5,
                   itemBuilder: (context, index) {
                     return Container(
-                      width: 150,
+                      width: 160,
                       margin: const EdgeInsets.only(right: 16),
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -54,7 +54,7 @@ class HomeSkeleton extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               SizedBox(
-                height: 200,
+                height: 150,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: 5,

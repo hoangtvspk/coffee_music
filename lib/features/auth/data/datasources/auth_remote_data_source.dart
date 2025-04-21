@@ -1,6 +1,7 @@
 import 'package:buitify_coffee/core/constants/api_endpoints.dart';
 import 'package:buitify_coffee/core/storage/secure_storage.dart';
 import 'package:buitify_coffee/features/auth/domain/entities/user.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_appauth/flutter_appauth.dart';
 
 import '../../../../core/config/env_config.dart';
@@ -88,25 +89,32 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<void> refreshToken() async {
     try {
+      _refreshToken = await SecureStorage().readRefreshToken();
+      dioClient.resetTokens();
+
       if (_refreshToken == null) {
         throw Exception('No refresh token available');
       }
 
-      final result = await _appAuth.token(
-        TokenRequest(
-          _clientId,
-          _redirectUri,
-          refreshToken: _refreshToken,
-          discoveryUrl: _discoveryUrl,
+      final response = await dioClient.post(
+        'https://accounts.spotify.com/api/token',
+        queryParameters: {
+          'grant_type': 'refresh_token',
+          'refresh_token': _refreshToken,
+          'client_id': _clientId,
+        },
+        options: Options(
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
         ),
       );
 
-      _accessToken = result.accessToken;
-      _refreshToken = result.refreshToken;
+      print("Raw response: ${response.data['access_token']}");
 
-      dioClient.setTokens(
-        accessToken: _accessToken,
-        refreshToken: _refreshToken,
+      await dioClient.setTokens(
+        accessToken: response.data['access_token'],
+        refreshToken: response.data['refresh_token'],
       );
     } catch (e) {
       throw Exception('Failed to refresh token: $e');

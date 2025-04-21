@@ -1,3 +1,4 @@
+import 'package:buitify_coffee/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:buitify_coffee/features/home/domain/usecases/get_several_track.dart';
 import 'package:buitify_coffee/features/home/presentation/widgets/home_banner.dart';
 import 'package:buitify_coffee/features/home/presentation/widgets/walking_animation.dart';
@@ -80,22 +81,24 @@ class _HomeScreenState extends State<HomeScreen> {
           listener: (context, state) {
             state.maybeWhen(
               initial: () => context.go('/'),
-              failure: (message) {
-                // Clear tokens and redirect to login
-                SecureStorage().deleteAll();
-                context.go('/');
-              },
-              success: (user) {
+              failure: (message) {},
+              success: (user) async {
+                // 1. Get new releases first
                 _homeBloc.add(const HomeEvent.getNewReleases(
                   offset: 0,
                   limit: 20,
                 ));
+
+                // 2. Then get user playlists
+                await Future.delayed(const Duration(milliseconds: 200));
                 _homeBloc.add(HomeEvent.getUserPlaylists(
                   offset: 0,
                   limit: 20,
                   userId: user.id,
                 ));
 
+                // 3. Finally get tracks
+                await Future.delayed(const Duration(milliseconds: 100));
                 _homeBloc.add(const HomeEvent.getTracks(
                   ids:
                       '7ouMYWpwJ422jRcDASZB7P,4VqPOruhp5EdPBeR92t6lQ,2takcwOaAZWiXQijPHIx7B',
@@ -158,102 +161,103 @@ class _HomeScreenState extends State<HomeScreen> {
                       create: (context) => _homeBloc,
                       child: BlocBuilder<HomeBloc, HomeState>(
                         builder: (context, state) {
-                          return AnimatedSwitcher(
-                            duration: const Duration(milliseconds: 500),
-                            transitionBuilder:
-                                (Widget child, Animation<double> animation) {
-                              return FadeTransition(
-                                opacity: animation,
-                                child: child,
+                          return state.when(
+                            initial: () => const SizedBox.shrink(),
+                            loading: () => const HomeSkeleton(
+                              key: ValueKey('loading'),
+                            ),
+                            homeError: (message) => Center(
+                              key: ValueKey('error'),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    message,
+                                    style: const TextStyle(color: Colors.white),
+                                  ),
+                                  const SizedBox(height: 20),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      context
+                                          .read<HomeBloc>()
+                                          .add(const HomeEvent.started());
+                                    },
+                                    child: const Text('Retry'),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            loaded: (newReleases, userPlaylists, tracks) {
+                              return Column(
+                                key: const ValueKey('loaded'),
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  // ElevatedButton(
+                                  //   onPressed: () {
+                                  //     SecureStorage().writeAccessToken(
+                                  //         'BQC-KIi3MGk6zpLn9G7jdlZ04AcrSYaBYnQAYf1dLvUf30dJ4HwFT25guTCcXV7nOpyzo4KLTtRObDaP7CW_peus5C1jl_KSEpPMA0VVPwos0AcAM3iBVghyodCts6FgRugC4nrcOQwCsXQefbVtpvEeqZTPMDysjRmYea4HLJZy1PN62L0uVWBspyvwCxB8LTPKZzVm2kcYAmlK1MBj3X8vxY1O_3Z48ozoPYXGneXik4lhZc8zj-F6CRE8Mg');
+                                  //     SecureStorage().writeRefreshToken(
+                                  //         'AQBXjNlmRvKby0KQULvbwiRcu5Pv7Ctc0C2mt5IlAjPt39sbn59Iipdca44URrrvnYxRfAHTrA6mzKGeRr55vrOs0qH2poHdDjeDFszu_os1ocUVIIHG_6lNCNyTClz3UEg');
+
+                                  //     // AuthRemoteDataSourceImpl()
+                                  //     //     .refreshToken();
+                                  //   },
+                                  //   child: const Text('Retry'),
+                                  // ),
+                                  if (newReleases.isNotEmpty) ...[
+                                    const Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 16),
+                                      child: Text(
+                                        'New Releases',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 16),
+                                    AlbumList(albums: newReleases),
+                                    const SizedBox(height: 24),
+                                  ],
+                                  if (userPlaylists.isNotEmpty) ...[
+                                    const Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 16),
+                                      child: Text(
+                                        'Your Playlists',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 16),
+                                    PlaylistList(playlists: userPlaylists),
+                                    const SizedBox(height: 24),
+                                  ],
+                                  if (tracks.albums.isNotEmpty) ...[
+                                    const Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 16),
+                                      child: Text(
+                                        'Several Tracks',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 16),
+                                    AlbumList(albums: tracks.albums),
+                                    const SizedBox(height: 24),
+                                  ],
+                                ],
                               );
                             },
-                            child: state.when(
-                              initial: () =>
-                                  const SizedBox(key: ValueKey('initial')),
-                              loading: () =>
-                                  const HomeSkeleton(key: ValueKey('loading')),
-                              homeError: (message) => Center(
-                                key: ValueKey('error'),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      message,
-                                      style:
-                                          const TextStyle(color: Colors.white),
-                                    ),
-                                    const SizedBox(height: 20),
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        context
-                                            .read<HomeBloc>()
-                                            .add(const HomeEvent.started());
-                                      },
-                                      child: const Text('Retry'),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              loaded: (newReleases, userPlaylists, tracks) {
-                                return Column(
-                                  key: const ValueKey('loaded'),
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    if (newReleases.isNotEmpty) ...[
-                                      const Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 16),
-                                        child: Text(
-                                          'New Releases',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(height: 16),
-                                      AlbumList(albums: newReleases),
-                                      const SizedBox(height: 24),
-                                    ],
-                                    if (userPlaylists.isNotEmpty) ...[
-                                      const Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 16),
-                                        child: Text(
-                                          'Your Playlists',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(height: 16),
-                                      PlaylistList(playlists: userPlaylists),
-                                      const SizedBox(height: 24),
-                                    ],
-                                    if (tracks.albums.isNotEmpty) ...[
-                                      const Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 16),
-                                        child: Text(
-                                          'Several Tracks',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(height: 16),
-                                      AlbumList(albums: tracks.albums),
-                                      const SizedBox(height: 24),
-                                    ],
-                                  ],
-                                );
-                              },
-                            ),
                           );
                         },
                       ),
