@@ -1,3 +1,4 @@
+import 'package:buitify_coffee/core/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -42,9 +43,9 @@ class Sidebar extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          const Text(
-                            'View Profile',
-                            style: TextStyle(
+                          Text(
+                            context.l10n.viewProfile,
+                            style: const TextStyle(
                               fontSize: 14,
                             ),
                           ),
@@ -76,7 +77,7 @@ class Sidebar extends StatelessWidget {
                           _buildNavItem(
                             context,
                             icon: Icons.home,
-                            label: 'Home',
+                            label: context.l10n.home,
                             onTap: () {
                               context
                                   .read<MainBloc>()
@@ -88,7 +89,7 @@ class Sidebar extends StatelessWidget {
                           _buildNavItem(
                             context,
                             icon: Icons.search,
-                            label: 'Search',
+                            label: context.l10n.search,
                             onTap: () {
                               context
                                   .read<MainBloc>()
@@ -99,7 +100,7 @@ class Sidebar extends StatelessWidget {
                           _buildNavItem(
                             context,
                             icon: Icons.library_music,
-                            label: 'Your Library',
+                            label: context.l10n.library,
                             onTap: () {
                               context
                                   .read<MainBloc>()
@@ -119,7 +120,7 @@ class Sidebar extends StatelessWidget {
                             _buildNavItem(
                               context,
                               icon: Icons.settings,
-                              label: 'Settings',
+                              label: context.l10n.settings,
                               onTap: () {
                                 context
                                     .read<MainBloc>()
@@ -130,7 +131,7 @@ class Sidebar extends StatelessWidget {
                             _buildNavItem(
                               context,
                               icon: Icons.logout,
-                              label: 'Logout',
+                              label: context.l10n.logout,
                               onTap: () {
                                 Navigator.pop(context);
                                 UiUtils.showLogoutConfirmation(context);

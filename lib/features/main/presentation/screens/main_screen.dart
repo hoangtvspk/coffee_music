@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/config/app_color.dart';
+import '../../../../core/l10n/app_localizations.dart';
 import '../../../home/presentation/screens/home_screen.dart';
 import '../../../search/presentation/screens/search_screen.dart';
 import '../../../library/presentation/screens/library_screen.dart';
@@ -72,22 +73,22 @@ class _MainScreenState extends State<MainScreen> {
             unselectedItemColor: Colors.grey,
             currentIndex: state.selectedIndex,
             onTap: _onItemTapped,
-            items: const [
+            items: [
               BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.house),
-                label: 'Home',
+                icon: const Icon(CupertinoIcons.house),
+                label: context.l10n.home,
               ),
               BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.search),
-                label: 'Search',
+                icon: const Icon(CupertinoIcons.search),
+                label: context.l10n.search,
               ),
               BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.music_albums),
-                label: 'Library',
+                icon: const Icon(CupertinoIcons.music_albums),
+                label: context.l10n.library,
               ),
               BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.settings),
-                label: 'Settings',
+                icon: const Icon(CupertinoIcons.settings),
+                label: context.l10n.settings,
               ),
             ],
           ),

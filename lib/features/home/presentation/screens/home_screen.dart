@@ -10,6 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/config/app_color.dart';
+import '../../../../core/l10n/app_localizations.dart';
 import '../../data/datasources/home_remote_data_source.dart';
 import '../../data/repositories/home_repository_impl.dart';
 import '../../domain/usecases/get_new_releases.dart';
@@ -155,19 +156,19 @@ class _HomeScreenState extends State<HomeScreen> {
                             children: [
                               // New Releases Section
                               state.statusLoadNewReleases.maybeWhen(
-                                idle: () => const HomeSkeleton(
-                                  title: 'New Releases',
-                                  key: ValueKey('idle_new_releases'),
+                                idle: () => HomeSkeleton(
+                                  title: context.l10n.newReleases,
+                                  key: const ValueKey('idle_new_releases'),
                                 ),
-                                loading: () => const HomeSkeleton(
-                                  title: 'New Releases',
-                                  key: ValueKey('loading_new_releases'),
+                                loading: () => HomeSkeleton(
+                                  title: context.l10n.newReleases,
+                                  key: const ValueKey('loading_new_releases'),
                                 ),
                                 failure: (message) => const SizedBox.shrink(),
                                 orElse: () => state.newReleases.isNotEmpty
                                     ? AlbumList(
                                         albums: state.newReleases,
-                                        title: 'New Releases',
+                                        title: context.l10n.newReleases,
                                         onAlbumSelected: (albumId) {
                                           context.push('/album/$albumId');
                                         },
@@ -177,19 +178,19 @@ class _HomeScreenState extends State<HomeScreen> {
 
                               // Playlists Section
                               state.statusLoadPlaylists.maybeWhen(
-                                idle: () => const HomeSkeleton(
-                                  title: 'User Playlists',
-                                  key: ValueKey('idle_playlists'),
+                                idle: () => HomeSkeleton(
+                                  title: context.l10n.userPlaylists,
+                                  key: const ValueKey('idle_playlists'),
                                 ),
-                                loading: () => const HomeSkeleton(
-                                  title: 'User Playlists',
-                                  key: ValueKey('loading_playlists'),
+                                loading: () => HomeSkeleton(
+                                  title: context.l10n.userPlaylists,
+                                  key: const ValueKey('loading_playlists'),
                                 ),
                                 failure: (message) => const SizedBox.shrink(),
                                 orElse: () => state.userPlaylists.isNotEmpty
                                     ? PlaylistList(
                                         playlists: state.userPlaylists,
-                                        title: 'User Playlists',
+                                        title: context.l10n.userPlaylists,
                                         onPlaylistSelected: (playlistId) {
                                           context.push('/album/$playlistId');
                                         },
@@ -199,19 +200,19 @@ class _HomeScreenState extends State<HomeScreen> {
 
                               // Tracks Section
                               state.statusLoadTracks.maybeWhen(
-                                idle: () => const HomeSkeleton(
-                                  title: 'Several Tracks',
-                                  key: ValueKey('idle_several_tracks'),
+                                idle: () => HomeSkeleton(
+                                  title: context.l10n.severalTracks,
+                                  key: const ValueKey('idle_several_tracks'),
                                 ),
-                                loading: () => const HomeSkeleton(
-                                  title: 'Several Tracks',
-                                  key: ValueKey('loading_several_tracks'),
+                                loading: () => HomeSkeleton(
+                                  title: context.l10n.severalTracks,
+                                  key: const ValueKey('loading_several_tracks'),
                                 ),
                                 failure: (message) => const SizedBox.shrink(),
                                 orElse: () => state.tracks.albums.isNotEmpty
                                     ? AlbumList(
                                         albums: state.tracks.albums,
-                                        title: 'Several Tracks',
+                                        title: context.l10n.severalTracks,
                                         onAlbumSelected: (albumId) {
                                           context.push('/album/$albumId');
                                         },

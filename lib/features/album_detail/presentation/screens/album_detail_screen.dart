@@ -1,5 +1,6 @@
 import 'package:buitify_coffee/core/entities/entities/status.dart';
 import 'package:buitify_coffee/core/widgets/image/cached_image.dart';
+import 'package:buitify_coffee/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/album_track/album_tracks_bloc.dart';
@@ -13,7 +14,7 @@ class AlbumDetailScreen extends StatefulWidget {
 }
 
 class _AlbumDetailScreenState extends State<AlbumDetailScreen> {
-  String _formatDuration(int milliseconds) {
+  String _formatDuration(int milliseconds, BuildContext context) {
     final duration = Duration(milliseconds: milliseconds);
     final minutes = duration.inMinutes;
     final seconds = (duration.inSeconds % 60).toString().padLeft(2, '0');
@@ -131,7 +132,7 @@ class _AlbumDetailScreenState extends State<AlbumDetailScreen> {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        'Release Date: ${album.releaseDate}',
+                        '${context.l10n.releaseDate}: ${album.releaseDate}',
                         style: const TextStyle(
                           color: Colors.grey,
                           fontSize: 16,
@@ -139,16 +140,16 @@ class _AlbumDetailScreenState extends State<AlbumDetailScreen> {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        'Total Tracks: ${album.totalTracks}',
+                        '${context.l10n.totalTracks}: ${album.totalTracks}',
                         style: const TextStyle(
                           color: Colors.grey,
                           fontSize: 16,
                         ),
                       ),
                       const SizedBox(height: 24),
-                      const Text(
-                        'Tracks',
-                        style: TextStyle(
+                      Text(
+                        context.l10n.tracks,
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -197,7 +198,7 @@ class _AlbumDetailScreenState extends State<AlbumDetailScreen> {
                               ),
                             ),
                             trailing: Text(
-                              _formatDuration(track.durationMs),
+                              _formatDuration(track.durationMs, context),
                               style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 14,

@@ -40,34 +40,37 @@ class PlaylistList extends StatelessWidget {
             itemBuilder: (context, index) {
               final playlist = playlists[index];
               return Container(
-                width: 160,
-                margin: const EdgeInsets.only(right: 16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: CachedImage(
-                        imageUrl: playlist.images.first.url,
-                        height: 160,
-                        width: 160,
-                        fit: BoxFit.cover,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
+                  width: 160,
+                  margin: const EdgeInsets.only(right: 16),
+                  child: GestureDetector(
+                    onTap: () => onPlaylistSelected(playlist.id),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: CachedImage(
+                              imageUrl: playlist.images.isNotEmpty
+                                  ? playlist.images.first.url
+                                  : '',
+                              height: 160,
+                              width: 160,
+                              fit: BoxFit.cover,
+                              borderRadius: BorderRadius.circular(8),
+                            )),
+                        const SizedBox(height: 8),
+                        Text(
+                          playlist.name,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
                     ),
-                    const SizedBox(height: 8),
-                    Text(
-                      playlist.name,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500,
-                      ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
-                ),
-              );
+                  ));
             },
           ),
         ),

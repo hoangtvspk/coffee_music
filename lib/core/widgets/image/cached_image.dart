@@ -44,33 +44,18 @@ class CachedImage extends StatelessWidget {
           color: backgroundColor ??
               Theme.of(context)
                   .colorScheme
-                  .errorContainer
-                  .withValues(alpha: 0.8),
+                  .surfaceVariant
+                  .withValues(alpha: 0.5),
           borderRadius: borderRadius,
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
-              Icons.broken_image_rounded,
-              color: Theme.of(context).colorScheme.onErrorContainer,
+              Icons.music_note_rounded,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
               size: (width ?? 48) * 0.3,
             ),
-            if (width != null && width! >= 100) ...[
-              const SizedBox(height: 4),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Text(
-                  'Unable to load image',
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Theme.of(context).colorScheme.onErrorContainer,
-                      ),
-                  textAlign: TextAlign.center,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            ],
           ],
         ),
       ),
