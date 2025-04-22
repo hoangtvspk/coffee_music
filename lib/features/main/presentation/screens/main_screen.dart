@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -73,19 +74,19 @@ class _MainScreenState extends State<MainScreen> {
             onTap: _onItemTapped,
             items: const [
               BottomNavigationBarItem(
-                icon: Icon(Icons.home),
+                icon: Icon(CupertinoIcons.house),
                 label: 'Home',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.search),
+                icon: Icon(CupertinoIcons.search),
                 label: 'Search',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.library_music),
+                icon: Icon(CupertinoIcons.music_albums),
                 label: 'Library',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.settings),
+                icon: Icon(CupertinoIcons.settings),
                 label: 'Settings',
               ),
             ],
