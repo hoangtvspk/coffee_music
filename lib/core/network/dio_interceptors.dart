@@ -211,13 +211,13 @@ class DioInterceptors {
       ),
     );
 
-    if (kDebugMode) {
-      _dio.interceptors.add(LogInterceptor(
-        requestBody: true,
-        responseBody: true,
-        requestHeader: true,
-        responseHeader: true,
-      ));
-    }
+    // if (kDebugMode) {
+    //   _dio.interceptors.add(LogInterceptor(
+    //     requestBody: true,
+    //     responseBody: true,
+    //     requestHeader: true,
+    //     responseHeader: true,
+    //   ));
+    // }
   }
 }

@@ -11,7 +11,6 @@ class GetSeveralTrack implements UseCase<Track, String> {
 
   @override
   Future<Either<Failure, Track>> call(String params) async {
-    print("params: $params");
     return await repository.getSeveralTracks(
       ids: params,
     );

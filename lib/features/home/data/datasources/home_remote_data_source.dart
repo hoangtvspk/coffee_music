@@ -96,22 +96,16 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
         ),
       );
 
-      print("Raw response data: ${response.data}");
-      print("Tracks list: ${response.data['tracks']}");
-
       final albumsList = (response.data['tracks'] as List).map((track) {
         final album = track['album'];
         final albumModel = AlbumModel.fromJson(album);
         return albumModel.toEntity();
       }).toList();
-      print("Processed albums: $albumsList");
 
       final tracks = TrackModel(albums: albumsList);
-      print("Converted TrackModel: $tracks");
 
       return BaseResponse(data: tracks);
     } catch (e) {
-      print("Error in getSeveralTracks: $e");
       throw Exception(e);
     }
   }

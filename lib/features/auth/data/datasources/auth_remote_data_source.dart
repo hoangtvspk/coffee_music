@@ -110,8 +110,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         ),
       );
 
-      print("Raw response: ${response.data['access_token']}");
-
       await dioClient.setTokens(
         accessToken: response.data['access_token'],
         refreshToken: response.data['refresh_token'],

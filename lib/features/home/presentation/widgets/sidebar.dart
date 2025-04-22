@@ -1,9 +1,12 @@
+import 'package:buitify_coffee/features/main/presentation/bloc/main_event.dart';
+import 'package:buitify_coffee/features/main/presentation/bloc/main_state.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/config/app_color.dart';
 import '../../../../core/utils/ui_utils.dart';
 import '../../../../features/auth/presentation/bloc/auth_bloc.dart';
+import '../../../../features/main/presentation/bloc/main_bloc.dart';
 import 'user_avatar.dart';
 
 class Sidebar extends StatelessWidget {
@@ -64,67 +67,85 @@ class Sidebar extends StatelessWidget {
               height: 40,
             ),
             // Navigation Items
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildNavItem(
-                  context,
-                  icon: Icons.home,
-                  label: 'Home',
-                  onTap: () {
-                    context.go('/main?tab=home');
-                    Navigator.pop(context); // Close drawer after navigation
-                  },
-                ),
-                _buildNavItem(
-                  context,
-                  icon: Icons.search,
-                  label: 'Search',
-                  onTap: () {
-                    context.go('/main?tab=search');
-                    Navigator.pop(context);
-                  },
-                ),
-                _buildNavItem(
-                  context,
-                  icon: Icons.library_music,
-                  label: 'Your Library',
-                  onTap: () {
-                    context.go('/main?tab=library');
-                    Navigator.pop(context);
-                  },
-                )
-              ],
-            ),
-            const Spacer(),
-            // User Section
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              child: Column(
-                children: [
-                  const Divider(color: Colors.white24),
-                  const SizedBox(height: 16),
-                  _buildNavItem(
-                    context,
-                    icon: Icons.settings,
-                    label: 'Settings',
-                    onTap: () {
-                      context.go('/main?tab=settings');
-                      Navigator.pop(context);
-                    },
-                  ),
-                  _buildNavItem(
-                    context,
-                    icon: Icons.logout,
-                    label: 'Logout',
-                    onTap: () {
-                      Navigator.pop(context);
-                      UiUtils.showLogoutConfirmation(context);
-                    },
-                  ),
-                ],
+            Expanded(
+              child: BlocBuilder<MainBloc, MainState>(
+                builder: (context, state) {
+                  return Column(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _buildNavItem(
+                            context,
+                            icon: Icons.home,
+                            label: 'Home',
+                            onTap: () {
+                              context
+                                  .read<MainBloc>()
+                                  .add(const MainTabChanged(index: 0));
+                              Navigator.pop(
+                                  context); // Close drawer after navigation
+                            },
+                          ),
+                          _buildNavItem(
+                            context,
+                            icon: Icons.search,
+                            label: 'Search',
+                            onTap: () {
+                              context
+                                  .read<MainBloc>()
+                                  .add(const MainTabChanged(index: 1));
+                              Navigator.pop(context);
+                            },
+                          ),
+                          _buildNavItem(
+                            context,
+                            icon: Icons.library_music,
+                            label: 'Your Library',
+                            onTap: () {
+                              context
+                                  .read<MainBloc>()
+                                  .add(const MainTabChanged(index: 2));
+                              Navigator.pop(context);
+                            },
+                          )
+                        ],
+                      ),
+                      const Spacer(),
+                      Container(
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        child: Column(
+                          children: [
+                            const Divider(color: Colors.white24),
+                            const SizedBox(height: 16),
+                            _buildNavItem(
+                              context,
+                              icon: Icons.settings,
+                              label: 'Settings',
+                              onTap: () {
+                                context
+                                    .read<MainBloc>()
+                                    .add(const MainTabChanged(index: 3));
+                                Navigator.pop(context);
+                              },
+                            ),
+                            _buildNavItem(
+                              context,
+                              icon: Icons.logout,
+                              label: 'Logout',
+                              onTap: () {
+                                Navigator.pop(context);
+                                UiUtils.showLogoutConfirmation(context);
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  );
+                },
               ),
-            ),
+            )
           ],
         ),
       ),
