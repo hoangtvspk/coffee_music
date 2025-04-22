@@ -7,8 +7,6 @@ import '../../../search/presentation/screens/search_screen.dart';
 import '../../../library/presentation/screens/library_screen.dart';
 import '../../../settings/presentation/screens/settings_screen.dart';
 import '../bloc/main_bloc.dart';
-import '../bloc/main_event.dart';
-import '../bloc/main_state.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});

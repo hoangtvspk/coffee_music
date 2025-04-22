@@ -1,0 +1,120 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# BLoC Pattern Rules
+
+## Status Pattern (Required)
+```dart
+// Must be in core/entities/status.dart
+@freezed
+class Status with _$Status {
+  const factory Status.idle() = StatusIdle;
+  const factory Status.loading() = StatusLoading;
+  const factory Status.failure(String error) = StatusFailure;
+  const factory Status.success() = StatusSuccess;
+}
+```
+
+## Event Definition (Required)
+```dart
+@freezed
+class ExampleEvent with _$ExampleEvent {
+  // Group related events with comments
+  // Auth Events
+  const factory ExampleEvent.login() = _Login;
+  const factory ExampleEvent.logout() = _Logout;
+
+  // Data Events
+  const factory ExampleEvent.loadItems({
+    @Default(0) int offset,
+    @Default(20) int limit,
+  }) = _LoadItems;
+}
+```
+
+## Event Registration (Required)
+```dart
+class ExampleBloc extends Bloc<ExampleEvent, ExampleState> {
+  ExampleBloc() : super(ExampleState.initial()) {
+    // Register each event with its handler
+    on<_Login>(_onLogin);
+    on<_Logout>(_onLogout);
+    on<_LoadItems>(_onLoadItems);
+  }
+
+  // Define handler methods
+  Future<void> _onLogin(_Login event, Emitter<ExampleState> emit) async {
+    // Handle login logic
+  }
+
+  // Convenience method to start the bloc (Optional)
+  void start() {
+    add(const ExampleEvent.started());
+  }
+}
+```
+
+## State Structure (Required)
+```dart
+@freezed
+class ExampleState with _$ExampleState {
+  const factory ExampleState({
+    // 1. Data fields first
+    @Default([]) List<Data> items,
+    
+    // 2. Status fields second
+    @Default(Status.idle()) Status statusLoadItems,
+    @Default(Status.idle()) Status statusUpdateItem,
+  }) = _ExampleState;
+}
+```
+
+## Naming Rules
+- Event handlers must start with _on: `_onEventName`
+- Status fields must follow pattern: `statusActionNoun`
+  - `statusLoadItems`
+  - `statusUpdateProfile`
+  - `statusDeleteMessage`
+- Event classes must be prefixed with _: `_EventName`
+
+## Event Handling Pattern (Required)
+```dart
+Future<void> _onLoadItems(_LoadItems event, Emitter<ExampleState> emit) async {
+  // 1. Emit loading state first
+  emit(state.copyWith(statusLoadItems: const Status.loading()));
+
+  // 2. Call use case/repository
+  final result = await _getItems(
+    PaginationParams(
+      offset: event.offset,
+      limit: event.limit,
+    ),
+  );
+
+  // 3. Handle result with fold
+  result.fold(
+    (failure) => emit(state.copyWith(
+      statusLoadItems: Status.failure(failure.message),
+    )),
+    (success) => emit(state.copyWith(
+      items: success,
+      statusLoadItems: const Status.success(),
+    )),
+  );
+}
+```
+
+## Event Chaining (When Needed)
+```dart
+Future<void> _onStarted(_Started event, Emitter<ExampleState> emit) async {
+  // Emit initial loading state
+  emit(state.copyWith(
+    statusLoadItems: const Status.loading(),
+  ));
+
+  // Chain to other events
+  add(const ExampleEvent.loadItems(offset: 0, limit: 20));
+}
+```

@@ -22,7 +22,4 @@ class HomeEvent with _$HomeEvent {
   const factory HomeEvent.getTracks({
     required String ids,
   }) = _GetTracks;
-
-  // Error Handling
-  const factory HomeEvent.homeError(String message) = _HomeError;
 }

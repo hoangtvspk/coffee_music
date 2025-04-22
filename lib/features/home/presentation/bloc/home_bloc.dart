@@ -9,6 +9,7 @@ import '../../domain/entities/playlist/playlist.dart';
 import '../../domain/usecases/get_new_releases.dart';
 import '../../domain/usecases/get_user_playlists.dart';
 import '../../../../core/usecase/usecase.dart';
+import '../../../../core/entities/entities/status.dart';
 
 part 'home_bloc.freezed.dart';
 part 'home_event.dart';
@@ -19,10 +20,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final GetUserPlaylists _getUserPlaylists;
   final GetSeveralTrack _getSeveralTrack;
 
-  Either<Failure, List<Album>>? _cacheAlbumResult;
-  Either<Failure, List<Playlist>>? _cachePlaylistResult;
-  Either<Failure, Track>? _cacheTrackResult;
-
   HomeBloc({
     required GetNewReleases getNewReleases,
     required GetUserPlaylists getUserPlaylists,
@@ -30,104 +27,84 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   })  : _getNewReleases = getNewReleases,
         _getUserPlaylists = getUserPlaylists,
         _getSeveralTrack = getSeveralTrack,
-        super(const HomeState.initial()) {
-    on<HomeEvent>((event, emit) async {
-      await event.when(
-        started: () async {
-          if (_cacheAlbumResult == null ||
-              _cachePlaylistResult == null ||
-              _cacheTrackResult == null) {
-            emit(const HomeState.loading());
-          }
-        },
-        getNewReleases: (offset, limit) async {
-          if (_cacheAlbumResult == null) {
-            emit(const HomeState.loading());
-            final result = await _getNewReleases(
-              PaginationParams(
-                offset: offset,
-                limit: limit,
-              ),
-            );
-            _cacheAlbumResult = result;
-          }
+        super(HomeState.initial()) {
+    on<_Started>(_onStarted);
+    on<_GetNewReleases>(_onGetNewReleases);
+    on<_GetUserPlaylists>(_onGetUserPlaylists);
+    on<_GetTracks>(_onGetTracks);
+  }
 
-          _cacheAlbumResult!.fold(
-            (failure) => emit(HomeState.homeError(failure.message)),
-            (success) => emit(HomeState.loaded(
-              newReleases: success,
-              userPlaylists: state.maybeWhen(
-                loaded: (albums, playlists, _) => playlists,
-                orElse: () => [],
-              ),
-              tracks: state.maybeWhen(
-                loaded: (albums, playlists, tracks) => tracks,
-                orElse: () => const Track(),
-              ),
-            )),
-          );
-        },
-        getUserPlaylists: (offset, limit, userId) async {
-          if (_cachePlaylistResult == null) {
-            emit(const HomeState.loading());
-            final result = await _getUserPlaylists(
-              UserPaginationParams(
-                offset: offset,
-                limit: limit,
-                userId: userId,
-              ),
-            );
-            _cachePlaylistResult = result;
-          }
+  Future<void> _onStarted(_Started event, Emitter<HomeState> emit) async {
+    emit(state.copyWith(
+      statusLoadNewReleases: const Status.loading(),
+      statusLoadPlaylists: const Status.loading(),
+      statusLoadTracks: const Status.loading(),
+    ));
+    add(const _GetNewReleases(offset: 0, limit: 20));
+  }
 
-          _cachePlaylistResult!.fold(
-            (failure) {
-              emit(HomeState.homeError(failure.message));
-            },
-            (success) {
-              emit(HomeState.loaded(
-                newReleases: state.maybeWhen(
-                  loaded: (albums, playlists, _) => albums,
-                  orElse: () => [],
-                ),
-                userPlaylists: success,
-                tracks: state.maybeWhen(
-                  loaded: (_, __, tracks) => tracks,
-                  orElse: () => const Track(),
-                ),
-              ));
-            },
-          );
-        },
-        getTracks: (ids) async {
-          if (_cacheTrackResult == null) {
-            emit(const HomeState.loading());
-            final result = await _getSeveralTrack(ids);
-            _cacheTrackResult = result;
-          }
-          _cacheTrackResult!.fold(
-            (failure) {
-              emit(HomeState.homeError(failure.message));
-            },
-            (success) {
-              emit(HomeState.loaded(
-                newReleases: state.maybeWhen(
-                  loaded: (albums, playlists, _) => albums,
-                  orElse: () => [],
-                ),
-                userPlaylists: state.maybeWhen(
-                  loaded: (_, playlists, __) => playlists,
-                  orElse: () => [],
-                ),
-                tracks: success,
-              ));
-            },
-          );
-        },
-        homeError: (message) {
-          emit(HomeState.homeError(message));
-        },
-      );
-    });
+  void start() {
+    add(const _Started());
+  }
+
+  Future<void> _onGetNewReleases(
+      _GetNewReleases event, Emitter<HomeState> emit) async {
+    emit(state.copyWith(statusLoadNewReleases: const Status.loading()));
+
+    final result = await _getNewReleases(
+      PaginationParams(
+        offset: event.offset,
+        limit: event.limit,
+      ),
+    );
+
+    result.fold(
+      (failure) => emit(state.copyWith(
+        statusLoadNewReleases: Status.failure(failure.message),
+      )),
+      (success) => emit(state.copyWith(
+        newReleases: success,
+        statusLoadNewReleases: const Status.success(),
+      )),
+    );
+  }
+
+  Future<void> _onGetUserPlaylists(
+      _GetUserPlaylists event, Emitter<HomeState> emit) async {
+    emit(state.copyWith(statusLoadPlaylists: const Status.loading()));
+
+    final result = await _getUserPlaylists(
+      UserPaginationParams(
+        offset: event.offset,
+        limit: event.limit,
+        userId: event.userId,
+      ),
+    );
+
+    result.fold(
+      (failure) => emit(state.copyWith(
+        statusLoadPlaylists: Status.failure(failure.message),
+      )),
+      (success) => emit(state.copyWith(
+        userPlaylists: success,
+        statusLoadPlaylists: const Status.success(),
+      )),
+    );
+  }
+
+  Future<void> _onGetTracks(_GetTracks event, Emitter<HomeState> emit) async {
+    emit(state.copyWith(statusLoadTracks: const Status.loading()));
+
+    final result = await _getSeveralTrack(event.ids);
+
+    result.fold(
+      (failure) => emit(state.copyWith(
+        statusLoadTracks: Status.failure(failure.message),
+      )),
+      (success) => emit(state.copyWith(
+        tracks: success,
+        statusLoadTracks: const Status.success(),
+      )),
+    );
   }
 }

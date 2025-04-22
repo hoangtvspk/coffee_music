@@ -19,39 +19,45 @@ mixin _$AlbumTracksEvent {
   String get albumId => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String albumId) fetchAlbumInfo,
-    required TResult Function(String albumId) fetchAlbumTracks,
+    required TResult Function(String albumId) started,
+    required TResult Function(String albumId) loadTracks,
+    required TResult Function(String albumId) loadAlbumInfo,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String albumId)? fetchAlbumInfo,
-    TResult? Function(String albumId)? fetchAlbumTracks,
+    TResult? Function(String albumId)? started,
+    TResult? Function(String albumId)? loadTracks,
+    TResult? Function(String albumId)? loadAlbumInfo,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String albumId)? fetchAlbumInfo,
-    TResult Function(String albumId)? fetchAlbumTracks,
+    TResult Function(String albumId)? started,
+    TResult Function(String albumId)? loadTracks,
+    TResult Function(String albumId)? loadAlbumInfo,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_FetchAlbumInfo value) fetchAlbumInfo,
-    required TResult Function(_FetchAlbumTracks value) fetchAlbumTracks,
+    required TResult Function(_Started value) started,
+    required TResult Function(_LoadTracks value) loadTracks,
+    required TResult Function(_LoadAlbumInfo value) loadAlbumInfo,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_FetchAlbumInfo value)? fetchAlbumInfo,
-    TResult? Function(_FetchAlbumTracks value)? fetchAlbumTracks,
+    TResult? Function(_Started value)? started,
+    TResult? Function(_LoadTracks value)? loadTracks,
+    TResult? Function(_LoadAlbumInfo value)? loadAlbumInfo,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_FetchAlbumInfo value)? fetchAlbumInfo,
-    TResult Function(_FetchAlbumTracks value)? fetchAlbumTracks,
+    TResult Function(_Started value)? started,
+    TResult Function(_LoadTracks value)? loadTracks,
+    TResult Function(_LoadAlbumInfo value)? loadAlbumInfo,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -99,22 +105,22 @@ class _$AlbumTracksEventCopyWithImpl<$Res, $Val extends AlbumTracksEvent>
 }
 
 /// @nodoc
-abstract class _$$FetchAlbumInfoImplCopyWith<$Res>
+abstract class _$$StartedImplCopyWith<$Res>
     implements $AlbumTracksEventCopyWith<$Res> {
-  factory _$$FetchAlbumInfoImplCopyWith(_$FetchAlbumInfoImpl value,
-          $Res Function(_$FetchAlbumInfoImpl) then) =
-      __$$FetchAlbumInfoImplCopyWithImpl<$Res>;
+  factory _$$StartedImplCopyWith(
+          _$StartedImpl value, $Res Function(_$StartedImpl) then) =
+      __$$StartedImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String albumId});
 }
 
 /// @nodoc
-class __$$FetchAlbumInfoImplCopyWithImpl<$Res>
-    extends _$AlbumTracksEventCopyWithImpl<$Res, _$FetchAlbumInfoImpl>
-    implements _$$FetchAlbumInfoImplCopyWith<$Res> {
-  __$$FetchAlbumInfoImplCopyWithImpl(
-      _$FetchAlbumInfoImpl _value, $Res Function(_$FetchAlbumInfoImpl) _then)
+class __$$StartedImplCopyWithImpl<$Res>
+    extends _$AlbumTracksEventCopyWithImpl<$Res, _$StartedImpl>
+    implements _$$StartedImplCopyWith<$Res> {
+  __$$StartedImplCopyWithImpl(
+      _$StartedImpl _value, $Res Function(_$StartedImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of AlbumTracksEvent
@@ -124,152 +130,7 @@ class __$$FetchAlbumInfoImplCopyWithImpl<$Res>
   $Res call({
     Object? albumId = null,
   }) {
-    return _then(_$FetchAlbumInfoImpl(
-      null == albumId
-          ? _value.albumId
-          : albumId // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$FetchAlbumInfoImpl implements _FetchAlbumInfo {
-  const _$FetchAlbumInfoImpl(this.albumId);
-
-  @override
-  final String albumId;
-
-  @override
-  String toString() {
-    return 'AlbumTracksEvent.fetchAlbumInfo(albumId: $albumId)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$FetchAlbumInfoImpl &&
-            (identical(other.albumId, albumId) || other.albumId == albumId));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, albumId);
-
-  /// Create a copy of AlbumTracksEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$FetchAlbumInfoImplCopyWith<_$FetchAlbumInfoImpl> get copyWith =>
-      __$$FetchAlbumInfoImplCopyWithImpl<_$FetchAlbumInfoImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String albumId) fetchAlbumInfo,
-    required TResult Function(String albumId) fetchAlbumTracks,
-  }) {
-    return fetchAlbumInfo(albumId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String albumId)? fetchAlbumInfo,
-    TResult? Function(String albumId)? fetchAlbumTracks,
-  }) {
-    return fetchAlbumInfo?.call(albumId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String albumId)? fetchAlbumInfo,
-    TResult Function(String albumId)? fetchAlbumTracks,
-    required TResult orElse(),
-  }) {
-    if (fetchAlbumInfo != null) {
-      return fetchAlbumInfo(albumId);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_FetchAlbumInfo value) fetchAlbumInfo,
-    required TResult Function(_FetchAlbumTracks value) fetchAlbumTracks,
-  }) {
-    return fetchAlbumInfo(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_FetchAlbumInfo value)? fetchAlbumInfo,
-    TResult? Function(_FetchAlbumTracks value)? fetchAlbumTracks,
-  }) {
-    return fetchAlbumInfo?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_FetchAlbumInfo value)? fetchAlbumInfo,
-    TResult Function(_FetchAlbumTracks value)? fetchAlbumTracks,
-    required TResult orElse(),
-  }) {
-    if (fetchAlbumInfo != null) {
-      return fetchAlbumInfo(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _FetchAlbumInfo implements AlbumTracksEvent {
-  const factory _FetchAlbumInfo(final String albumId) = _$FetchAlbumInfoImpl;
-
-  @override
-  String get albumId;
-
-  /// Create a copy of AlbumTracksEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FetchAlbumInfoImplCopyWith<_$FetchAlbumInfoImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$FetchAlbumTracksImplCopyWith<$Res>
-    implements $AlbumTracksEventCopyWith<$Res> {
-  factory _$$FetchAlbumTracksImplCopyWith(_$FetchAlbumTracksImpl value,
-          $Res Function(_$FetchAlbumTracksImpl) then) =
-      __$$FetchAlbumTracksImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String albumId});
-}
-
-/// @nodoc
-class __$$FetchAlbumTracksImplCopyWithImpl<$Res>
-    extends _$AlbumTracksEventCopyWithImpl<$Res, _$FetchAlbumTracksImpl>
-    implements _$$FetchAlbumTracksImplCopyWith<$Res> {
-  __$$FetchAlbumTracksImplCopyWithImpl(_$FetchAlbumTracksImpl _value,
-      $Res Function(_$FetchAlbumTracksImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of AlbumTracksEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? albumId = null,
-  }) {
-    return _then(_$FetchAlbumTracksImpl(
+    return _then(_$StartedImpl(
       albumId: null == albumId
           ? _value.albumId
           : albumId // ignore: cast_nullable_to_non_nullable
@@ -280,22 +141,22 @@ class __$$FetchAlbumTracksImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$FetchAlbumTracksImpl implements _FetchAlbumTracks {
-  const _$FetchAlbumTracksImpl({required this.albumId});
+class _$StartedImpl implements _Started {
+  const _$StartedImpl({required this.albumId});
 
   @override
   final String albumId;
 
   @override
   String toString() {
-    return 'AlbumTracksEvent.fetchAlbumTracks(albumId: $albumId)';
+    return 'AlbumTracksEvent.started(albumId: $albumId)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FetchAlbumTracksImpl &&
+            other is _$StartedImpl &&
             (identical(other.albumId, albumId) || other.albumId == albumId));
   }
 
@@ -307,37 +168,39 @@ class _$FetchAlbumTracksImpl implements _FetchAlbumTracks {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$FetchAlbumTracksImplCopyWith<_$FetchAlbumTracksImpl> get copyWith =>
-      __$$FetchAlbumTracksImplCopyWithImpl<_$FetchAlbumTracksImpl>(
-          this, _$identity);
+  _$$StartedImplCopyWith<_$StartedImpl> get copyWith =>
+      __$$StartedImplCopyWithImpl<_$StartedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String albumId) fetchAlbumInfo,
-    required TResult Function(String albumId) fetchAlbumTracks,
+    required TResult Function(String albumId) started,
+    required TResult Function(String albumId) loadTracks,
+    required TResult Function(String albumId) loadAlbumInfo,
   }) {
-    return fetchAlbumTracks(albumId);
+    return started(albumId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String albumId)? fetchAlbumInfo,
-    TResult? Function(String albumId)? fetchAlbumTracks,
+    TResult? Function(String albumId)? started,
+    TResult? Function(String albumId)? loadTracks,
+    TResult? Function(String albumId)? loadAlbumInfo,
   }) {
-    return fetchAlbumTracks?.call(albumId);
+    return started?.call(albumId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String albumId)? fetchAlbumInfo,
-    TResult Function(String albumId)? fetchAlbumTracks,
+    TResult Function(String albumId)? started,
+    TResult Function(String albumId)? loadTracks,
+    TResult Function(String albumId)? loadAlbumInfo,
     required TResult orElse(),
   }) {
-    if (fetchAlbumTracks != null) {
-      return fetchAlbumTracks(albumId);
+    if (started != null) {
+      return started(albumId);
     }
     return orElse();
   }
@@ -345,38 +208,40 @@ class _$FetchAlbumTracksImpl implements _FetchAlbumTracks {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_FetchAlbumInfo value) fetchAlbumInfo,
-    required TResult Function(_FetchAlbumTracks value) fetchAlbumTracks,
+    required TResult Function(_Started value) started,
+    required TResult Function(_LoadTracks value) loadTracks,
+    required TResult Function(_LoadAlbumInfo value) loadAlbumInfo,
   }) {
-    return fetchAlbumTracks(this);
+    return started(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_FetchAlbumInfo value)? fetchAlbumInfo,
-    TResult? Function(_FetchAlbumTracks value)? fetchAlbumTracks,
+    TResult? Function(_Started value)? started,
+    TResult? Function(_LoadTracks value)? loadTracks,
+    TResult? Function(_LoadAlbumInfo value)? loadAlbumInfo,
   }) {
-    return fetchAlbumTracks?.call(this);
+    return started?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_FetchAlbumInfo value)? fetchAlbumInfo,
-    TResult Function(_FetchAlbumTracks value)? fetchAlbumTracks,
+    TResult Function(_Started value)? started,
+    TResult Function(_LoadTracks value)? loadTracks,
+    TResult Function(_LoadAlbumInfo value)? loadAlbumInfo,
     required TResult orElse(),
   }) {
-    if (fetchAlbumTracks != null) {
-      return fetchAlbumTracks(this);
+    if (started != null) {
+      return started(this);
     }
     return orElse();
   }
 }
 
-abstract class _FetchAlbumTracks implements AlbumTracksEvent {
-  const factory _FetchAlbumTracks({required final String albumId}) =
-      _$FetchAlbumTracksImpl;
+abstract class _Started implements AlbumTracksEvent {
+  const factory _Started({required final String albumId}) = _$StartedImpl;
 
   @override
   String get albumId;
@@ -385,61 +250,323 @@ abstract class _FetchAlbumTracks implements AlbumTracksEvent {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FetchAlbumTracksImplCopyWith<_$FetchAlbumTracksImpl> get copyWith =>
+  _$$StartedImplCopyWith<_$StartedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$LoadTracksImplCopyWith<$Res>
+    implements $AlbumTracksEventCopyWith<$Res> {
+  factory _$$LoadTracksImplCopyWith(
+          _$LoadTracksImpl value, $Res Function(_$LoadTracksImpl) then) =
+      __$$LoadTracksImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String albumId});
+}
+
+/// @nodoc
+class __$$LoadTracksImplCopyWithImpl<$Res>
+    extends _$AlbumTracksEventCopyWithImpl<$Res, _$LoadTracksImpl>
+    implements _$$LoadTracksImplCopyWith<$Res> {
+  __$$LoadTracksImplCopyWithImpl(
+      _$LoadTracksImpl _value, $Res Function(_$LoadTracksImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of AlbumTracksEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? albumId = null,
+  }) {
+    return _then(_$LoadTracksImpl(
+      albumId: null == albumId
+          ? _value.albumId
+          : albumId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$LoadTracksImpl implements _LoadTracks {
+  const _$LoadTracksImpl({required this.albumId});
+
+  @override
+  final String albumId;
+
+  @override
+  String toString() {
+    return 'AlbumTracksEvent.loadTracks(albumId: $albumId)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LoadTracksImpl &&
+            (identical(other.albumId, albumId) || other.albumId == albumId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, albumId);
+
+  /// Create a copy of AlbumTracksEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LoadTracksImplCopyWith<_$LoadTracksImpl> get copyWith =>
+      __$$LoadTracksImplCopyWithImpl<_$LoadTracksImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String albumId) started,
+    required TResult Function(String albumId) loadTracks,
+    required TResult Function(String albumId) loadAlbumInfo,
+  }) {
+    return loadTracks(albumId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String albumId)? started,
+    TResult? Function(String albumId)? loadTracks,
+    TResult? Function(String albumId)? loadAlbumInfo,
+  }) {
+    return loadTracks?.call(albumId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String albumId)? started,
+    TResult Function(String albumId)? loadTracks,
+    TResult Function(String albumId)? loadAlbumInfo,
+    required TResult orElse(),
+  }) {
+    if (loadTracks != null) {
+      return loadTracks(albumId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_LoadTracks value) loadTracks,
+    required TResult Function(_LoadAlbumInfo value) loadAlbumInfo,
+  }) {
+    return loadTracks(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_LoadTracks value)? loadTracks,
+    TResult? Function(_LoadAlbumInfo value)? loadAlbumInfo,
+  }) {
+    return loadTracks?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_LoadTracks value)? loadTracks,
+    TResult Function(_LoadAlbumInfo value)? loadAlbumInfo,
+    required TResult orElse(),
+  }) {
+    if (loadTracks != null) {
+      return loadTracks(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LoadTracks implements AlbumTracksEvent {
+  const factory _LoadTracks({required final String albumId}) = _$LoadTracksImpl;
+
+  @override
+  String get albumId;
+
+  /// Create a copy of AlbumTracksEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$LoadTracksImplCopyWith<_$LoadTracksImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$LoadAlbumInfoImplCopyWith<$Res>
+    implements $AlbumTracksEventCopyWith<$Res> {
+  factory _$$LoadAlbumInfoImplCopyWith(
+          _$LoadAlbumInfoImpl value, $Res Function(_$LoadAlbumInfoImpl) then) =
+      __$$LoadAlbumInfoImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String albumId});
+}
+
+/// @nodoc
+class __$$LoadAlbumInfoImplCopyWithImpl<$Res>
+    extends _$AlbumTracksEventCopyWithImpl<$Res, _$LoadAlbumInfoImpl>
+    implements _$$LoadAlbumInfoImplCopyWith<$Res> {
+  __$$LoadAlbumInfoImplCopyWithImpl(
+      _$LoadAlbumInfoImpl _value, $Res Function(_$LoadAlbumInfoImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of AlbumTracksEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? albumId = null,
+  }) {
+    return _then(_$LoadAlbumInfoImpl(
+      albumId: null == albumId
+          ? _value.albumId
+          : albumId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$LoadAlbumInfoImpl implements _LoadAlbumInfo {
+  const _$LoadAlbumInfoImpl({required this.albumId});
+
+  @override
+  final String albumId;
+
+  @override
+  String toString() {
+    return 'AlbumTracksEvent.loadAlbumInfo(albumId: $albumId)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LoadAlbumInfoImpl &&
+            (identical(other.albumId, albumId) || other.albumId == albumId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, albumId);
+
+  /// Create a copy of AlbumTracksEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LoadAlbumInfoImplCopyWith<_$LoadAlbumInfoImpl> get copyWith =>
+      __$$LoadAlbumInfoImplCopyWithImpl<_$LoadAlbumInfoImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String albumId) started,
+    required TResult Function(String albumId) loadTracks,
+    required TResult Function(String albumId) loadAlbumInfo,
+  }) {
+    return loadAlbumInfo(albumId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String albumId)? started,
+    TResult? Function(String albumId)? loadTracks,
+    TResult? Function(String albumId)? loadAlbumInfo,
+  }) {
+    return loadAlbumInfo?.call(albumId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String albumId)? started,
+    TResult Function(String albumId)? loadTracks,
+    TResult Function(String albumId)? loadAlbumInfo,
+    required TResult orElse(),
+  }) {
+    if (loadAlbumInfo != null) {
+      return loadAlbumInfo(albumId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_LoadTracks value) loadTracks,
+    required TResult Function(_LoadAlbumInfo value) loadAlbumInfo,
+  }) {
+    return loadAlbumInfo(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_LoadTracks value)? loadTracks,
+    TResult? Function(_LoadAlbumInfo value)? loadAlbumInfo,
+  }) {
+    return loadAlbumInfo?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_LoadTracks value)? loadTracks,
+    TResult Function(_LoadAlbumInfo value)? loadAlbumInfo,
+    required TResult orElse(),
+  }) {
+    if (loadAlbumInfo != null) {
+      return loadAlbumInfo(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LoadAlbumInfo implements AlbumTracksEvent {
+  const factory _LoadAlbumInfo({required final String albumId}) =
+      _$LoadAlbumInfoImpl;
+
+  @override
+  String get albumId;
+
+  /// Create a copy of AlbumTracksEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$LoadAlbumInfoImplCopyWith<_$LoadAlbumInfoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 mixin _$AlbumTracksState {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(String message) error,
-    required TResult Function(List<TrackItem> tracks, Album album) loaded,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(String message)? error,
-    TResult? Function(List<TrackItem> tracks, Album album)? loaded,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(String message)? error,
-    TResult Function(List<TrackItem> tracks, Album album)? loaded,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Error value) error,
-    required TResult Function(_Loaded value) loaded,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Error value)? error,
-    TResult? Function(_Loaded value)? loaded,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Error value)? error,
-    TResult Function(_Loaded value)? loaded,
-    required TResult orElse(),
-  }) =>
+// Data fields
+  List<TrackItem> get tracks => throw _privateConstructorUsedError;
+  Album? get album => throw _privateConstructorUsedError; // Status fields
+  Status get statusLoadTracks => throw _privateConstructorUsedError;
+  Status get statusLoadAlbumInfo => throw _privateConstructorUsedError;
+
+  /// Create a copy of AlbumTracksState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $AlbumTracksStateCopyWith<AlbumTracksState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -448,6 +575,16 @@ abstract class $AlbumTracksStateCopyWith<$Res> {
   factory $AlbumTracksStateCopyWith(
           AlbumTracksState value, $Res Function(AlbumTracksState) then) =
       _$AlbumTracksStateCopyWithImpl<$Res, AlbumTracksState>;
+  @useResult
+  $Res call(
+      {List<TrackItem> tracks,
+      Album? album,
+      Status statusLoadTracks,
+      Status statusLoadAlbumInfo});
+
+  $AlbumCopyWith<$Res>? get album;
+  $StatusCopyWith<$Res> get statusLoadTracks;
+  $StatusCopyWith<$Res> get statusLoadAlbumInfo;
 }
 
 /// @nodoc
@@ -462,411 +599,97 @@ class _$AlbumTracksStateCopyWithImpl<$Res, $Val extends AlbumTracksState>
 
   /// Create a copy of AlbumTracksState
   /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-abstract class _$$InitialImplCopyWith<$Res> {
-  factory _$$InitialImplCopyWith(
-          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
-      __$$InitialImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$InitialImplCopyWithImpl<$Res>
-    extends _$AlbumTracksStateCopyWithImpl<$Res, _$InitialImpl>
-    implements _$$InitialImplCopyWith<$Res> {
-  __$$InitialImplCopyWithImpl(
-      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of AlbumTracksState
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$InitialImpl implements _Initial {
-  const _$InitialImpl();
-
-  @override
-  String toString() {
-    return 'AlbumTracksState.initial()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$InitialImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(String message) error,
-    required TResult Function(List<TrackItem> tracks, Album album) loaded,
-  }) {
-    return initial();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(String message)? error,
-    TResult? Function(List<TrackItem> tracks, Album album)? loaded,
-  }) {
-    return initial?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(String message)? error,
-    TResult Function(List<TrackItem> tracks, Album album)? loaded,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Error value) error,
-    required TResult Function(_Loaded value) loaded,
-  }) {
-    return initial(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Error value)? error,
-    TResult? Function(_Loaded value)? loaded,
-  }) {
-    return initial?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Error value)? error,
-    TResult Function(_Loaded value)? loaded,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Initial implements AlbumTracksState {
-  const factory _Initial() = _$InitialImpl;
-}
-
-/// @nodoc
-abstract class _$$LoadingImplCopyWith<$Res> {
-  factory _$$LoadingImplCopyWith(
-          _$LoadingImpl value, $Res Function(_$LoadingImpl) then) =
-      __$$LoadingImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$LoadingImplCopyWithImpl<$Res>
-    extends _$AlbumTracksStateCopyWithImpl<$Res, _$LoadingImpl>
-    implements _$$LoadingImplCopyWith<$Res> {
-  __$$LoadingImplCopyWithImpl(
-      _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of AlbumTracksState
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$LoadingImpl implements _Loading {
-  const _$LoadingImpl();
-
-  @override
-  String toString() {
-    return 'AlbumTracksState.loading()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LoadingImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(String message) error,
-    required TResult Function(List<TrackItem> tracks, Album album) loaded,
-  }) {
-    return loading();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(String message)? error,
-    TResult? Function(List<TrackItem> tracks, Album album)? loaded,
-  }) {
-    return loading?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(String message)? error,
-    TResult Function(List<TrackItem> tracks, Album album)? loaded,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Error value) error,
-    required TResult Function(_Loaded value) loaded,
-  }) {
-    return loading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Error value)? error,
-    TResult? Function(_Loaded value)? loaded,
-  }) {
-    return loading?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Error value)? error,
-    TResult Function(_Loaded value)? loaded,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Loading implements AlbumTracksState {
-  const factory _Loading() = _$LoadingImpl;
-}
-
-/// @nodoc
-abstract class _$$ErrorImplCopyWith<$Res> {
-  factory _$$ErrorImplCopyWith(
-          _$ErrorImpl value, $Res Function(_$ErrorImpl) then) =
-      __$$ErrorImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String message});
-}
-
-/// @nodoc
-class __$$ErrorImplCopyWithImpl<$Res>
-    extends _$AlbumTracksStateCopyWithImpl<$Res, _$ErrorImpl>
-    implements _$$ErrorImplCopyWith<$Res> {
-  __$$ErrorImplCopyWithImpl(
-      _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of AlbumTracksState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? message = null,
+    Object? tracks = null,
+    Object? album = freezed,
+    Object? statusLoadTracks = null,
+    Object? statusLoadAlbumInfo = null,
   }) {
-    return _then(_$ErrorImpl(
-      null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+    return _then(_value.copyWith(
+      tracks: null == tracks
+          ? _value.tracks
+          : tracks // ignore: cast_nullable_to_non_nullable
+              as List<TrackItem>,
+      album: freezed == album
+          ? _value.album
+          : album // ignore: cast_nullable_to_non_nullable
+              as Album?,
+      statusLoadTracks: null == statusLoadTracks
+          ? _value.statusLoadTracks
+          : statusLoadTracks // ignore: cast_nullable_to_non_nullable
+              as Status,
+      statusLoadAlbumInfo: null == statusLoadAlbumInfo
+          ? _value.statusLoadAlbumInfo
+          : statusLoadAlbumInfo // ignore: cast_nullable_to_non_nullable
+              as Status,
+    ) as $Val);
   }
-}
-
-/// @nodoc
-
-class _$ErrorImpl implements _Error {
-  const _$ErrorImpl(this.message);
-
-  @override
-  final String message;
-
-  @override
-  String toString() {
-    return 'AlbumTracksState.error(message: $message)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ErrorImpl &&
-            (identical(other.message, message) || other.message == message));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, message);
 
   /// Create a copy of AlbumTracksState
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
-      __$$ErrorImplCopyWithImpl<_$ErrorImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(String message) error,
-    required TResult Function(List<TrackItem> tracks, Album album) loaded,
-  }) {
-    return error(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(String message)? error,
-    TResult? Function(List<TrackItem> tracks, Album album)? loaded,
-  }) {
-    return error?.call(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(String message)? error,
-    TResult Function(List<TrackItem> tracks, Album album)? loaded,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(message);
+  $AlbumCopyWith<$Res>? get album {
+    if (_value.album == null) {
+      return null;
     }
-    return orElse();
+
+    return $AlbumCopyWith<$Res>(_value.album!, (value) {
+      return _then(_value.copyWith(album: value) as $Val);
+    });
   }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Error value) error,
-    required TResult Function(_Loaded value) loaded,
-  }) {
-    return error(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Error value)? error,
-    TResult? Function(_Loaded value)? loaded,
-  }) {
-    return error?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Error value)? error,
-    TResult Function(_Loaded value)? loaded,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Error implements AlbumTracksState {
-  const factory _Error(final String message) = _$ErrorImpl;
-
-  String get message;
 
   /// Create a copy of AlbumTracksState
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @override
+  @pragma('vm:prefer-inline')
+  $StatusCopyWith<$Res> get statusLoadTracks {
+    return $StatusCopyWith<$Res>(_value.statusLoadTracks, (value) {
+      return _then(_value.copyWith(statusLoadTracks: value) as $Val);
+    });
+  }
+
+  /// Create a copy of AlbumTracksState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $StatusCopyWith<$Res> get statusLoadAlbumInfo {
+    return $StatusCopyWith<$Res>(_value.statusLoadAlbumInfo, (value) {
+      return _then(_value.copyWith(statusLoadAlbumInfo: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
-abstract class _$$LoadedImplCopyWith<$Res> {
-  factory _$$LoadedImplCopyWith(
-          _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
-      __$$LoadedImplCopyWithImpl<$Res>;
+abstract class _$$AlbumTracksStateImplCopyWith<$Res>
+    implements $AlbumTracksStateCopyWith<$Res> {
+  factory _$$AlbumTracksStateImplCopyWith(_$AlbumTracksStateImpl value,
+          $Res Function(_$AlbumTracksStateImpl) then) =
+      __$$AlbumTracksStateImplCopyWithImpl<$Res>;
+  @override
   @useResult
-  $Res call({List<TrackItem> tracks, Album album});
+  $Res call(
+      {List<TrackItem> tracks,
+      Album? album,
+      Status statusLoadTracks,
+      Status statusLoadAlbumInfo});
 
-  $AlbumCopyWith<$Res> get album;
+  @override
+  $AlbumCopyWith<$Res>? get album;
+  @override
+  $StatusCopyWith<$Res> get statusLoadTracks;
+  @override
+  $StatusCopyWith<$Res> get statusLoadAlbumInfo;
 }
 
 /// @nodoc
-class __$$LoadedImplCopyWithImpl<$Res>
-    extends _$AlbumTracksStateCopyWithImpl<$Res, _$LoadedImpl>
-    implements _$$LoadedImplCopyWith<$Res> {
-  __$$LoadedImplCopyWithImpl(
-      _$LoadedImpl _value, $Res Function(_$LoadedImpl) _then)
+class __$$AlbumTracksStateImplCopyWithImpl<$Res>
+    extends _$AlbumTracksStateCopyWithImpl<$Res, _$AlbumTracksStateImpl>
+    implements _$$AlbumTracksStateImplCopyWith<$Res> {
+  __$$AlbumTracksStateImplCopyWithImpl(_$AlbumTracksStateImpl _value,
+      $Res Function(_$AlbumTracksStateImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of AlbumTracksState
@@ -875,40 +698,46 @@ class __$$LoadedImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? tracks = null,
-    Object? album = null,
+    Object? album = freezed,
+    Object? statusLoadTracks = null,
+    Object? statusLoadAlbumInfo = null,
   }) {
-    return _then(_$LoadedImpl(
+    return _then(_$AlbumTracksStateImpl(
       tracks: null == tracks
           ? _value._tracks
           : tracks // ignore: cast_nullable_to_non_nullable
               as List<TrackItem>,
-      album: null == album
+      album: freezed == album
           ? _value.album
           : album // ignore: cast_nullable_to_non_nullable
-              as Album,
+              as Album?,
+      statusLoadTracks: null == statusLoadTracks
+          ? _value.statusLoadTracks
+          : statusLoadTracks // ignore: cast_nullable_to_non_nullable
+              as Status,
+      statusLoadAlbumInfo: null == statusLoadAlbumInfo
+          ? _value.statusLoadAlbumInfo
+          : statusLoadAlbumInfo // ignore: cast_nullable_to_non_nullable
+              as Status,
     ));
-  }
-
-  /// Create a copy of AlbumTracksState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $AlbumCopyWith<$Res> get album {
-    return $AlbumCopyWith<$Res>(_value.album, (value) {
-      return _then(_value.copyWith(album: value));
-    });
   }
 }
 
 /// @nodoc
 
-class _$LoadedImpl implements _Loaded {
-  const _$LoadedImpl(
-      {required final List<TrackItem> tracks, required this.album})
+class _$AlbumTracksStateImpl implements _AlbumTracksState {
+  const _$AlbumTracksStateImpl(
+      {final List<TrackItem> tracks = const [],
+      this.album = null,
+      this.statusLoadTracks = const Status.idle(),
+      this.statusLoadAlbumInfo = const Status.idle()})
       : _tracks = tracks;
 
+// Data fields
   final List<TrackItem> _tracks;
+// Data fields
   @override
+  @JsonKey()
   List<TrackItem> get tracks {
     if (_tracks is EqualUnmodifiableListView) return _tracks;
     // ignore: implicit_dynamic_type
@@ -916,120 +745,73 @@ class _$LoadedImpl implements _Loaded {
   }
 
   @override
-  final Album album;
+  @JsonKey()
+  final Album? album;
+// Status fields
+  @override
+  @JsonKey()
+  final Status statusLoadTracks;
+  @override
+  @JsonKey()
+  final Status statusLoadAlbumInfo;
 
   @override
   String toString() {
-    return 'AlbumTracksState.loaded(tracks: $tracks, album: $album)';
+    return 'AlbumTracksState(tracks: $tracks, album: $album, statusLoadTracks: $statusLoadTracks, statusLoadAlbumInfo: $statusLoadAlbumInfo)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LoadedImpl &&
+            other is _$AlbumTracksStateImpl &&
             const DeepCollectionEquality().equals(other._tracks, _tracks) &&
-            (identical(other.album, album) || other.album == album));
+            (identical(other.album, album) || other.album == album) &&
+            (identical(other.statusLoadTracks, statusLoadTracks) ||
+                other.statusLoadTracks == statusLoadTracks) &&
+            (identical(other.statusLoadAlbumInfo, statusLoadAlbumInfo) ||
+                other.statusLoadAlbumInfo == statusLoadAlbumInfo));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_tracks), album);
+      runtimeType,
+      const DeepCollectionEquality().hash(_tracks),
+      album,
+      statusLoadTracks,
+      statusLoadAlbumInfo);
 
   /// Create a copy of AlbumTracksState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
-      __$$LoadedImplCopyWithImpl<_$LoadedImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(String message) error,
-    required TResult Function(List<TrackItem> tracks, Album album) loaded,
-  }) {
-    return loaded(tracks, album);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(String message)? error,
-    TResult? Function(List<TrackItem> tracks, Album album)? loaded,
-  }) {
-    return loaded?.call(tracks, album);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(String message)? error,
-    TResult Function(List<TrackItem> tracks, Album album)? loaded,
-    required TResult orElse(),
-  }) {
-    if (loaded != null) {
-      return loaded(tracks, album);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Error value) error,
-    required TResult Function(_Loaded value) loaded,
-  }) {
-    return loaded(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Error value)? error,
-    TResult? Function(_Loaded value)? loaded,
-  }) {
-    return loaded?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Error value)? error,
-    TResult Function(_Loaded value)? loaded,
-    required TResult orElse(),
-  }) {
-    if (loaded != null) {
-      return loaded(this);
-    }
-    return orElse();
-  }
+  _$$AlbumTracksStateImplCopyWith<_$AlbumTracksStateImpl> get copyWith =>
+      __$$AlbumTracksStateImplCopyWithImpl<_$AlbumTracksStateImpl>(
+          this, _$identity);
 }
 
-abstract class _Loaded implements AlbumTracksState {
-  const factory _Loaded(
-      {required final List<TrackItem> tracks,
-      required final Album album}) = _$LoadedImpl;
+abstract class _AlbumTracksState implements AlbumTracksState {
+  const factory _AlbumTracksState(
+      {final List<TrackItem> tracks,
+      final Album? album,
+      final Status statusLoadTracks,
+      final Status statusLoadAlbumInfo}) = _$AlbumTracksStateImpl;
 
+// Data fields
+  @override
   List<TrackItem> get tracks;
-  Album get album;
+  @override
+  Album? get album; // Status fields
+  @override
+  Status get statusLoadTracks;
+  @override
+  Status get statusLoadAlbumInfo;
 
   /// Create a copy of AlbumTracksState
   /// with the given fields replaced by the non-null parameter values.
+  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
+  _$$AlbumTracksStateImplCopyWith<_$AlbumTracksStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

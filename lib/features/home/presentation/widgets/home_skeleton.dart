@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
+import '../../../../core/config/app_color.dart';
 
 class HomeSkeleton extends StatelessWidget {
-  const HomeSkeleton({super.key});
+  final String title;
+  const HomeSkeleton({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -10,14 +12,14 @@ class HomeSkeleton extends StatelessWidget {
       baseColor: Colors.grey[800]!,
       highlightColor: Colors.grey[700]!,
       child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // New Releases Section
-              const Text(
-                'New Releases',
-                style: TextStyle(
+              Text(
+                title,
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -41,64 +43,17 @@ class HomeSkeleton extends StatelessWidget {
                   },
                 ),
               ),
-              const SizedBox(height: 24),
-
-              // Your Playlists Section
-              const Text(
-                'Your Playlists',
+              const SizedBox(height: 8),
+              Text(
+                'album.name',
                 style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+                  color: AppColor.gray.withValues(alpha: 0),
+                  fontWeight: FontWeight.w500,
                 ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
-              const SizedBox(height: 16),
-              SizedBox(
-                height: 150,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 5,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      width: 150,
-                      margin: const EdgeInsets.only(right: 16),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    );
-                  },
-                ),
-              ),
-              const SizedBox(height: 24),
-
-              // Several Tracks Section
-              const Text(
-                'Several Tracks',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 16),
-              SizedBox(
-                height: 200,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 5,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      width: 150,
-                      margin: const EdgeInsets.only(right: 16),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    );
-                  },
-                ),
-              ),
+              const SizedBox(height: 13),
             ],
           )),
     );

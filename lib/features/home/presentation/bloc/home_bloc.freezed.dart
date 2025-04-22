@@ -23,7 +23,6 @@ mixin _$HomeEvent {
     required TResult Function(int offset, int limit, String userId)
         getUserPlaylists,
     required TResult Function(String ids) getTracks,
-    required TResult Function(String message) homeError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -32,7 +31,6 @@ mixin _$HomeEvent {
     TResult? Function(int offset, int limit)? getNewReleases,
     TResult? Function(int offset, int limit, String userId)? getUserPlaylists,
     TResult? Function(String ids)? getTracks,
-    TResult? Function(String message)? homeError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -41,7 +39,6 @@ mixin _$HomeEvent {
     TResult Function(int offset, int limit)? getNewReleases,
     TResult Function(int offset, int limit, String userId)? getUserPlaylists,
     TResult Function(String ids)? getTracks,
-    TResult Function(String message)? homeError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -51,7 +48,6 @@ mixin _$HomeEvent {
     required TResult Function(_GetNewReleases value) getNewReleases,
     required TResult Function(_GetUserPlaylists value) getUserPlaylists,
     required TResult Function(_GetTracks value) getTracks,
-    required TResult Function(_HomeError value) homeError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -60,7 +56,6 @@ mixin _$HomeEvent {
     TResult? Function(_GetNewReleases value)? getNewReleases,
     TResult? Function(_GetUserPlaylists value)? getUserPlaylists,
     TResult? Function(_GetTracks value)? getTracks,
-    TResult? Function(_HomeError value)? homeError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -69,7 +64,6 @@ mixin _$HomeEvent {
     TResult Function(_GetNewReleases value)? getNewReleases,
     TResult Function(_GetUserPlaylists value)? getUserPlaylists,
     TResult Function(_GetTracks value)? getTracks,
-    TResult Function(_HomeError value)? homeError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -141,7 +135,6 @@ class _$StartedImpl implements _Started {
     required TResult Function(int offset, int limit, String userId)
         getUserPlaylists,
     required TResult Function(String ids) getTracks,
-    required TResult Function(String message) homeError,
   }) {
     return started();
   }
@@ -153,7 +146,6 @@ class _$StartedImpl implements _Started {
     TResult? Function(int offset, int limit)? getNewReleases,
     TResult? Function(int offset, int limit, String userId)? getUserPlaylists,
     TResult? Function(String ids)? getTracks,
-    TResult? Function(String message)? homeError,
   }) {
     return started?.call();
   }
@@ -165,7 +157,6 @@ class _$StartedImpl implements _Started {
     TResult Function(int offset, int limit)? getNewReleases,
     TResult Function(int offset, int limit, String userId)? getUserPlaylists,
     TResult Function(String ids)? getTracks,
-    TResult Function(String message)? homeError,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -181,7 +172,6 @@ class _$StartedImpl implements _Started {
     required TResult Function(_GetNewReleases value) getNewReleases,
     required TResult Function(_GetUserPlaylists value) getUserPlaylists,
     required TResult Function(_GetTracks value) getTracks,
-    required TResult Function(_HomeError value) homeError,
   }) {
     return started(this);
   }
@@ -193,7 +183,6 @@ class _$StartedImpl implements _Started {
     TResult? Function(_GetNewReleases value)? getNewReleases,
     TResult? Function(_GetUserPlaylists value)? getUserPlaylists,
     TResult? Function(_GetTracks value)? getTracks,
-    TResult? Function(_HomeError value)? homeError,
   }) {
     return started?.call(this);
   }
@@ -205,7 +194,6 @@ class _$StartedImpl implements _Started {
     TResult Function(_GetNewReleases value)? getNewReleases,
     TResult Function(_GetUserPlaylists value)? getUserPlaylists,
     TResult Function(_GetTracks value)? getTracks,
-    TResult Function(_HomeError value)? homeError,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -303,7 +291,6 @@ class _$GetNewReleasesImpl implements _GetNewReleases {
     required TResult Function(int offset, int limit, String userId)
         getUserPlaylists,
     required TResult Function(String ids) getTracks,
-    required TResult Function(String message) homeError,
   }) {
     return getNewReleases(offset, limit);
   }
@@ -315,7 +302,6 @@ class _$GetNewReleasesImpl implements _GetNewReleases {
     TResult? Function(int offset, int limit)? getNewReleases,
     TResult? Function(int offset, int limit, String userId)? getUserPlaylists,
     TResult? Function(String ids)? getTracks,
-    TResult? Function(String message)? homeError,
   }) {
     return getNewReleases?.call(offset, limit);
   }
@@ -327,7 +313,6 @@ class _$GetNewReleasesImpl implements _GetNewReleases {
     TResult Function(int offset, int limit)? getNewReleases,
     TResult Function(int offset, int limit, String userId)? getUserPlaylists,
     TResult Function(String ids)? getTracks,
-    TResult Function(String message)? homeError,
     required TResult orElse(),
   }) {
     if (getNewReleases != null) {
@@ -343,7 +328,6 @@ class _$GetNewReleasesImpl implements _GetNewReleases {
     required TResult Function(_GetNewReleases value) getNewReleases,
     required TResult Function(_GetUserPlaylists value) getUserPlaylists,
     required TResult Function(_GetTracks value) getTracks,
-    required TResult Function(_HomeError value) homeError,
   }) {
     return getNewReleases(this);
   }
@@ -355,7 +339,6 @@ class _$GetNewReleasesImpl implements _GetNewReleases {
     TResult? Function(_GetNewReleases value)? getNewReleases,
     TResult? Function(_GetUserPlaylists value)? getUserPlaylists,
     TResult? Function(_GetTracks value)? getTracks,
-    TResult? Function(_HomeError value)? homeError,
   }) {
     return getNewReleases?.call(this);
   }
@@ -367,7 +350,6 @@ class _$GetNewReleasesImpl implements _GetNewReleases {
     TResult Function(_GetNewReleases value)? getNewReleases,
     TResult Function(_GetUserPlaylists value)? getUserPlaylists,
     TResult Function(_GetTracks value)? getTracks,
-    TResult Function(_HomeError value)? homeError,
     required TResult orElse(),
   }) {
     if (getNewReleases != null) {
@@ -484,7 +466,6 @@ class _$GetUserPlaylistsImpl implements _GetUserPlaylists {
     required TResult Function(int offset, int limit, String userId)
         getUserPlaylists,
     required TResult Function(String ids) getTracks,
-    required TResult Function(String message) homeError,
   }) {
     return getUserPlaylists(offset, limit, userId);
   }
@@ -496,7 +477,6 @@ class _$GetUserPlaylistsImpl implements _GetUserPlaylists {
     TResult? Function(int offset, int limit)? getNewReleases,
     TResult? Function(int offset, int limit, String userId)? getUserPlaylists,
     TResult? Function(String ids)? getTracks,
-    TResult? Function(String message)? homeError,
   }) {
     return getUserPlaylists?.call(offset, limit, userId);
   }
@@ -508,7 +488,6 @@ class _$GetUserPlaylistsImpl implements _GetUserPlaylists {
     TResult Function(int offset, int limit)? getNewReleases,
     TResult Function(int offset, int limit, String userId)? getUserPlaylists,
     TResult Function(String ids)? getTracks,
-    TResult Function(String message)? homeError,
     required TResult orElse(),
   }) {
     if (getUserPlaylists != null) {
@@ -524,7 +503,6 @@ class _$GetUserPlaylistsImpl implements _GetUserPlaylists {
     required TResult Function(_GetNewReleases value) getNewReleases,
     required TResult Function(_GetUserPlaylists value) getUserPlaylists,
     required TResult Function(_GetTracks value) getTracks,
-    required TResult Function(_HomeError value) homeError,
   }) {
     return getUserPlaylists(this);
   }
@@ -536,7 +514,6 @@ class _$GetUserPlaylistsImpl implements _GetUserPlaylists {
     TResult? Function(_GetNewReleases value)? getNewReleases,
     TResult? Function(_GetUserPlaylists value)? getUserPlaylists,
     TResult? Function(_GetTracks value)? getTracks,
-    TResult? Function(_HomeError value)? homeError,
   }) {
     return getUserPlaylists?.call(this);
   }
@@ -548,7 +525,6 @@ class _$GetUserPlaylistsImpl implements _GetUserPlaylists {
     TResult Function(_GetNewReleases value)? getNewReleases,
     TResult Function(_GetUserPlaylists value)? getUserPlaylists,
     TResult Function(_GetTracks value)? getTracks,
-    TResult Function(_HomeError value)? homeError,
     required TResult orElse(),
   }) {
     if (getUserPlaylists != null) {
@@ -648,7 +624,6 @@ class _$GetTracksImpl implements _GetTracks {
     required TResult Function(int offset, int limit, String userId)
         getUserPlaylists,
     required TResult Function(String ids) getTracks,
-    required TResult Function(String message) homeError,
   }) {
     return getTracks(ids);
   }
@@ -660,7 +635,6 @@ class _$GetTracksImpl implements _GetTracks {
     TResult? Function(int offset, int limit)? getNewReleases,
     TResult? Function(int offset, int limit, String userId)? getUserPlaylists,
     TResult? Function(String ids)? getTracks,
-    TResult? Function(String message)? homeError,
   }) {
     return getTracks?.call(ids);
   }
@@ -672,7 +646,6 @@ class _$GetTracksImpl implements _GetTracks {
     TResult Function(int offset, int limit)? getNewReleases,
     TResult Function(int offset, int limit, String userId)? getUserPlaylists,
     TResult Function(String ids)? getTracks,
-    TResult Function(String message)? homeError,
     required TResult orElse(),
   }) {
     if (getTracks != null) {
@@ -688,7 +661,6 @@ class _$GetTracksImpl implements _GetTracks {
     required TResult Function(_GetNewReleases value) getNewReleases,
     required TResult Function(_GetUserPlaylists value) getUserPlaylists,
     required TResult Function(_GetTracks value) getTracks,
-    required TResult Function(_HomeError value) homeError,
   }) {
     return getTracks(this);
   }
@@ -700,7 +672,6 @@ class _$GetTracksImpl implements _GetTracks {
     TResult? Function(_GetNewReleases value)? getNewReleases,
     TResult? Function(_GetUserPlaylists value)? getUserPlaylists,
     TResult? Function(_GetTracks value)? getTracks,
-    TResult? Function(_HomeError value)? homeError,
   }) {
     return getTracks?.call(this);
   }
@@ -712,7 +683,6 @@ class _$GetTracksImpl implements _GetTracks {
     TResult Function(_GetNewReleases value)? getNewReleases,
     TResult Function(_GetUserPlaylists value)? getUserPlaylists,
     TResult Function(_GetTracks value)? getTracks,
-    TResult Function(_HomeError value)? homeError,
     required TResult orElse(),
   }) {
     if (getTracks != null) {
@@ -735,221 +705,18 @@ abstract class _GetTracks implements HomeEvent {
 }
 
 /// @nodoc
-abstract class _$$HomeErrorImplCopyWith<$Res> {
-  factory _$$HomeErrorImplCopyWith(
-          _$HomeErrorImpl value, $Res Function(_$HomeErrorImpl) then) =
-      __$$HomeErrorImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String message});
-}
-
-/// @nodoc
-class __$$HomeErrorImplCopyWithImpl<$Res>
-    extends _$HomeEventCopyWithImpl<$Res, _$HomeErrorImpl>
-    implements _$$HomeErrorImplCopyWith<$Res> {
-  __$$HomeErrorImplCopyWithImpl(
-      _$HomeErrorImpl _value, $Res Function(_$HomeErrorImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of HomeEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? message = null,
-  }) {
-    return _then(_$HomeErrorImpl(
-      null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$HomeErrorImpl implements _HomeError {
-  const _$HomeErrorImpl(this.message);
-
-  @override
-  final String message;
-
-  @override
-  String toString() {
-    return 'HomeEvent.homeError(message: $message)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$HomeErrorImpl &&
-            (identical(other.message, message) || other.message == message));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, message);
-
-  /// Create a copy of HomeEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$HomeErrorImplCopyWith<_$HomeErrorImpl> get copyWith =>
-      __$$HomeErrorImplCopyWithImpl<_$HomeErrorImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() started,
-    required TResult Function(int offset, int limit) getNewReleases,
-    required TResult Function(int offset, int limit, String userId)
-        getUserPlaylists,
-    required TResult Function(String ids) getTracks,
-    required TResult Function(String message) homeError,
-  }) {
-    return homeError(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
-    TResult? Function(int offset, int limit)? getNewReleases,
-    TResult? Function(int offset, int limit, String userId)? getUserPlaylists,
-    TResult? Function(String ids)? getTracks,
-    TResult? Function(String message)? homeError,
-  }) {
-    return homeError?.call(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function(int offset, int limit)? getNewReleases,
-    TResult Function(int offset, int limit, String userId)? getUserPlaylists,
-    TResult Function(String ids)? getTracks,
-    TResult Function(String message)? homeError,
-    required TResult orElse(),
-  }) {
-    if (homeError != null) {
-      return homeError(message);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
-    required TResult Function(_GetNewReleases value) getNewReleases,
-    required TResult Function(_GetUserPlaylists value) getUserPlaylists,
-    required TResult Function(_GetTracks value) getTracks,
-    required TResult Function(_HomeError value) homeError,
-  }) {
-    return homeError(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
-    TResult? Function(_GetNewReleases value)? getNewReleases,
-    TResult? Function(_GetUserPlaylists value)? getUserPlaylists,
-    TResult? Function(_GetTracks value)? getTracks,
-    TResult? Function(_HomeError value)? homeError,
-  }) {
-    return homeError?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
-    TResult Function(_GetNewReleases value)? getNewReleases,
-    TResult Function(_GetUserPlaylists value)? getUserPlaylists,
-    TResult Function(_GetTracks value)? getTracks,
-    TResult Function(_HomeError value)? homeError,
-    required TResult orElse(),
-  }) {
-    if (homeError != null) {
-      return homeError(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _HomeError implements HomeEvent {
-  const factory _HomeError(final String message) = _$HomeErrorImpl;
-
-  String get message;
-
-  /// Create a copy of HomeEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$HomeErrorImplCopyWith<_$HomeErrorImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
 mixin _$HomeState {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(String message) homeError,
-    required TResult Function(
-            List<Album> newReleases, List<Playlist> userPlaylists, Track tracks)
-        loaded,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(String message)? homeError,
-    TResult? Function(List<Album> newReleases, List<Playlist> userPlaylists,
-            Track tracks)?
-        loaded,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(String message)? homeError,
-    TResult Function(List<Album> newReleases, List<Playlist> userPlaylists,
-            Track tracks)?
-        loaded,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_HomeStateError value) homeError,
-    required TResult Function(_Loaded value) loaded,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_HomeStateError value)? homeError,
-    TResult? Function(_Loaded value)? loaded,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_HomeStateError value)? homeError,
-    TResult Function(_Loaded value)? loaded,
-    required TResult orElse(),
-  }) =>
+  List<Album> get newReleases => throw _privateConstructorUsedError;
+  List<Playlist> get userPlaylists => throw _privateConstructorUsedError;
+  Track get tracks => throw _privateConstructorUsedError;
+  Status get statusLoadNewReleases => throw _privateConstructorUsedError;
+  Status get statusLoadPlaylists => throw _privateConstructorUsedError;
+  Status get statusLoadTracks => throw _privateConstructorUsedError;
+
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $HomeStateCopyWith<HomeState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -957,6 +724,19 @@ mixin _$HomeState {
 abstract class $HomeStateCopyWith<$Res> {
   factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) then) =
       _$HomeStateCopyWithImpl<$Res, HomeState>;
+  @useResult
+  $Res call(
+      {List<Album> newReleases,
+      List<Playlist> userPlaylists,
+      Track tracks,
+      Status statusLoadNewReleases,
+      Status statusLoadPlaylists,
+      Status statusLoadTracks});
+
+  $TrackCopyWith<$Res> get tracks;
+  $StatusCopyWith<$Res> get statusLoadNewReleases;
+  $StatusCopyWith<$Res> get statusLoadPlaylists;
+  $StatusCopyWith<$Res> get statusLoadTracks;
 }
 
 /// @nodoc
@@ -971,431 +751,117 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
 
   /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-abstract class _$$InitialImplCopyWith<$Res> {
-  factory _$$InitialImplCopyWith(
-          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
-      __$$InitialImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$InitialImplCopyWithImpl<$Res>
-    extends _$HomeStateCopyWithImpl<$Res, _$InitialImpl>
-    implements _$$InitialImplCopyWith<$Res> {
-  __$$InitialImplCopyWithImpl(
-      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of HomeState
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$InitialImpl implements _Initial {
-  const _$InitialImpl();
-
-  @override
-  String toString() {
-    return 'HomeState.initial()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$InitialImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(String message) homeError,
-    required TResult Function(
-            List<Album> newReleases, List<Playlist> userPlaylists, Track tracks)
-        loaded,
-  }) {
-    return initial();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(String message)? homeError,
-    TResult? Function(List<Album> newReleases, List<Playlist> userPlaylists,
-            Track tracks)?
-        loaded,
-  }) {
-    return initial?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(String message)? homeError,
-    TResult Function(List<Album> newReleases, List<Playlist> userPlaylists,
-            Track tracks)?
-        loaded,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_HomeStateError value) homeError,
-    required TResult Function(_Loaded value) loaded,
-  }) {
-    return initial(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_HomeStateError value)? homeError,
-    TResult? Function(_Loaded value)? loaded,
-  }) {
-    return initial?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_HomeStateError value)? homeError,
-    TResult Function(_Loaded value)? loaded,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Initial implements HomeState {
-  const factory _Initial() = _$InitialImpl;
-}
-
-/// @nodoc
-abstract class _$$LoadingImplCopyWith<$Res> {
-  factory _$$LoadingImplCopyWith(
-          _$LoadingImpl value, $Res Function(_$LoadingImpl) then) =
-      __$$LoadingImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$LoadingImplCopyWithImpl<$Res>
-    extends _$HomeStateCopyWithImpl<$Res, _$LoadingImpl>
-    implements _$$LoadingImplCopyWith<$Res> {
-  __$$LoadingImplCopyWithImpl(
-      _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of HomeState
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$LoadingImpl implements _Loading {
-  const _$LoadingImpl();
-
-  @override
-  String toString() {
-    return 'HomeState.loading()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LoadingImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(String message) homeError,
-    required TResult Function(
-            List<Album> newReleases, List<Playlist> userPlaylists, Track tracks)
-        loaded,
-  }) {
-    return loading();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(String message)? homeError,
-    TResult? Function(List<Album> newReleases, List<Playlist> userPlaylists,
-            Track tracks)?
-        loaded,
-  }) {
-    return loading?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(String message)? homeError,
-    TResult Function(List<Album> newReleases, List<Playlist> userPlaylists,
-            Track tracks)?
-        loaded,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_HomeStateError value) homeError,
-    required TResult Function(_Loaded value) loaded,
-  }) {
-    return loading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_HomeStateError value)? homeError,
-    TResult? Function(_Loaded value)? loaded,
-  }) {
-    return loading?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_HomeStateError value)? homeError,
-    TResult Function(_Loaded value)? loaded,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Loading implements HomeState {
-  const factory _Loading() = _$LoadingImpl;
-}
-
-/// @nodoc
-abstract class _$$HomeStateErrorImplCopyWith<$Res> {
-  factory _$$HomeStateErrorImplCopyWith(_$HomeStateErrorImpl value,
-          $Res Function(_$HomeStateErrorImpl) then) =
-      __$$HomeStateErrorImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String message});
-}
-
-/// @nodoc
-class __$$HomeStateErrorImplCopyWithImpl<$Res>
-    extends _$HomeStateCopyWithImpl<$Res, _$HomeStateErrorImpl>
-    implements _$$HomeStateErrorImplCopyWith<$Res> {
-  __$$HomeStateErrorImplCopyWithImpl(
-      _$HomeStateErrorImpl _value, $Res Function(_$HomeStateErrorImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of HomeState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? message = null,
+    Object? newReleases = null,
+    Object? userPlaylists = null,
+    Object? tracks = null,
+    Object? statusLoadNewReleases = null,
+    Object? statusLoadPlaylists = null,
+    Object? statusLoadTracks = null,
   }) {
-    return _then(_$HomeStateErrorImpl(
-      null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+    return _then(_value.copyWith(
+      newReleases: null == newReleases
+          ? _value.newReleases
+          : newReleases // ignore: cast_nullable_to_non_nullable
+              as List<Album>,
+      userPlaylists: null == userPlaylists
+          ? _value.userPlaylists
+          : userPlaylists // ignore: cast_nullable_to_non_nullable
+              as List<Playlist>,
+      tracks: null == tracks
+          ? _value.tracks
+          : tracks // ignore: cast_nullable_to_non_nullable
+              as Track,
+      statusLoadNewReleases: null == statusLoadNewReleases
+          ? _value.statusLoadNewReleases
+          : statusLoadNewReleases // ignore: cast_nullable_to_non_nullable
+              as Status,
+      statusLoadPlaylists: null == statusLoadPlaylists
+          ? _value.statusLoadPlaylists
+          : statusLoadPlaylists // ignore: cast_nullable_to_non_nullable
+              as Status,
+      statusLoadTracks: null == statusLoadTracks
+          ? _value.statusLoadTracks
+          : statusLoadTracks // ignore: cast_nullable_to_non_nullable
+              as Status,
+    ) as $Val);
   }
-}
-
-/// @nodoc
-
-class _$HomeStateErrorImpl implements _HomeStateError {
-  const _$HomeStateErrorImpl(this.message);
-
-  @override
-  final String message;
-
-  @override
-  String toString() {
-    return 'HomeState.homeError(message: $message)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$HomeStateErrorImpl &&
-            (identical(other.message, message) || other.message == message));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, message);
 
   /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$HomeStateErrorImplCopyWith<_$HomeStateErrorImpl> get copyWith =>
-      __$$HomeStateErrorImplCopyWithImpl<_$HomeStateErrorImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(String message) homeError,
-    required TResult Function(
-            List<Album> newReleases, List<Playlist> userPlaylists, Track tracks)
-        loaded,
-  }) {
-    return homeError(message);
+  $TrackCopyWith<$Res> get tracks {
+    return $TrackCopyWith<$Res>(_value.tracks, (value) {
+      return _then(_value.copyWith(tracks: value) as $Val);
+    });
   }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(String message)? homeError,
-    TResult? Function(List<Album> newReleases, List<Playlist> userPlaylists,
-            Track tracks)?
-        loaded,
-  }) {
-    return homeError?.call(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(String message)? homeError,
-    TResult Function(List<Album> newReleases, List<Playlist> userPlaylists,
-            Track tracks)?
-        loaded,
-    required TResult orElse(),
-  }) {
-    if (homeError != null) {
-      return homeError(message);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_HomeStateError value) homeError,
-    required TResult Function(_Loaded value) loaded,
-  }) {
-    return homeError(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_HomeStateError value)? homeError,
-    TResult? Function(_Loaded value)? loaded,
-  }) {
-    return homeError?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_HomeStateError value)? homeError,
-    TResult Function(_Loaded value)? loaded,
-    required TResult orElse(),
-  }) {
-    if (homeError != null) {
-      return homeError(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _HomeStateError implements HomeState {
-  const factory _HomeStateError(final String message) = _$HomeStateErrorImpl;
-
-  String get message;
 
   /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$HomeStateErrorImplCopyWith<_$HomeStateErrorImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @override
+  @pragma('vm:prefer-inline')
+  $StatusCopyWith<$Res> get statusLoadNewReleases {
+    return $StatusCopyWith<$Res>(_value.statusLoadNewReleases, (value) {
+      return _then(_value.copyWith(statusLoadNewReleases: value) as $Val);
+    });
+  }
+
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $StatusCopyWith<$Res> get statusLoadPlaylists {
+    return $StatusCopyWith<$Res>(_value.statusLoadPlaylists, (value) {
+      return _then(_value.copyWith(statusLoadPlaylists: value) as $Val);
+    });
+  }
+
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $StatusCopyWith<$Res> get statusLoadTracks {
+    return $StatusCopyWith<$Res>(_value.statusLoadTracks, (value) {
+      return _then(_value.copyWith(statusLoadTracks: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
-abstract class _$$LoadedImplCopyWith<$Res> {
-  factory _$$LoadedImplCopyWith(
-          _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
-      __$$LoadedImplCopyWithImpl<$Res>;
+abstract class _$$HomeStateImplCopyWith<$Res>
+    implements $HomeStateCopyWith<$Res> {
+  factory _$$HomeStateImplCopyWith(
+          _$HomeStateImpl value, $Res Function(_$HomeStateImpl) then) =
+      __$$HomeStateImplCopyWithImpl<$Res>;
+  @override
   @useResult
   $Res call(
-      {List<Album> newReleases, List<Playlist> userPlaylists, Track tracks});
+      {List<Album> newReleases,
+      List<Playlist> userPlaylists,
+      Track tracks,
+      Status statusLoadNewReleases,
+      Status statusLoadPlaylists,
+      Status statusLoadTracks});
 
+  @override
   $TrackCopyWith<$Res> get tracks;
+  @override
+  $StatusCopyWith<$Res> get statusLoadNewReleases;
+  @override
+  $StatusCopyWith<$Res> get statusLoadPlaylists;
+  @override
+  $StatusCopyWith<$Res> get statusLoadTracks;
 }
 
 /// @nodoc
-class __$$LoadedImplCopyWithImpl<$Res>
-    extends _$HomeStateCopyWithImpl<$Res, _$LoadedImpl>
-    implements _$$LoadedImplCopyWith<$Res> {
-  __$$LoadedImplCopyWithImpl(
-      _$LoadedImpl _value, $Res Function(_$LoadedImpl) _then)
+class __$$HomeStateImplCopyWithImpl<$Res>
+    extends _$HomeStateCopyWithImpl<$Res, _$HomeStateImpl>
+    implements _$$HomeStateImplCopyWith<$Res> {
+  __$$HomeStateImplCopyWithImpl(
+      _$HomeStateImpl _value, $Res Function(_$HomeStateImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of HomeState
@@ -1406,8 +872,11 @@ class __$$LoadedImplCopyWithImpl<$Res>
     Object? newReleases = null,
     Object? userPlaylists = null,
     Object? tracks = null,
+    Object? statusLoadNewReleases = null,
+    Object? statusLoadPlaylists = null,
+    Object? statusLoadTracks = null,
   }) {
-    return _then(_$LoadedImpl(
+    return _then(_$HomeStateImpl(
       newReleases: null == newReleases
           ? _value._newReleases
           : newReleases // ignore: cast_nullable_to_non_nullable
@@ -1420,32 +889,38 @@ class __$$LoadedImplCopyWithImpl<$Res>
           ? _value.tracks
           : tracks // ignore: cast_nullable_to_non_nullable
               as Track,
+      statusLoadNewReleases: null == statusLoadNewReleases
+          ? _value.statusLoadNewReleases
+          : statusLoadNewReleases // ignore: cast_nullable_to_non_nullable
+              as Status,
+      statusLoadPlaylists: null == statusLoadPlaylists
+          ? _value.statusLoadPlaylists
+          : statusLoadPlaylists // ignore: cast_nullable_to_non_nullable
+              as Status,
+      statusLoadTracks: null == statusLoadTracks
+          ? _value.statusLoadTracks
+          : statusLoadTracks // ignore: cast_nullable_to_non_nullable
+              as Status,
     ));
-  }
-
-  /// Create a copy of HomeState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $TrackCopyWith<$Res> get tracks {
-    return $TrackCopyWith<$Res>(_value.tracks, (value) {
-      return _then(_value.copyWith(tracks: value));
-    });
   }
 }
 
 /// @nodoc
 
-class _$LoadedImpl implements _Loaded {
-  const _$LoadedImpl(
-      {required final List<Album> newReleases,
-      required final List<Playlist> userPlaylists,
-      required this.tracks})
+class _$HomeStateImpl implements _HomeState {
+  const _$HomeStateImpl(
+      {final List<Album> newReleases = const [],
+      final List<Playlist> userPlaylists = const [],
+      this.tracks = const Track(),
+      this.statusLoadNewReleases = const Status.idle(),
+      this.statusLoadPlaylists = const Status.idle(),
+      this.statusLoadTracks = const Status.idle()})
       : _newReleases = newReleases,
         _userPlaylists = userPlaylists;
 
   final List<Album> _newReleases;
   @override
+  @JsonKey()
   List<Album> get newReleases {
     if (_newReleases is EqualUnmodifiableListView) return _newReleases;
     // ignore: implicit_dynamic_type
@@ -1454,6 +929,7 @@ class _$LoadedImpl implements _Loaded {
 
   final List<Playlist> _userPlaylists;
   @override
+  @JsonKey()
   List<Playlist> get userPlaylists {
     if (_userPlaylists is EqualUnmodifiableListView) return _userPlaylists;
     // ignore: implicit_dynamic_type
@@ -1461,23 +937,39 @@ class _$LoadedImpl implements _Loaded {
   }
 
   @override
+  @JsonKey()
   final Track tracks;
+  @override
+  @JsonKey()
+  final Status statusLoadNewReleases;
+  @override
+  @JsonKey()
+  final Status statusLoadPlaylists;
+  @override
+  @JsonKey()
+  final Status statusLoadTracks;
 
   @override
   String toString() {
-    return 'HomeState.loaded(newReleases: $newReleases, userPlaylists: $userPlaylists, tracks: $tracks)';
+    return 'HomeState(newReleases: $newReleases, userPlaylists: $userPlaylists, tracks: $tracks, statusLoadNewReleases: $statusLoadNewReleases, statusLoadPlaylists: $statusLoadPlaylists, statusLoadTracks: $statusLoadTracks)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LoadedImpl &&
+            other is _$HomeStateImpl &&
             const DeepCollectionEquality()
                 .equals(other._newReleases, _newReleases) &&
             const DeepCollectionEquality()
                 .equals(other._userPlaylists, _userPlaylists) &&
-            (identical(other.tracks, tracks) || other.tracks == tracks));
+            (identical(other.tracks, tracks) || other.tracks == tracks) &&
+            (identical(other.statusLoadNewReleases, statusLoadNewReleases) ||
+                other.statusLoadNewReleases == statusLoadNewReleases) &&
+            (identical(other.statusLoadPlaylists, statusLoadPlaylists) ||
+                other.statusLoadPlaylists == statusLoadPlaylists) &&
+            (identical(other.statusLoadTracks, statusLoadTracks) ||
+                other.statusLoadTracks == statusLoadTracks));
   }
 
   @override
@@ -1485,110 +977,46 @@ class _$LoadedImpl implements _Loaded {
       runtimeType,
       const DeepCollectionEquality().hash(_newReleases),
       const DeepCollectionEquality().hash(_userPlaylists),
-      tracks);
+      tracks,
+      statusLoadNewReleases,
+      statusLoadPlaylists,
+      statusLoadTracks);
 
   /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
-      __$$LoadedImplCopyWithImpl<_$LoadedImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(String message) homeError,
-    required TResult Function(
-            List<Album> newReleases, List<Playlist> userPlaylists, Track tracks)
-        loaded,
-  }) {
-    return loaded(newReleases, userPlaylists, tracks);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(String message)? homeError,
-    TResult? Function(List<Album> newReleases, List<Playlist> userPlaylists,
-            Track tracks)?
-        loaded,
-  }) {
-    return loaded?.call(newReleases, userPlaylists, tracks);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(String message)? homeError,
-    TResult Function(List<Album> newReleases, List<Playlist> userPlaylists,
-            Track tracks)?
-        loaded,
-    required TResult orElse(),
-  }) {
-    if (loaded != null) {
-      return loaded(newReleases, userPlaylists, tracks);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_HomeStateError value) homeError,
-    required TResult Function(_Loaded value) loaded,
-  }) {
-    return loaded(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_HomeStateError value)? homeError,
-    TResult? Function(_Loaded value)? loaded,
-  }) {
-    return loaded?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_HomeStateError value)? homeError,
-    TResult Function(_Loaded value)? loaded,
-    required TResult orElse(),
-  }) {
-    if (loaded != null) {
-      return loaded(this);
-    }
-    return orElse();
-  }
+  _$$HomeStateImplCopyWith<_$HomeStateImpl> get copyWith =>
+      __$$HomeStateImplCopyWithImpl<_$HomeStateImpl>(this, _$identity);
 }
 
-abstract class _Loaded implements HomeState {
-  const factory _Loaded(
-      {required final List<Album> newReleases,
-      required final List<Playlist> userPlaylists,
-      required final Track tracks}) = _$LoadedImpl;
+abstract class _HomeState implements HomeState {
+  const factory _HomeState(
+      {final List<Album> newReleases,
+      final List<Playlist> userPlaylists,
+      final Track tracks,
+      final Status statusLoadNewReleases,
+      final Status statusLoadPlaylists,
+      final Status statusLoadTracks}) = _$HomeStateImpl;
 
+  @override
   List<Album> get newReleases;
+  @override
   List<Playlist> get userPlaylists;
+  @override
   Track get tracks;
+  @override
+  Status get statusLoadNewReleases;
+  @override
+  Status get statusLoadPlaylists;
+  @override
+  Status get statusLoadTracks;
 
   /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
+  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
+  _$$HomeStateImplCopyWith<_$HomeStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

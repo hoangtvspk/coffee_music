@@ -1,6 +1,4 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-
-part 'main_state.freezed.dart';
+part of 'main_bloc.dart';
 
 @freezed
 class MainState with _$MainState {

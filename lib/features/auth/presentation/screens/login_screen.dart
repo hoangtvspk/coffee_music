@@ -1,6 +1,6 @@
 import 'package:buitify_coffee/core/config/app_color.dart';
 import 'package:buitify_coffee/core/utils/snackbar_utils.dart';
-import 'package:buitify_coffee/core/widgets/button.dart';
+import 'package:buitify_coffee/core/widgets/button/button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
