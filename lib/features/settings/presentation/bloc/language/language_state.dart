@@ -1,11 +1,9 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-
-part 'language_state.freezed.dart';
+part of 'language_bloc.dart';
 
 @freezed
 class LanguageState with _$LanguageState {
   const factory LanguageState({
-    @Default('en') String languageCode,
+    required String languageCode,
     @Default(false) bool isLoading,
     String? error,
   }) = _LanguageState;

@@ -1,6 +1,4 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-
-part 'language_event.freezed.dart';
+part of 'language_bloc.dart';
 
 @freezed
 class LanguageEvent with _$LanguageEvent {

@@ -1,6 +1,5 @@
 import 'package:buitify_coffee/core/storage/secure_storage.dart';
 import 'package:buitify_coffee/features/main/presentation/bloc/main_bloc.dart';
-import 'package:buitify_coffee/features/settings/presentation/bloc/language/language_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:buitify_coffee/core/config/env_config.dart';
@@ -16,7 +15,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'core/l10n/app_localizations.dart';
 import 'features/settings/presentation/bloc/language/language_bloc.dart';
-import 'features/settings/presentation/bloc/language/language_event.dart';
 
 import 'core/router/app_router.dart';
 
