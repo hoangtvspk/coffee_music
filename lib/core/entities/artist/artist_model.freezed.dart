@@ -23,7 +23,6 @@ mixin _$ArtistModel {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
-  @JsonKey(name: 'external_urls')
   Map<String, String> get externalUrls => throw _privateConstructorUsedError;
 
   /// Serializes this ArtistModel to a JSON map.
@@ -43,10 +42,7 @@ abstract class $ArtistModelCopyWith<$Res> {
       _$ArtistModelCopyWithImpl<$Res, ArtistModel>;
   @useResult
   $Res call(
-      {String id,
-      String name,
-      String type,
-      @JsonKey(name: 'external_urls') Map<String, String> externalUrls});
+      {String id, String name, String type, Map<String, String> externalUrls});
 }
 
 /// @nodoc
@@ -99,10 +95,7 @@ abstract class _$$ArtistModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String id,
-      String name,
-      String type,
-      @JsonKey(name: 'external_urls') Map<String, String> externalUrls});
+      {String id, String name, String type, Map<String, String> externalUrls});
 }
 
 /// @nodoc
@@ -146,14 +139,14 @@ class __$$ArtistModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ArtistModelImpl implements _ArtistModel {
+class _$ArtistModelImpl extends _ArtistModel {
   const _$ArtistModelImpl(
       {required this.id,
       required this.name,
       required this.type,
-      @JsonKey(name: 'external_urls')
       required final Map<String, String> externalUrls})
-      : _externalUrls = externalUrls;
+      : _externalUrls = externalUrls,
+        super._();
 
   factory _$ArtistModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ArtistModelImplFromJson(json);
@@ -166,7 +159,6 @@ class _$ArtistModelImpl implements _ArtistModel {
   final String type;
   final Map<String, String> _externalUrls;
   @override
-  @JsonKey(name: 'external_urls')
   Map<String, String> get externalUrls {
     if (_externalUrls is EqualUnmodifiableMapView) return _externalUrls;
     // ignore: implicit_dynamic_type
@@ -211,13 +203,13 @@ class _$ArtistModelImpl implements _ArtistModel {
   }
 }
 
-abstract class _ArtistModel implements ArtistModel {
+abstract class _ArtistModel extends ArtistModel {
   const factory _ArtistModel(
       {required final String id,
       required final String name,
       required final String type,
-      @JsonKey(name: 'external_urls')
       required final Map<String, String> externalUrls}) = _$ArtistModelImpl;
+  const _ArtistModel._() : super._();
 
   factory _ArtistModel.fromJson(Map<String, dynamic> json) =
       _$ArtistModelImpl.fromJson;
@@ -229,7 +221,6 @@ abstract class _ArtistModel implements ArtistModel {
   @override
   String get type;
   @override
-  @JsonKey(name: 'external_urls')
   Map<String, String> get externalUrls;
 
   /// Create a copy of ArtistModel

@@ -12,3 +12,6 @@ build-dev:
 
 build-prod:
 	flutter build --flavor prod --dart-define=ENVIRONMENT=prod
+
+build-runner:
+	dart run build_runner build --delete-conflicting-outputs

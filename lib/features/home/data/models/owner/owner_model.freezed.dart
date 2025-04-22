@@ -21,10 +21,8 @@ OwnerModel _$OwnerModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$OwnerModel {
   String get id => throw _privateConstructorUsedError;
-  @JsonKey(name: 'display_name')
   String get displayName => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
-  @JsonKey(name: 'external_urls')
   Map<String, String> get externalUrls => throw _privateConstructorUsedError;
 
   /// Serializes this OwnerModel to a JSON map.
@@ -45,9 +43,9 @@ abstract class $OwnerModelCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      @JsonKey(name: 'display_name') String displayName,
+      String displayName,
       String type,
-      @JsonKey(name: 'external_urls') Map<String, String> externalUrls});
+      Map<String, String> externalUrls});
 }
 
 /// @nodoc
@@ -101,9 +99,9 @@ abstract class _$$OwnerModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
-      @JsonKey(name: 'display_name') String displayName,
+      String displayName,
       String type,
-      @JsonKey(name: 'external_urls') Map<String, String> externalUrls});
+      Map<String, String> externalUrls});
 }
 
 /// @nodoc
@@ -147,14 +145,14 @@ class __$$OwnerModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$OwnerModelImpl implements _OwnerModel {
+class _$OwnerModelImpl extends _OwnerModel {
   const _$OwnerModelImpl(
       {required this.id,
-      @JsonKey(name: 'display_name') required this.displayName,
+      required this.displayName,
       required this.type,
-      @JsonKey(name: 'external_urls')
       required final Map<String, String> externalUrls})
-      : _externalUrls = externalUrls;
+      : _externalUrls = externalUrls,
+        super._();
 
   factory _$OwnerModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$OwnerModelImplFromJson(json);
@@ -162,13 +160,11 @@ class _$OwnerModelImpl implements _OwnerModel {
   @override
   final String id;
   @override
-  @JsonKey(name: 'display_name')
   final String displayName;
   @override
   final String type;
   final Map<String, String> _externalUrls;
   @override
-  @JsonKey(name: 'external_urls')
   Map<String, String> get externalUrls {
     if (_externalUrls is EqualUnmodifiableMapView) return _externalUrls;
     // ignore: implicit_dynamic_type
@@ -214,13 +210,13 @@ class _$OwnerModelImpl implements _OwnerModel {
   }
 }
 
-abstract class _OwnerModel implements OwnerModel {
+abstract class _OwnerModel extends OwnerModel {
   const factory _OwnerModel(
       {required final String id,
-      @JsonKey(name: 'display_name') required final String displayName,
+      required final String displayName,
       required final String type,
-      @JsonKey(name: 'external_urls')
       required final Map<String, String> externalUrls}) = _$OwnerModelImpl;
+  const _OwnerModel._() : super._();
 
   factory _OwnerModel.fromJson(Map<String, dynamic> json) =
       _$OwnerModelImpl.fromJson;
@@ -228,12 +224,10 @@ abstract class _OwnerModel implements OwnerModel {
   @override
   String get id;
   @override
-  @JsonKey(name: 'display_name')
   String get displayName;
   @override
   String get type;
   @override
-  @JsonKey(name: 'external_urls')
   Map<String, String> get externalUrls;
 
   /// Create a copy of OwnerModel

@@ -1,15 +1,14 @@
-import 'package:buitify_coffee/core/error/failure.dart';
 import 'package:buitify_coffee/features/home/domain/entities/track/track.dart';
 import 'package:buitify_coffee/features/home/domain/usecases/get_several_track.dart';
-import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import '../../../../core/entities/entities/status.dart';
+import '../../../../core/usecase/usecase.dart';
 import '../../domain/entities/album/album.dart';
 import '../../domain/entities/playlist/playlist.dart';
 import '../../domain/usecases/get_new_releases.dart';
 import '../../domain/usecases/get_user_playlists.dart';
-import '../../../../core/usecase/usecase.dart';
-import '../../../../core/entities/entities/status.dart';
 
 part 'home_bloc.freezed.dart';
 part 'home_event.dart';

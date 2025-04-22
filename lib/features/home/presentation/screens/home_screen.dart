@@ -1,24 +1,22 @@
-import 'package:buitify_coffee/features/auth/data/datasources/auth_remote_data_source.dart';
+import 'package:buitify_coffee/core/storage/secure_storage.dart';
+import 'package:buitify_coffee/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:buitify_coffee/features/home/domain/usecases/get_several_track.dart';
 import 'package:buitify_coffee/features/home/presentation/widgets/home_banner.dart';
+import 'package:buitify_coffee/features/home/presentation/widgets/home_skeleton.dart';
 import 'package:buitify_coffee/features/home/presentation/widgets/playlist_list.dart';
 import 'package:buitify_coffee/features/home/presentation/widgets/walking_animation.dart';
-import 'package:buitify_coffee/features/home/presentation/widgets/home_skeleton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:buitify_coffee/core/storage/secure_storage.dart';
 import 'package:go_router/go_router.dart';
-import 'package:buitify_coffee/features/auth/presentation/bloc/auth_bloc.dart';
+
 import '../../../../core/config/app_color.dart';
-import '../../../../core/utils/ui_utils.dart';
-import '../bloc/home_bloc.dart';
-import '../widgets/album_list.dart';
-import '../widgets/album_list.dart';
-import '../widgets/sidebar.dart';
 import '../../data/datasources/home_remote_data_source.dart';
 import '../../data/repositories/home_repository_impl.dart';
 import '../../domain/usecases/get_new_releases.dart';
 import '../../domain/usecases/get_user_playlists.dart';
+import '../bloc/home_bloc.dart';
+import '../widgets/album_list.dart';
+import '../widgets/sidebar.dart';
 
 // - hot_hits.jpg
 // - sad.jpg
@@ -39,7 +37,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   String token = '';
   late final HomeBloc _homeBloc;
-  final _key = GlobalKey();
 
   @override
   void initState() {
@@ -68,10 +65,6 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       token = storageToken ?? 'No token';
     });
-  }
-
-  Future<void> _showLogoutConfirmation() async {
-    await UiUtils.showLogoutConfirmation(context);
   }
 
   @override

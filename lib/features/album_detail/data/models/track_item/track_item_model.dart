@@ -9,18 +9,31 @@ part 'track_item_model.g.dart';
 
 @freezed
 class TrackItemModel with _$TrackItemModel {
-  const TrackItemModel._();
-
+  const TrackItemModel._(); // cần constructor ẩn để dùng getter
   const factory TrackItemModel({
     required String id,
     required String name,
-    @JsonKey(fromJson: _artistsFromJson) required List<String> artists,
-    @JsonKey(name: 'duration_ms') required int durationMs,
-    @JsonKey(name: 'track_number') required int trackNumber,
+    // remove JsonKey here
+    required List<String> artists,
+    required int durationMs,
+    required int trackNumber,
   }) = _TrackItemModel;
 
   factory TrackItemModel.fromJson(Map<String, dynamic> json) =>
       _$TrackItemModelFromJson(json);
+
+  // custom getter cho artists
+  @override
+  @JsonKey(fromJson: _artistsFromJson)
+  List<String> get artists => throw UnimplementedError();
+
+  @override
+  @JsonKey(name: 'duration_ms')
+  int get durationMs => throw UnimplementedError();
+
+  @override
+  @JsonKey(name: 'track_number')
+  int get trackNumber => throw UnimplementedError();
 
   TrackItem toEntity({required List<SpotifyImage> albumImages}) {
     return TrackItem(

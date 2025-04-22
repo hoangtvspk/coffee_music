@@ -24,13 +24,9 @@ mixin _$AlbumModel {
   String get name => throw _privateConstructorUsedError;
   List<SpotifyImage> get images => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
-  @JsonKey(name: 'album_type')
   String get albumType => throw _privateConstructorUsedError;
-  @JsonKey(name: 'release_date')
   String get releaseDate => throw _privateConstructorUsedError;
-  @JsonKey(name: 'total_tracks')
   int get totalTracks => throw _privateConstructorUsedError;
-  @JsonKey(name: 'artists')
   List<ArtistModel> get artists => throw _privateConstructorUsedError;
 
   /// Serializes this AlbumModel to a JSON map.
@@ -54,10 +50,10 @@ abstract class $AlbumModelCopyWith<$Res> {
       String name,
       List<SpotifyImage> images,
       String type,
-      @JsonKey(name: 'album_type') String albumType,
-      @JsonKey(name: 'release_date') String releaseDate,
-      @JsonKey(name: 'total_tracks') int totalTracks,
-      @JsonKey(name: 'artists') List<ArtistModel> artists});
+      String albumType,
+      String releaseDate,
+      int totalTracks,
+      List<ArtistModel> artists});
 }
 
 /// @nodoc
@@ -134,10 +130,10 @@ abstract class _$$AlbumModelImplCopyWith<$Res>
       String name,
       List<SpotifyImage> images,
       String type,
-      @JsonKey(name: 'album_type') String albumType,
-      @JsonKey(name: 'release_date') String releaseDate,
-      @JsonKey(name: 'total_tracks') int totalTracks,
-      @JsonKey(name: 'artists') List<ArtistModel> artists});
+      String albumType,
+      String releaseDate,
+      int totalTracks,
+      List<ArtistModel> artists});
 }
 
 /// @nodoc
@@ -201,18 +197,19 @@ class __$$AlbumModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$AlbumModelImpl implements _AlbumModel {
+class _$AlbumModelImpl extends _AlbumModel {
   const _$AlbumModelImpl(
       {required this.id,
       required this.name,
       required final List<SpotifyImage> images,
       required this.type,
-      @JsonKey(name: 'album_type') required this.albumType,
-      @JsonKey(name: 'release_date') required this.releaseDate,
-      @JsonKey(name: 'total_tracks') required this.totalTracks,
-      @JsonKey(name: 'artists') required final List<ArtistModel> artists})
+      required this.albumType,
+      required this.releaseDate,
+      required this.totalTracks,
+      required final List<ArtistModel> artists})
       : _images = images,
-        _artists = artists;
+        _artists = artists,
+        super._();
 
   factory _$AlbumModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$AlbumModelImplFromJson(json);
@@ -232,17 +229,13 @@ class _$AlbumModelImpl implements _AlbumModel {
   @override
   final String type;
   @override
-  @JsonKey(name: 'album_type')
   final String albumType;
   @override
-  @JsonKey(name: 'release_date')
   final String releaseDate;
   @override
-  @JsonKey(name: 'total_tracks')
   final int totalTracks;
   final List<ArtistModel> _artists;
   @override
-  @JsonKey(name: 'artists')
   List<ArtistModel> get artists {
     if (_artists is EqualUnmodifiableListView) return _artists;
     // ignore: implicit_dynamic_type
@@ -301,17 +294,17 @@ class _$AlbumModelImpl implements _AlbumModel {
   }
 }
 
-abstract class _AlbumModel implements AlbumModel {
+abstract class _AlbumModel extends AlbumModel {
   const factory _AlbumModel(
-          {required final String id,
-          required final String name,
-          required final List<SpotifyImage> images,
-          required final String type,
-          @JsonKey(name: 'album_type') required final String albumType,
-          @JsonKey(name: 'release_date') required final String releaseDate,
-          @JsonKey(name: 'total_tracks') required final int totalTracks,
-          @JsonKey(name: 'artists') required final List<ArtistModel> artists}) =
-      _$AlbumModelImpl;
+      {required final String id,
+      required final String name,
+      required final List<SpotifyImage> images,
+      required final String type,
+      required final String albumType,
+      required final String releaseDate,
+      required final int totalTracks,
+      required final List<ArtistModel> artists}) = _$AlbumModelImpl;
+  const _AlbumModel._() : super._();
 
   factory _AlbumModel.fromJson(Map<String, dynamic> json) =
       _$AlbumModelImpl.fromJson;
@@ -325,16 +318,12 @@ abstract class _AlbumModel implements AlbumModel {
   @override
   String get type;
   @override
-  @JsonKey(name: 'album_type')
   String get albumType;
   @override
-  @JsonKey(name: 'release_date')
   String get releaseDate;
   @override
-  @JsonKey(name: 'total_tracks')
   int get totalTracks;
   @override
-  @JsonKey(name: 'artists')
   List<ArtistModel> get artists;
 
   /// Create a copy of AlbumModel

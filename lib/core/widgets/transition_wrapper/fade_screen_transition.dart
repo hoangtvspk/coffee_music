@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class FadeScreenTransition extends Page<void> {
   final Widget child;
@@ -10,8 +9,8 @@ class FadeScreenTransition extends Page<void> {
     required this.child,
     this.duration = const Duration(milliseconds: 500),
     this.curve = Curves.easeOutCubic,
-    LocalKey? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Route<void> createRoute(BuildContext context) {

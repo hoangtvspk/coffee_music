@@ -8,16 +8,34 @@ part 'album_model.g.dart';
 
 @freezed
 class AlbumModel with _$AlbumModel {
+  const AlbumModel._(); // cần cho custom getter
+
   const factory AlbumModel({
     required String id,
     required String name,
     required List<SpotifyImage> images,
     required String type,
-    @JsonKey(name: 'album_type') required String albumType,
-    @JsonKey(name: 'release_date') required String releaseDate,
-    @JsonKey(name: 'total_tracks') required int totalTracks,
-    @JsonKey(name: 'artists') required List<ArtistModel> artists,
+    required String albumType,
+    required String releaseDate,
+    required int totalTracks,
+    required List<ArtistModel> artists,
   }) = _AlbumModel;
+
+  @override
+  @JsonKey(name: 'album_type')
+  String get albumType => throw UnimplementedError();
+
+  @override
+  @JsonKey(name: 'release_date')
+  String get releaseDate => throw UnimplementedError();
+
+  @override
+  @JsonKey(name: 'total_tracks')
+  int get totalTracks => throw UnimplementedError();
+
+  @override
+  @JsonKey(name: 'artists')
+  List<ArtistModel> get artists => throw UnimplementedError();
 
   factory AlbumModel.fromJson(Map<String, dynamic> json) =>
       _$AlbumModelFromJson(json);

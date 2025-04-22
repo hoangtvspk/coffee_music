@@ -1,15 +1,12 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:go_router/go_router.dart';
 
+part 'main_bloc.freezed.dart';
 part 'main_event.dart';
 part 'main_state.dart';
-part 'main_bloc.freezed.dart';
 
 class MainBloc extends Bloc<MainEvent, MainState> {
-  final GoRouter _router;
-
-  MainBloc(this._router) : super(const MainState()) {
+  MainBloc() : super(const MainState()) {
     on<MainTabChanged>(_onTabChanged);
     on<MainDeepLinkReceived>(_onDeepLinkReceived);
   }

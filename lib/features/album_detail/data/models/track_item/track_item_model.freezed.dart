@@ -21,12 +21,9 @@ TrackItemModel _$TrackItemModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$TrackItemModel {
   String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  @JsonKey(fromJson: _artistsFromJson)
+  String get name => throw _privateConstructorUsedError; // remove JsonKey here
   List<String> get artists => throw _privateConstructorUsedError;
-  @JsonKey(name: 'duration_ms')
   int get durationMs => throw _privateConstructorUsedError;
-  @JsonKey(name: 'track_number')
   int get trackNumber => throw _privateConstructorUsedError;
 
   /// Serializes this TrackItemModel to a JSON map.
@@ -48,9 +45,9 @@ abstract class $TrackItemModelCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      @JsonKey(fromJson: _artistsFromJson) List<String> artists,
-      @JsonKey(name: 'duration_ms') int durationMs,
-      @JsonKey(name: 'track_number') int trackNumber});
+      List<String> artists,
+      int durationMs,
+      int trackNumber});
 }
 
 /// @nodoc
@@ -110,9 +107,9 @@ abstract class _$$TrackItemModelImplCopyWith<$Res>
   $Res call(
       {String id,
       String name,
-      @JsonKey(fromJson: _artistsFromJson) List<String> artists,
-      @JsonKey(name: 'duration_ms') int durationMs,
-      @JsonKey(name: 'track_number') int trackNumber});
+      List<String> artists,
+      int durationMs,
+      int trackNumber});
 }
 
 /// @nodoc
@@ -166,9 +163,9 @@ class _$TrackItemModelImpl extends _TrackItemModel
   const _$TrackItemModelImpl(
       {required this.id,
       required this.name,
-      @JsonKey(fromJson: _artistsFromJson) required final List<String> artists,
-      @JsonKey(name: 'duration_ms') required this.durationMs,
-      @JsonKey(name: 'track_number') required this.trackNumber})
+      required final List<String> artists,
+      required this.durationMs,
+      required this.trackNumber})
       : _artists = artists,
         super._();
 
@@ -179,9 +176,10 @@ class _$TrackItemModelImpl extends _TrackItemModel
   final String id;
   @override
   final String name;
+// remove JsonKey here
   final List<String> _artists;
+// remove JsonKey here
   @override
-  @JsonKey(fromJson: _artistsFromJson)
   List<String> get artists {
     if (_artists is EqualUnmodifiableListView) return _artists;
     // ignore: implicit_dynamic_type
@@ -189,10 +187,8 @@ class _$TrackItemModelImpl extends _TrackItemModel
   }
 
   @override
-  @JsonKey(name: 'duration_ms')
   final int durationMs;
   @override
-  @JsonKey(name: 'track_number')
   final int trackNumber;
 
   @override
@@ -252,9 +248,8 @@ abstract class _TrackItemModel extends TrackItemModel {
   const factory _TrackItemModel(
       {required final String id,
       required final String name,
-      @JsonKey(fromJson: _artistsFromJson) required final List<String> artists,
-      @JsonKey(name: 'duration_ms') required final int durationMs,
-      @JsonKey(name: 'track_number')
+      required final List<String> artists,
+      required final int durationMs,
       required final int trackNumber}) = _$TrackItemModelImpl;
   const _TrackItemModel._() : super._();
 
@@ -264,15 +259,12 @@ abstract class _TrackItemModel extends TrackItemModel {
   @override
   String get id;
   @override
-  String get name;
+  String get name; // remove JsonKey here
   @override
-  @JsonKey(fromJson: _artistsFromJson)
   List<String> get artists;
   @override
-  @JsonKey(name: 'duration_ms')
   int get durationMs;
   @override
-  @JsonKey(name: 'track_number')
   int get trackNumber;
 
   /// Create a copy of TrackItemModel

@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => MainBloc(router),
+          create: (context) => MainBloc(),
         ),
         BlocProvider(create: (context) {
           AuthBloc bloc = AuthBloc(

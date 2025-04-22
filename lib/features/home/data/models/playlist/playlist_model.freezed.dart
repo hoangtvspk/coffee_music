@@ -24,9 +24,7 @@ mixin _$PlaylistModel {
   String get name => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   List<SpotifyImage> get images => throw _privateConstructorUsedError;
-  @JsonKey(name: 'owner')
   OwnerModel get owner => throw _privateConstructorUsedError;
-  @JsonKey(name: 'tracks')
   Map<String, dynamic> get tracks => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
 
@@ -51,8 +49,8 @@ abstract class $PlaylistModelCopyWith<$Res> {
       String name,
       String description,
       List<SpotifyImage> images,
-      @JsonKey(name: 'owner') OwnerModel owner,
-      @JsonKey(name: 'tracks') Map<String, dynamic> tracks,
+      OwnerModel owner,
+      Map<String, dynamic> tracks,
       String type});
 
   $OwnerModelCopyWith<$Res> get owner;
@@ -137,8 +135,8 @@ abstract class _$$PlaylistModelImplCopyWith<$Res>
       String name,
       String description,
       List<SpotifyImage> images,
-      @JsonKey(name: 'owner') OwnerModel owner,
-      @JsonKey(name: 'tracks') Map<String, dynamic> tracks,
+      OwnerModel owner,
+      Map<String, dynamic> tracks,
       String type});
 
   @override
@@ -201,17 +199,18 @@ class __$$PlaylistModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$PlaylistModelImpl implements _PlaylistModel {
+class _$PlaylistModelImpl extends _PlaylistModel {
   const _$PlaylistModelImpl(
       {required this.id,
       required this.name,
       required this.description,
       final List<SpotifyImage> images = const [],
-      @JsonKey(name: 'owner') required this.owner,
-      @JsonKey(name: 'tracks') required final Map<String, dynamic> tracks,
+      required this.owner,
+      required final Map<String, dynamic> tracks,
       required this.type})
       : _images = images,
-        _tracks = tracks;
+        _tracks = tracks,
+        super._();
 
   factory _$PlaylistModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$PlaylistModelImplFromJson(json);
@@ -232,11 +231,9 @@ class _$PlaylistModelImpl implements _PlaylistModel {
   }
 
   @override
-  @JsonKey(name: 'owner')
   final OwnerModel owner;
   final Map<String, dynamic> _tracks;
   @override
-  @JsonKey(name: 'tracks')
   Map<String, dynamic> get tracks {
     if (_tracks is EqualUnmodifiableMapView) return _tracks;
     // ignore: implicit_dynamic_type
@@ -294,15 +291,16 @@ class _$PlaylistModelImpl implements _PlaylistModel {
   }
 }
 
-abstract class _PlaylistModel implements PlaylistModel {
+abstract class _PlaylistModel extends PlaylistModel {
   const factory _PlaylistModel(
       {required final String id,
       required final String name,
       required final String description,
       final List<SpotifyImage> images,
-      @JsonKey(name: 'owner') required final OwnerModel owner,
-      @JsonKey(name: 'tracks') required final Map<String, dynamic> tracks,
+      required final OwnerModel owner,
+      required final Map<String, dynamic> tracks,
       required final String type}) = _$PlaylistModelImpl;
+  const _PlaylistModel._() : super._();
 
   factory _PlaylistModel.fromJson(Map<String, dynamic> json) =
       _$PlaylistModelImpl.fromJson;
@@ -316,10 +314,8 @@ abstract class _PlaylistModel implements PlaylistModel {
   @override
   List<SpotifyImage> get images;
   @override
-  @JsonKey(name: 'owner')
   OwnerModel get owner;
   @override
-  @JsonKey(name: 'tracks')
   Map<String, dynamic> get tracks;
   @override
   String get type;

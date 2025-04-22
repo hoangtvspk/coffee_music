@@ -34,7 +34,8 @@ class AlbumDetailRemoteDataSourceImpl implements AlbumDetailRemoteDataSource {
       );
 
       final tracks = (response.data['items'] as List)
-          .map((track) => TrackItemModel.fromJson(track))
+          .map(
+              (track) => TrackItemModel.fromJson(track as Map<String, dynamic>))
           .toList();
       return BaseResponse(data: tracks);
     } catch (e) {
