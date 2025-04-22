@@ -7,52 +7,13 @@ alwaysApply: true
 
 ## Status Pattern (Required)
 ```dart
-// Must be in core/entities/status.dart
+// Must be in core/domain/entities/status.dart
 @freezed
 class Status with _$Status {
   const factory Status.idle() = StatusIdle;
   const factory Status.loading() = StatusLoading;
   const factory Status.failure(String error) = StatusFailure;
   const factory Status.success() = StatusSuccess;
-}
-```
-
-## Event Definition (Required)
-```dart
-@freezed
-class ExampleEvent with _$ExampleEvent {
-  // Group related events with comments
-  // Auth Events
-  const factory ExampleEvent.login() = _Login;
-  const factory ExampleEvent.logout() = _Logout;
-
-  // Data Events
-  const factory ExampleEvent.loadItems({
-    @Default(0) int offset,
-    @Default(20) int limit,
-  }) = _LoadItems;
-}
-```
-
-## Event Registration (Required)
-```dart
-class ExampleBloc extends Bloc<ExampleEvent, ExampleState> {
-  ExampleBloc() : super(ExampleState.initial()) {
-    // Register each event with its handler
-    on<_Login>(_onLogin);
-    on<_Logout>(_onLogout);
-    on<_LoadItems>(_onLoadItems);
-  }
-
-  // Define handler methods
-  Future<void> _onLogin(_Login event, Emitter<ExampleState> emit) async {
-    // Handle login logic
-  }
-
-  // Convenience method to start the bloc (Optional)
-  void start() {
-    add(const ExampleEvent.started());
-  }
 }
 ```
 
@@ -72,49 +33,110 @@ class ExampleState with _$ExampleState {
 ```
 
 ## Naming Rules
-- Event handlers must start with _on: `_onEventName`
 - Status fields must follow pattern: `statusActionNoun`
   - `statusLoadItems`
   - `statusUpdateProfile`
   - `statusDeleteMessage`
-- Event classes must be prefixed with _: `_EventName`
 
-## Event Handling Pattern (Required)
+## State Updates (Required)
 ```dart
-Future<void> _onLoadItems(_LoadItems event, Emitter<ExampleState> emit) async {
-  // 1. Emit loading state first
-  emit(state.copyWith(statusLoadItems: const Status.loading()));
+// Loading
+emit(state.copyWith(
+  statusLoadItems: const Status.loading()
+));
 
-  // 2. Call use case/repository
-  final result = await _getItems(
-    PaginationParams(
-      offset: event.offset,
-      limit: event.limit,
-    ),
-  );
+// Success
+emit(state.copyWith(
+  items: newData,
+  statusLoadItems: const Status.success()
+));
 
-  // 3. Handle result with fold
-  result.fold(
-    (failure) => emit(state.copyWith(
-      statusLoadItems: Status.failure(failure.message),
-    )),
-    (success) => emit(state.copyWith(
-      items: success,
-      statusLoadItems: const Status.success(),
-    )),
-  );
-}
+// Error
+emit(state.copyWith(
+  statusLoadItems: Status.failure(error.message)
+));
 ```
 
-## Event Chaining (When Needed)
-```dart
-Future<void> _onStarted(_Started event, Emitter<ExampleState> emit) async {
-  // Emit initial loading state
-  emit(state.copyWith(
-    statusLoadItems: const Status.loading(),
-  ));
+# Your rule content
 
-  // Chain to other events
-  add(const ExampleEvent.loadItems(offset: 0, limit: 20));
-}
+- You can @ files here
+- You can use markdown but dont have to
+
+# BLoC State Management Rules
+
+## 1. Status Definition
+- Must be defined in `core/domain/entities/status.dart`
+- Must use Freezed annotation
+- Must have exactly these 4 states:
+  ```dart
+  @freezed
+  class Status with _$Status {
+    const factory Status.idle() = StatusIdle;
+    const factory Status.loading() = StatusLoading;
+    const factory Status.failure(String error) = StatusFailure;
+    const factory Status.success() = StatusSuccess;
+  }
+  ```
+
+## 2. State Structure
+- One main state class per feature/bloc
+- Data fields must come first with `@Default` values
+- Status fields must follow data fields
+- Status field naming: `statusLoadX`, `statusUpdateX`, `statusDeleteX`
+- All status fields must default to `Status.idle()`
+- Example:
+  ```dart
+  @freezed
+  class FeatureState with _$FeatureState {
+    const factory FeatureState({
+      // Data fields first
+      @Default([]) List<Data> items,
+      @Default(0) int count,
+      
+      // Status fields second
+      @Default(Status.idle()) Status statusLoadItems,
+      @Default(Status.idle()) Status statusUpdateItems,
+    }) = _FeatureState;
+  }
+  ```
+
+## 3. State Updates
+- Must use `copyWith` for all state updates
+- Never create new state instances directly
+- Update status and data together when operation completes
+- Keep status updates atomic (one operation = one status)
+
+## 4. Operation Flow Pattern
+```dart
+// Start Operation
+emit(state.copyWith(
+  statusLoadX: const Status.loading()
+));
+
+// Success Case
+emit(state.copyWith(
+  data: newData,
+  statusLoadX: const Status.success()
+));
+
+// Failure Case
+emit(state.copyWith(
+  statusLoadX: Status.failure(message)
+));
 ```
+
+## 5. Multiple Operations
+- Each distinct operation must have its own status field
+- Operations can run independently
+- Status fields must reflect the specific operation they control
+- Example:
+  ```dart
+  statusLoadItems    // for loading items
+  statusUpdateItem   // for updating single item
+  statusDeleteItem   // for deleting single item
+  ```
+
+# Your rule content
+
+- You can @ files here
+- You can use markdown but dont have to
