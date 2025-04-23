@@ -1,11 +1,12 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../../../../core/entities/spotify_image/spotify_image.dart';
+import '../../../../../core/entities/tracks_list/tracks_list.dart';
 
 part 'album.freezed.dart';
 part 'album.g.dart';
 
 @freezed
-class Album with _$Album {
+class Album with _$Album implements TracksList {
   const factory Album({
     required String id,
     required String name,

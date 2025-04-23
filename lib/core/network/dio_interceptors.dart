@@ -174,6 +174,7 @@ class DioInterceptors {
           }
 
           if (_accessToken != null) {
+            print('accessToken: $_accessToken');
             options.headers['Authorization'] = 'Bearer $_accessToken';
           }
           if (!options.headers.containsKey('Content-Type')) {

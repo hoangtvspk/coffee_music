@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/config/app_color.dart';
 import '../../../../core/l10n/app_localizations.dart';
 import '../../../../features/auth/presentation/bloc/auth_bloc.dart';
-import '../../presentation/bloc/language/language_bloc.dart';
+import '../../../../core/provider/language/language_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class SettingsScreen extends StatelessWidget {

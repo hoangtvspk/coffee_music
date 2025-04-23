@@ -18,6 +18,9 @@ _$PlaylistImpl _$$PlaylistImplFromJson(Map<String, dynamic> json) =>
       owner: json['owner'] as String,
       totalTracks: (json['totalTracks'] as num).toInt(),
       type: json['type'] as String,
+      releaseDate: json['releaseDate'] as String,
+      artists:
+          (json['artists'] as List<dynamic>).map((e) => e as String).toList(),
     );
 
 Map<String, dynamic> _$$PlaylistImplToJson(_$PlaylistImpl instance) =>
@@ -29,4 +32,6 @@ Map<String, dynamic> _$$PlaylistImplToJson(_$PlaylistImpl instance) =>
       'owner': instance.owner,
       'totalTracks': instance.totalTracks,
       'type': instance.type,
+      'releaseDate': instance.releaseDate,
+      'artists': instance.artists,
     };

@@ -42,6 +42,8 @@ extension PlaylistModelX on PlaylistModel {
       owner: owner.displayName,
       totalTracks: tracks['total'] as int,
       type: type,
+      releaseDate: '',
+      artists: [],
     );
   }
 }

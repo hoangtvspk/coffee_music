@@ -170,7 +170,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                         albums: state.newReleases,
                                         title: context.l10n.newReleases,
                                         onAlbumSelected: (albumId) {
-                                          context.push('/album/$albumId');
+                                          final album = state.newReleases
+                                              .firstWhere(
+                                                  (a) => a.id == albumId);
+                                          context.push('/album/$albumId',
+                                              extra: album);
                                         },
                                       )
                                     : const SizedBox.shrink(),
@@ -192,7 +196,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                         playlists: state.userPlaylists,
                                         title: context.l10n.userPlaylists,
                                         onPlaylistSelected: (playlistId) {
-                                          context.push('/album/$playlistId');
+                                          final playlist = state.userPlaylists
+                                              .firstWhere(
+                                                  (p) => p.id == playlistId);
+                                          context.push('/playlist/$playlistId',
+                                              extra: playlist);
                                         },
                                       )
                                     : const SizedBox.shrink(),
@@ -214,7 +222,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                         albums: state.tracks.albums,
                                         title: context.l10n.severalTracks,
                                         onAlbumSelected: (albumId) {
-                                          context.push('/album/$albumId');
+                                          final album = state.tracks.albums
+                                              .firstWhere(
+                                                  (a) => a.id == albumId);
+                                          context.push('/album/$albumId',
+                                              extra: album);
                                         },
                                       )
                                     : const SizedBox.shrink(),

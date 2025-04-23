@@ -1,18 +1,19 @@
 import 'package:buitify_coffee/core/widgets/go_route_wrapper/go_route_with_bloc.dart';
 import 'package:buitify_coffee/core/widgets/transition_wrapper/fade_screen_transition.dart';
-import 'package:buitify_coffee/features/album_detail/data/datasources/album_detail_remote_data_source.dart';
-import 'package:buitify_coffee/features/album_detail/data/repositories/albums_detail_repository_impl.dart';
-import 'package:buitify_coffee/features/album_detail/domain/repositories/album_detail_repository.dart';
+import 'package:buitify_coffee/features/home/domain/entities/playlist/playlist.dart';
+import 'package:buitify_coffee/features/tracks_list/data/datasources/tracks_list_remote_data_source.dart';
+import 'package:buitify_coffee/features/tracks_list/data/repositories/tracks_list_repository_impl.dart';
+import 'package:buitify_coffee/features/tracks_list/domain/repositories/tracks_list_repository.dart';
 import 'package:buitify_coffee/features/auth/presentation/screens/login_screen.dart';
 import 'package:buitify_coffee/features/main/presentation/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../features/album_detail/domain/usecases/get_album_info.dart';
-import '../../features/album_detail/domain/usecases/get_album_tracks.dart';
-import '../../features/album_detail/presentation/bloc/album_track/album_tracks_bloc.dart';
-import '../../features/album_detail/presentation/screens/album_detail_screen.dart';
+import '../../features/tracks_list/domain/usecases/get_tracks.dart';
+import '../../features/tracks_list/presentation/bloc/track_list/tracks_list_bloc.dart';
+import '../../features/tracks_list/presentation/screens/tracks_list_screen.dart';
+import '../../features/home/domain/entities/album/album.dart';
 import '../network/dio_client.dart';
 import '../storage/secure_storage.dart';
 
@@ -61,18 +62,35 @@ GoRouter router = GoRouter(
       path: '/main',
       builder: (context, state) => const MainScreen(),
     ),
-    GoRouteWithBloc<AlbumTracksBloc, AlbumDetailRepository,
-        AlbumDetailRemoteDataSource>(
+    GoRouteWithBloc<TracksListBloc, TracksListRepository,
+        TrackListRemoteDataSource>(
       path: '/album/:albumId',
-      screenBuilder: (context, state) => AlbumDetailScreen(
-        albumId: state.pathParameters['albumId'] ?? '',
+      screenBuilder: (context, state) => AlbumDetailScreen<Album>(
+        id: state.pathParameters['albumId'] ?? '',
+        listInfo: state.extra as Album,
       ),
-      createBloc: (repository) => AlbumTracksBloc(
-        getAlbumTracks: GetAlbumTracks(repository),
-        getAlbumInfo: GetAlbumInfo(repository),
+      createBloc: (repository) => TracksListBloc(
+        getTracks: GetTracks(repository),
       ),
-      createDataSource: () => AlbumDetailRemoteDataSourceImpl(),
-      createRepository: (dataSource) => AlbumDetailRepositoryImpl(dataSource),
+      createDataSource: () => AlbumTrackRemoteDataSourceImpl(),
+      createRepository: (dataSource) => TracksListRepositoryImpl(dataSource),
+      transitionBuilder: (child, state) => FadeScreenTransition(
+        key: state.pageKey,
+        child: child,
+      ),
+    ).build(),
+    GoRouteWithBloc<TracksListBloc, TracksListRepository,
+        TrackListRemoteDataSource>(
+      path: '/playlist/:playlistId',
+      screenBuilder: (context, state) => AlbumDetailScreen<Playlist>(
+        id: state.pathParameters['playlistId'] ?? '',
+        listInfo: state.extra as Playlist,
+      ),
+      createBloc: (repository) => TracksListBloc(
+        getTracks: GetTracks(repository),
+      ),
+      createDataSource: () => PlaylistTrackRemoteDataSourceImpl(),
+      createRepository: (dataSource) => TracksListRepositoryImpl(dataSource),
       transitionBuilder: (child, state) => FadeScreenTransition(
         key: state.pageKey,
         child: child,

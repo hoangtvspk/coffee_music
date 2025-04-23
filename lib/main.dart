@@ -14,7 +14,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'core/l10n/app_localizations.dart';
-import 'features/settings/presentation/bloc/language/language_bloc.dart';
+import 'core/provider/language/language_bloc.dart';
 
 import 'core/router/app_router.dart';
 

@@ -27,6 +27,8 @@ mixin _$Playlist {
   String get owner => throw _privateConstructorUsedError;
   int get totalTracks => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
+  String get releaseDate => throw _privateConstructorUsedError;
+  List<String> get artists => throw _privateConstructorUsedError;
 
   /// Serializes this Playlist to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -50,7 +52,9 @@ abstract class $PlaylistCopyWith<$Res> {
       List<SpotifyImage> images,
       String owner,
       int totalTracks,
-      String type});
+      String type,
+      String releaseDate,
+      List<String> artists});
 }
 
 /// @nodoc
@@ -75,6 +79,8 @@ class _$PlaylistCopyWithImpl<$Res, $Val extends Playlist>
     Object? owner = null,
     Object? totalTracks = null,
     Object? type = null,
+    Object? releaseDate = null,
+    Object? artists = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -105,6 +111,14 @@ class _$PlaylistCopyWithImpl<$Res, $Val extends Playlist>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
+      releaseDate: null == releaseDate
+          ? _value.releaseDate
+          : releaseDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      artists: null == artists
+          ? _value.artists
+          : artists // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ) as $Val);
   }
 }
@@ -124,7 +138,9 @@ abstract class _$$PlaylistImplCopyWith<$Res>
       List<SpotifyImage> images,
       String owner,
       int totalTracks,
-      String type});
+      String type,
+      String releaseDate,
+      List<String> artists});
 }
 
 /// @nodoc
@@ -147,6 +163,8 @@ class __$$PlaylistImplCopyWithImpl<$Res>
     Object? owner = null,
     Object? totalTracks = null,
     Object? type = null,
+    Object? releaseDate = null,
+    Object? artists = null,
   }) {
     return _then(_$PlaylistImpl(
       id: null == id
@@ -177,6 +195,14 @@ class __$$PlaylistImplCopyWithImpl<$Res>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
+      releaseDate: null == releaseDate
+          ? _value.releaseDate
+          : releaseDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      artists: null == artists
+          ? _value._artists
+          : artists // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -191,8 +217,11 @@ class _$PlaylistImpl implements _Playlist {
       final List<SpotifyImage> images = const [],
       required this.owner,
       required this.totalTracks,
-      required this.type})
-      : _images = images;
+      required this.type,
+      required this.releaseDate,
+      required final List<String> artists})
+      : _images = images,
+        _artists = artists;
 
   factory _$PlaylistImpl.fromJson(Map<String, dynamic> json) =>
       _$$PlaylistImplFromJson(json);
@@ -218,10 +247,19 @@ class _$PlaylistImpl implements _Playlist {
   final int totalTracks;
   @override
   final String type;
+  @override
+  final String releaseDate;
+  final List<String> _artists;
+  @override
+  List<String> get artists {
+    if (_artists is EqualUnmodifiableListView) return _artists;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_artists);
+  }
 
   @override
   String toString() {
-    return 'Playlist(id: $id, name: $name, description: $description, images: $images, owner: $owner, totalTracks: $totalTracks, type: $type)';
+    return 'Playlist(id: $id, name: $name, description: $description, images: $images, owner: $owner, totalTracks: $totalTracks, type: $type, releaseDate: $releaseDate, artists: $artists)';
   }
 
   @override
@@ -237,13 +275,25 @@ class _$PlaylistImpl implements _Playlist {
             (identical(other.owner, owner) || other.owner == owner) &&
             (identical(other.totalTracks, totalTracks) ||
                 other.totalTracks == totalTracks) &&
-            (identical(other.type, type) || other.type == type));
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.releaseDate, releaseDate) ||
+                other.releaseDate == releaseDate) &&
+            const DeepCollectionEquality().equals(other._artists, _artists));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, description,
-      const DeepCollectionEquality().hash(_images), owner, totalTracks, type);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      description,
+      const DeepCollectionEquality().hash(_images),
+      owner,
+      totalTracks,
+      type,
+      releaseDate,
+      const DeepCollectionEquality().hash(_artists));
 
   /// Create a copy of Playlist
   /// with the given fields replaced by the non-null parameter values.
@@ -269,7 +319,9 @@ abstract class _Playlist implements Playlist {
       final List<SpotifyImage> images,
       required final String owner,
       required final int totalTracks,
-      required final String type}) = _$PlaylistImpl;
+      required final String type,
+      required final String releaseDate,
+      required final List<String> artists}) = _$PlaylistImpl;
 
   factory _Playlist.fromJson(Map<String, dynamic> json) =
       _$PlaylistImpl.fromJson;
@@ -288,6 +340,10 @@ abstract class _Playlist implements Playlist {
   int get totalTracks;
   @override
   String get type;
+  @override
+  String get releaseDate;
+  @override
+  List<String> get artists;
 
   /// Create a copy of Playlist
   /// with the given fields replaced by the non-null parameter values.
