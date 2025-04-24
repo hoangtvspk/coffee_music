@@ -6,7 +6,12 @@ import 'package:buitify_coffee/features/tracks_list/data/repositories/tracks_lis
 import 'package:buitify_coffee/features/tracks_list/domain/repositories/tracks_list_repository.dart';
 import 'package:buitify_coffee/features/auth/presentation/screens/login_screen.dart';
 import 'package:buitify_coffee/features/main/presentation/screens/main_screen.dart';
+import 'package:buitify_coffee/features/media_player/presentation/media_player_screen.dart';
+import 'package:buitify_coffee/features/media_player/presentation/test_media_player_screen.dart';
+import 'package:buitify_coffee/features/media_player/presentation/bloc/media_player_bloc.dart';
+import 'package:buitify_coffee/features/media_player/domain/entities/media_player_event.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:go_router/go_router.dart';
 
@@ -62,6 +67,10 @@ GoRouter router = GoRouter(
       path: '/main',
       builder: (context, state) => const MainScreen(),
     ),
+    GoRoute(
+      path: '/test-media-player',
+      builder: (context, state) => const TestMediaPlayerScreen(),
+    ),
     GoRouteWithBloc<TracksListBloc, TracksListRepository,
         TrackListRemoteDataSource>(
       path: '/album/:albumId',
@@ -96,5 +105,26 @@ GoRouter router = GoRouter(
         child: child,
       ),
     ).build(),
+    GoRoute(
+      path: '/player',
+      builder: (context, state) {
+        final track = state.extra as Map<String, dynamic>?;
+        if (track == null) {
+          return const MediaPlayerScreen();
+        }
+        return BlocProvider(
+          create: (context) => MediaPlayerBloc()
+            ..add(
+              MediaPlayerEvent.loadTrack(
+                trackUrl: track['url'] as String,
+                title: track['title'] as String,
+                artist: track['artist'] as String,
+                imageUrl: track['imageUrl'] as String,
+              ),
+            ),
+          child: const MediaPlayerScreen(),
+        );
+      },
+    ),
   ],
 );

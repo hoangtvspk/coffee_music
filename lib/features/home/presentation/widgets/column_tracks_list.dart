@@ -1,5 +1,6 @@
 import 'package:buitify_coffee/features/home/domain/entities/track/track.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ColumnTracksList extends StatelessWidget {
   const ColumnTracksList({
@@ -31,7 +32,13 @@ class ColumnTracksList extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             child: GestureDetector(
               onTap: () {
-                // Handle track tap
+                // Navigate to media player with track data
+                context.go('/player', extra: {
+                  'url': track.previewUrl ?? '',
+                  'title': track.name,
+                  'artist': track.artists.map((e) => e.name).join(', '),
+                  'imageUrl': track.album.images.first.url,
+                });
               },
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
