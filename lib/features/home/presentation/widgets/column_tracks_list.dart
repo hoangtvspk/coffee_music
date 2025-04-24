@@ -33,7 +33,7 @@ class ColumnTracksList extends StatelessWidget {
             child: GestureDetector(
               onTap: () {
                 // Navigate to media player with track data
-                context.go('/player', extra: {
+                context.push('/player', extra: {
                   'url': track.previewUrl ?? '',
                   'title': track.name,
                   'artist': track.artists.map((e) => e.name).join(', '),

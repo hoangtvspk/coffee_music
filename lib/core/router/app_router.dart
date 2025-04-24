@@ -107,22 +107,44 @@ GoRouter router = GoRouter(
     ).build(),
     GoRoute(
       path: '/player',
-      builder: (context, state) {
+      pageBuilder: (context, state) {
         final track = state.extra as Map<String, dynamic>?;
-        if (track == null) {
-          return const MediaPlayerScreen();
-        }
-        return BlocProvider(
-          create: (context) => MediaPlayerBloc()
-            ..add(
-              MediaPlayerEvent.loadTrack(
-                trackUrl: track['url'] as String,
-                title: track['title'] as String,
-                artist: track['artist'] as String,
-                imageUrl: track['imageUrl'] as String,
+        final child = track == null
+            ? const MediaPlayerScreen()
+            : BlocProvider(
+                create: (context) => MediaPlayerBloc()
+                  ..add(
+                    MediaPlayerEvent.loadTrack(
+                      trackUrl: track['url'] as String,
+                      title: track['title'] as String,
+                      artist: track['artist'] as String,
+                      imageUrl: track['imageUrl'] as String,
+                    ),
+                  ),
+                child: const MediaPlayerScreen(),
+              );
+
+        return CustomTransitionPage(
+          key: state.pageKey,
+          child: child,
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            // Slide up from bottom
+            const begin = Offset(0.0, 1.0);
+            const end = Offset.zero;
+
+            var tween = Tween(begin: begin, end: end)
+                .chain(CurveTween(curve: Curves.easeOutCubic));
+            var offsetAnimation = animation.drive(tween);
+
+            return SlideTransition(
+              position: offsetAnimation,
+              child: FadeTransition(
+                opacity: animation,
+                child: child,
               ),
-            ),
-          child: const MediaPlayerScreen(),
+            );
+          },
+          transitionDuration: const Duration(milliseconds: 400),
         );
       },
     ),
