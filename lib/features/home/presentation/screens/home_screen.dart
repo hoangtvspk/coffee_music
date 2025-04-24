@@ -5,7 +5,7 @@ import 'package:buitify_coffee/features/home/domain/usecases/get_several_track.d
 import 'package:buitify_coffee/features/home/presentation/widgets/home_banner.dart';
 import 'package:buitify_coffee/features/home/presentation/widgets/home_skeleton.dart';
 import 'package:buitify_coffee/features/home/presentation/widgets/playlist_list.dart';
-import 'package:buitify_coffee/features/home/presentation/widgets/saved_tracks_list.dart';
+import 'package:buitify_coffee/features/home/presentation/widgets/column_tracks_list.dart';
 import 'package:buitify_coffee/features/home/presentation/widgets/walking_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
