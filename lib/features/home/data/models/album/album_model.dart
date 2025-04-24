@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '../../../../../core/entities/spotify_image/spotify_image.dart';
-import '../../../domain/entities/album/album.dart';
-import '../../../../../core/entities/artist/artist_model.dart';
+import '../../../../../core/domain/entities/source_image/source_image.dart';
+import '../../../../../core/domain/entities/album/album.dart';
+import '../../../../../core/domain/entities/artist/artist.dart';
 
 part 'album_model.freezed.dart';
 part 'album_model.g.dart';
@@ -13,12 +13,12 @@ class AlbumModel with _$AlbumModel {
   const factory AlbumModel({
     required String id,
     required String name,
-    required List<SpotifyImage> images,
+    required List<SourceImage> images,
     required String type,
     required String albumType,
     required String releaseDate,
     required int totalTracks,
-    required List<ArtistModel> artists,
+    required List<Artist> artists,
   }) = _AlbumModel;
 
   @override
@@ -35,7 +35,7 @@ class AlbumModel with _$AlbumModel {
 
   @override
   @JsonKey(name: 'artists')
-  List<ArtistModel> get artists => throw UnimplementedError();
+  List<Artist> get artists => throw UnimplementedError();
 
   factory AlbumModel.fromJson(Map<String, dynamic> json) =>
       _$AlbumModelFromJson(json);

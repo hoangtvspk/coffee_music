@@ -23,7 +23,7 @@ mixin _$Playlist {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
-  List<SpotifyImage> get images => throw _privateConstructorUsedError;
+  List<SourceImage> get images => throw _privateConstructorUsedError;
   String get owner => throw _privateConstructorUsedError;
   int get totalTracks => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
@@ -49,7 +49,7 @@ abstract class $PlaylistCopyWith<$Res> {
       {String id,
       String name,
       String description,
-      List<SpotifyImage> images,
+      List<SourceImage> images,
       String owner,
       int totalTracks,
       String type,
@@ -98,7 +98,7 @@ class _$PlaylistCopyWithImpl<$Res, $Val extends Playlist>
       images: null == images
           ? _value.images
           : images // ignore: cast_nullable_to_non_nullable
-              as List<SpotifyImage>,
+              as List<SourceImage>,
       owner: null == owner
           ? _value.owner
           : owner // ignore: cast_nullable_to_non_nullable
@@ -135,7 +135,7 @@ abstract class _$$PlaylistImplCopyWith<$Res>
       {String id,
       String name,
       String description,
-      List<SpotifyImage> images,
+      List<SourceImage> images,
       String owner,
       int totalTracks,
       String type,
@@ -182,7 +182,7 @@ class __$$PlaylistImplCopyWithImpl<$Res>
       images: null == images
           ? _value._images
           : images // ignore: cast_nullable_to_non_nullable
-              as List<SpotifyImage>,
+              as List<SourceImage>,
       owner: null == owner
           ? _value.owner
           : owner // ignore: cast_nullable_to_non_nullable
@@ -214,7 +214,7 @@ class _$PlaylistImpl implements _Playlist {
       {required this.id,
       required this.name,
       required this.description,
-      final List<SpotifyImage> images = const [],
+      final List<SourceImage> images = const [],
       required this.owner,
       required this.totalTracks,
       required this.type,
@@ -232,10 +232,10 @@ class _$PlaylistImpl implements _Playlist {
   final String name;
   @override
   final String description;
-  final List<SpotifyImage> _images;
+  final List<SourceImage> _images;
   @override
   @JsonKey()
-  List<SpotifyImage> get images {
+  List<SourceImage> get images {
     if (_images is EqualUnmodifiableListView) return _images;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_images);
@@ -316,7 +316,7 @@ abstract class _Playlist implements Playlist {
       {required final String id,
       required final String name,
       required final String description,
-      final List<SpotifyImage> images,
+      final List<SourceImage> images,
       required final String owner,
       required final int totalTracks,
       required final String type,
@@ -333,7 +333,7 @@ abstract class _Playlist implements Playlist {
   @override
   String get description;
   @override
-  List<SpotifyImage> get images;
+  List<SourceImage> get images;
   @override
   String get owner;
   @override

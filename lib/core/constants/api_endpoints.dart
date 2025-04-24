@@ -17,5 +17,14 @@ class ApiEndpoints {
   static String createPlaylist(String userId) => 'users/$userId/playlists';
   static String categoryPlaylists(String categoryId) =>
       'browse/categories/$categoryId/playlists';
+
+  // Track endpoints
   static String severalTracks(String ids) => 'tracks?ids=$ids';
+  static String savedTracks() => 'me/tracks';
+
+  // Artist endpoints
+  static String artist(String artistId) => 'artists/$artistId';
+  static String artistAlbums(String artistId) => 'artists/$artistId/albums';
+  static String artistTopTracks(String artistId) =>
+      'artists/$artistId/top-tracks';
 }

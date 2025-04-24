@@ -1,20 +1,19 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'artist_model.dart';
+part of 'artist.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ArtistModelImpl _$$ArtistModelImplFromJson(Map<String, dynamic> json) =>
-    _$ArtistModelImpl(
+_$ArtistImpl _$$ArtistImplFromJson(Map<String, dynamic> json) => _$ArtistImpl(
       id: json['id'] as String,
       name: json['name'] as String,
       type: json['type'] as String,
       externalUrls: Map<String, String>.from(json['external_urls'] as Map),
     );
 
-Map<String, dynamic> _$$ArtistModelImplToJson(_$ArtistModelImpl instance) =>
+Map<String, dynamic> _$$ArtistImplToJson(_$ArtistImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

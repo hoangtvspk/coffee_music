@@ -73,6 +73,7 @@ class _MainScreenState extends State<MainScreen> {
             unselectedItemColor: Colors.grey,
             currentIndex: state.selectedIndex,
             onTap: _onItemTapped,
+            iconSize: 22,
             items: [
               BottomNavigationBarItem(
                 icon: const Icon(CupertinoIcons.house),

@@ -1,6 +1,6 @@
-import 'package:buitify_coffee/core/entities/tracks_list/tracks_list.dart';
+import 'package:buitify_coffee/core/domain/entities/tracks_list/tracks_list.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '../../../../../core/entities/spotify_image/spotify_image.dart';
+import '../source_image/source_image.dart';
 
 part 'playlist.freezed.dart';
 part 'playlist.g.dart';
@@ -11,7 +11,7 @@ class Playlist with _$Playlist implements TracksList {
     required String id,
     required String name,
     required String description,
-    @Default([]) List<SpotifyImage> images,
+    @Default([]) List<SourceImage> images,
     required String owner,
     required int totalTracks,
     required String type,

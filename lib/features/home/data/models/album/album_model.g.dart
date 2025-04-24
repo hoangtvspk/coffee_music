@@ -11,14 +11,14 @@ _$AlbumModelImpl _$$AlbumModelImplFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String,
       name: json['name'] as String,
       images: (json['images'] as List<dynamic>)
-          .map((e) => SpotifyImage.fromJson(e as Map<String, dynamic>))
+          .map((e) => SourceImage.fromJson(e as Map<String, dynamic>))
           .toList(),
       type: json['type'] as String,
       albumType: json['album_type'] as String,
       releaseDate: json['release_date'] as String,
       totalTracks: (json['total_tracks'] as num).toInt(),
       artists: (json['artists'] as List<dynamic>)
-          .map((e) => ArtistModel.fromJson(e as Map<String, dynamic>))
+          .map((e) => Artist.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

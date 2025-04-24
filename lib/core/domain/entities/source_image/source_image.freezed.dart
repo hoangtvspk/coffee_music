@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'spotify_image.dart';
+part of 'source_image.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,46 +14,46 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-SpotifyImage _$SpotifyImageFromJson(Map<String, dynamic> json) {
-  return _SpotifyImage.fromJson(json);
+SourceImage _$SourceImageFromJson(Map<String, dynamic> json) {
+  return _SourceImage.fromJson(json);
 }
 
 /// @nodoc
-mixin _$SpotifyImage {
+mixin _$SourceImage {
   String get url => throw _privateConstructorUsedError;
   int get height => throw _privateConstructorUsedError;
   int get width => throw _privateConstructorUsedError;
 
-  /// Serializes this SpotifyImage to a JSON map.
+  /// Serializes this SourceImage to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-  /// Create a copy of SpotifyImage
+  /// Create a copy of SourceImage
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $SpotifyImageCopyWith<SpotifyImage> get copyWith =>
+  $SourceImageCopyWith<SourceImage> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $SpotifyImageCopyWith<$Res> {
-  factory $SpotifyImageCopyWith(
-          SpotifyImage value, $Res Function(SpotifyImage) then) =
-      _$SpotifyImageCopyWithImpl<$Res, SpotifyImage>;
+abstract class $SourceImageCopyWith<$Res> {
+  factory $SourceImageCopyWith(
+          SourceImage value, $Res Function(SourceImage) then) =
+      _$SourceImageCopyWithImpl<$Res, SourceImage>;
   @useResult
   $Res call({String url, int height, int width});
 }
 
 /// @nodoc
-class _$SpotifyImageCopyWithImpl<$Res, $Val extends SpotifyImage>
-    implements $SpotifyImageCopyWith<$Res> {
-  _$SpotifyImageCopyWithImpl(this._value, this._then);
+class _$SourceImageCopyWithImpl<$Res, $Val extends SourceImage>
+    implements $SourceImageCopyWith<$Res> {
+  _$SourceImageCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of SpotifyImage
+  /// Create a copy of SourceImage
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -80,25 +80,25 @@ class _$SpotifyImageCopyWithImpl<$Res, $Val extends SpotifyImage>
 }
 
 /// @nodoc
-abstract class _$$SpotifyImageImplCopyWith<$Res>
-    implements $SpotifyImageCopyWith<$Res> {
-  factory _$$SpotifyImageImplCopyWith(
-          _$SpotifyImageImpl value, $Res Function(_$SpotifyImageImpl) then) =
-      __$$SpotifyImageImplCopyWithImpl<$Res>;
+abstract class _$$SourceImageImplCopyWith<$Res>
+    implements $SourceImageCopyWith<$Res> {
+  factory _$$SourceImageImplCopyWith(
+          _$SourceImageImpl value, $Res Function(_$SourceImageImpl) then) =
+      __$$SourceImageImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String url, int height, int width});
 }
 
 /// @nodoc
-class __$$SpotifyImageImplCopyWithImpl<$Res>
-    extends _$SpotifyImageCopyWithImpl<$Res, _$SpotifyImageImpl>
-    implements _$$SpotifyImageImplCopyWith<$Res> {
-  __$$SpotifyImageImplCopyWithImpl(
-      _$SpotifyImageImpl _value, $Res Function(_$SpotifyImageImpl) _then)
+class __$$SourceImageImplCopyWithImpl<$Res>
+    extends _$SourceImageCopyWithImpl<$Res, _$SourceImageImpl>
+    implements _$$SourceImageImplCopyWith<$Res> {
+  __$$SourceImageImplCopyWithImpl(
+      _$SourceImageImpl _value, $Res Function(_$SourceImageImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of SpotifyImage
+  /// Create a copy of SourceImage
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -107,7 +107,7 @@ class __$$SpotifyImageImplCopyWithImpl<$Res>
     Object? height = null,
     Object? width = null,
   }) {
-    return _then(_$SpotifyImageImpl(
+    return _then(_$SourceImageImpl(
       url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -126,12 +126,12 @@ class __$$SpotifyImageImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$SpotifyImageImpl with DiagnosticableTreeMixin implements _SpotifyImage {
-  const _$SpotifyImageImpl(
+class _$SourceImageImpl with DiagnosticableTreeMixin implements _SourceImage {
+  const _$SourceImageImpl(
       {required this.url, required this.height, required this.width});
 
-  factory _$SpotifyImageImpl.fromJson(Map<String, dynamic> json) =>
-      _$$SpotifyImageImplFromJson(json);
+  factory _$SourceImageImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SourceImageImplFromJson(json);
 
   @override
   final String url;
@@ -142,14 +142,14 @@ class _$SpotifyImageImpl with DiagnosticableTreeMixin implements _SpotifyImage {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'SpotifyImage(url: $url, height: $height, width: $width)';
+    return 'SourceImage(url: $url, height: $height, width: $width)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'SpotifyImage'))
+      ..add(DiagnosticsProperty('type', 'SourceImage'))
       ..add(DiagnosticsProperty('url', url))
       ..add(DiagnosticsProperty('height', height))
       ..add(DiagnosticsProperty('width', width));
@@ -159,7 +159,7 @@ class _$SpotifyImageImpl with DiagnosticableTreeMixin implements _SpotifyImage {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SpotifyImageImpl &&
+            other is _$SourceImageImpl &&
             (identical(other.url, url) || other.url == url) &&
             (identical(other.height, height) || other.height == height) &&
             (identical(other.width, width) || other.width == width));
@@ -169,30 +169,30 @@ class _$SpotifyImageImpl with DiagnosticableTreeMixin implements _SpotifyImage {
   @override
   int get hashCode => Object.hash(runtimeType, url, height, width);
 
-  /// Create a copy of SpotifyImage
+  /// Create a copy of SourceImage
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$SpotifyImageImplCopyWith<_$SpotifyImageImpl> get copyWith =>
-      __$$SpotifyImageImplCopyWithImpl<_$SpotifyImageImpl>(this, _$identity);
+  _$$SourceImageImplCopyWith<_$SourceImageImpl> get copyWith =>
+      __$$SourceImageImplCopyWithImpl<_$SourceImageImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$SpotifyImageImplToJson(
+    return _$$SourceImageImplToJson(
       this,
     );
   }
 }
 
-abstract class _SpotifyImage implements SpotifyImage {
-  const factory _SpotifyImage(
+abstract class _SourceImage implements SourceImage {
+  const factory _SourceImage(
       {required final String url,
       required final int height,
-      required final int width}) = _$SpotifyImageImpl;
+      required final int width}) = _$SourceImageImpl;
 
-  factory _SpotifyImage.fromJson(Map<String, dynamic> json) =
-      _$SpotifyImageImpl.fromJson;
+  factory _SourceImage.fromJson(Map<String, dynamic> json) =
+      _$SourceImageImpl.fromJson;
 
   @override
   String get url;
@@ -201,10 +201,10 @@ abstract class _SpotifyImage implements SpotifyImage {
   @override
   int get width;
 
-  /// Create a copy of SpotifyImage
+  /// Create a copy of SourceImage
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$SpotifyImageImplCopyWith<_$SpotifyImageImpl> get copyWith =>
+  _$$SourceImageImplCopyWith<_$SourceImageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

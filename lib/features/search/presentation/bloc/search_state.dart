@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '../../../../core/domain/entities/status.dart';
+import '../../../../core/domain/entities/status/status.dart';
 import '../../domain/entities/search_result.dart';
 
 part 'search_state.freezed.dart';

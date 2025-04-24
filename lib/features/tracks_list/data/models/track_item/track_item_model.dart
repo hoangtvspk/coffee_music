@@ -1,7 +1,7 @@
 import 'package:buitify_coffee/features/home/data/models/album/album_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
-import 'package:buitify_coffee/core/entities/spotify_image/spotify_image.dart';
+import 'package:buitify_coffee/core/domain/entities/source_image/source_image.dart';
 
 import '../../../domain/entities/track/track_item.dart';
 
@@ -18,7 +18,7 @@ class TrackItemModel with _$TrackItemModel {
     required List<String> artists,
     required int durationMs,
     required int trackNumber,
-    @Default([]) List<SpotifyImage> images,
+    @Default([]) List<SourceImage> images,
     AlbumModel? album,
   }) = _TrackItemModel;
 
@@ -38,7 +38,7 @@ class TrackItemModel with _$TrackItemModel {
   @JsonKey(name: 'track_number')
   int get trackNumber => throw UnimplementedError();
 
-  TrackItem toEntity({required List<SpotifyImage> albumImages}) {
+  TrackItem toEntity({required List<SourceImage> albumImages}) {
     return TrackItem(
       id: id,
       name: name,

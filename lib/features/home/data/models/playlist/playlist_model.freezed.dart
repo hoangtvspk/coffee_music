@@ -23,7 +23,7 @@ mixin _$PlaylistModel {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
-  List<SpotifyImage> get images => throw _privateConstructorUsedError;
+  List<SourceImage> get images => throw _privateConstructorUsedError;
   OwnerModel get owner => throw _privateConstructorUsedError;
   Map<String, dynamic> get tracks => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
@@ -48,7 +48,7 @@ abstract class $PlaylistModelCopyWith<$Res> {
       {String id,
       String name,
       String description,
-      List<SpotifyImage> images,
+      List<SourceImage> images,
       OwnerModel owner,
       Map<String, dynamic> tracks,
       String type});
@@ -95,7 +95,7 @@ class _$PlaylistModelCopyWithImpl<$Res, $Val extends PlaylistModel>
       images: null == images
           ? _value.images
           : images // ignore: cast_nullable_to_non_nullable
-              as List<SpotifyImage>,
+              as List<SourceImage>,
       owner: null == owner
           ? _value.owner
           : owner // ignore: cast_nullable_to_non_nullable
@@ -134,7 +134,7 @@ abstract class _$$PlaylistModelImplCopyWith<$Res>
       {String id,
       String name,
       String description,
-      List<SpotifyImage> images,
+      List<SourceImage> images,
       OwnerModel owner,
       Map<String, dynamic> tracks,
       String type});
@@ -180,7 +180,7 @@ class __$$PlaylistModelImplCopyWithImpl<$Res>
       images: null == images
           ? _value._images
           : images // ignore: cast_nullable_to_non_nullable
-              as List<SpotifyImage>,
+              as List<SourceImage>,
       owner: null == owner
           ? _value.owner
           : owner // ignore: cast_nullable_to_non_nullable
@@ -204,7 +204,7 @@ class _$PlaylistModelImpl extends _PlaylistModel {
       {required this.id,
       required this.name,
       required this.description,
-      final List<SpotifyImage> images = const [],
+      final List<SourceImage> images = const [],
       required this.owner,
       required final Map<String, dynamic> tracks,
       required this.type})
@@ -221,10 +221,10 @@ class _$PlaylistModelImpl extends _PlaylistModel {
   final String name;
   @override
   final String description;
-  final List<SpotifyImage> _images;
+  final List<SourceImage> _images;
   @override
   @JsonKey()
-  List<SpotifyImage> get images {
+  List<SourceImage> get images {
     if (_images is EqualUnmodifiableListView) return _images;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_images);
@@ -296,7 +296,7 @@ abstract class _PlaylistModel extends PlaylistModel {
       {required final String id,
       required final String name,
       required final String description,
-      final List<SpotifyImage> images,
+      final List<SourceImage> images,
       required final OwnerModel owner,
       required final Map<String, dynamic> tracks,
       required final String type}) = _$PlaylistModelImpl;
@@ -312,7 +312,7 @@ abstract class _PlaylistModel extends PlaylistModel {
   @override
   String get description;
   @override
-  List<SpotifyImage> get images;
+  List<SourceImage> get images;
   @override
   OwnerModel get owner;
   @override

@@ -1,6 +1,6 @@
 import 'package:buitify_coffee/core/widgets/image/cached_image.dart';
 import 'package:flutter/material.dart';
-import '../../domain/entities/playlist/playlist.dart';
+import '../../../../core/domain/entities/playlist/playlist.dart';
 
 class PlaylistList extends StatelessWidget {
   final String title;

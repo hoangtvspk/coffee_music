@@ -1,4 +1,8 @@
+import 'dart:convert';
+import 'dart:math';
+
 import 'package:buitify_coffee/features/home/data/models/track/track_model.dart';
+import 'package:flutter/widgets.dart';
 import '../../../../core/constants/api_endpoints.dart';
 import '../../../../core/models/base_response.dart';
 import '../../../../core/network/dio_client.dart';
@@ -8,10 +12,15 @@ import 'package:dio/dio.dart';
 
 abstract class HomeRemoteDataSource {
   Future<BaseResponse<List<AlbumModel>>> getNewReleases(
-      {int offset = 0, int limit = 20});
+      {int offset, int limit});
   Future<BaseResponse<List<PlaylistModel>>> getUserPlaylists(
-      {int offset = 0, int limit = 20, required String userId});
-  Future<BaseResponse<TrackModel>> getSeveralTracks({required String ids});
+      {int offset, int limit, required String userId});
+  Future<BaseResponse<List<TrackModel>>> getSeveralTracks(
+      {required String ids});
+  Future<BaseResponse<List<TrackModel>>> getSavedTracks(
+      {required String trackId, int offset, int limit});
+  Future<BaseResponse<List<TrackModel>>> getArtistTopTracks(
+      {required String artistId, int offset, int limit});
 }
 
 class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
@@ -82,7 +91,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
   }
 
   @override
-  Future<BaseResponse<TrackModel>> getSeveralTracks(
+  Future<BaseResponse<List<TrackModel>>> getSeveralTracks(
       {required String ids}) async {
     try {
       final response = await dioClient.get(
@@ -96,15 +105,69 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
         ),
       );
 
-      final albumsList = (response.data['tracks'] as List).map((track) {
-        final album = track['album'];
-        final albumModel = AlbumModel.fromJson(album);
-        return albumModel.toEntity();
+      final items = response.data['tracks'] as List;
+
+      final tracksList = items.map((track) {
+        try {
+          return TrackModel.fromJson(track);
+        } catch (e) {
+          rethrow;
+        }
       }).toList();
 
-      final tracks = TrackModel(albums: albumsList);
+      return BaseResponse(data: tracksList);
+    } catch (e) {
+      print(e);
+      throw Exception(e);
+    }
+  }
 
-      return BaseResponse(data: tracks);
+  @override
+  Future<BaseResponse<List<TrackModel>>> getSavedTracks(
+      {required String trackId, int offset = 0, int limit = 20}) async {
+    try {
+      final response =
+          await dioClient.get(ApiEndpoints.savedTracks(), queryParameters: {
+        'ids': trackId,
+      });
+
+      final items = response.data['items'] as List;
+
+      final tracksList = items.map((item) {
+        return TrackModel.fromJson(item['track']);
+      }).toList();
+      return BaseResponse(data: tracksList);
+    } catch (e) {
+      debugPrint("error convert saved tracks: $e");
+      throw Exception(e);
+    }
+  }
+
+  @override
+  Future<BaseResponse<List<TrackModel>>> getArtistTopTracks(
+      {required String artistId, int offset = 0, int limit = 20}) async {
+    try {
+      final response =
+          await dioClient.get(ApiEndpoints.artistTopTracks(artistId),
+              queryParameters: {
+                'offset': offset,
+                'limit': limit,
+              },
+              options: Options(
+                extra: {
+                  'cache': true,
+                  'cacheKey': 'artist_top_tracks_$artistId',
+                  'maxStale': const Duration(days: 1),
+                },
+              ));
+
+      final items = response.data['tracks'] as List;
+
+      final tracksList = items.map((track) {
+        return TrackModel.fromJson(track);
+      }).toList();
+
+      return BaseResponse(data: tracksList);
     } catch (e) {
       throw Exception(e);
     }

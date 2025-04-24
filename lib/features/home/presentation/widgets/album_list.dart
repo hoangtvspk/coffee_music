@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../domain/entities/album/album.dart';
+import '../../../../core/domain/entities/album/album.dart';
 import '../../../../core/widgets/image/cached_image.dart';
 
 class AlbumList extends StatelessWidget {

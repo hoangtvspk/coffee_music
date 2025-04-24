@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../../domain/entities/track/track_item.dart';
 import '../../../domain/usecases/get_tracks.dart';
-import '../../../../../core/entities/entities/status.dart';
+import '../../../../../core/domain/entities/status/status.dart';
 
 part 'tracks_list_event.dart';
 part 'tracks_list_state.dart';

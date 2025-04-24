@@ -1,19 +1,19 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'spotify_image.dart';
+part of 'source_image.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$SpotifyImageImpl _$$SpotifyImageImplFromJson(Map<String, dynamic> json) =>
-    _$SpotifyImageImpl(
+_$SourceImageImpl _$$SourceImageImplFromJson(Map<String, dynamic> json) =>
+    _$SourceImageImpl(
       url: json['url'] as String,
       height: (json['height'] as num).toInt(),
       width: (json['width'] as num).toInt(),
     );
 
-Map<String, dynamic> _$$SpotifyImageImplToJson(_$SpotifyImageImpl instance) =>
+Map<String, dynamic> _$$SourceImageImplToJson(_$SourceImageImpl instance) =>
     <String, dynamic>{
       'url': instance.url,
       'height': instance.height,

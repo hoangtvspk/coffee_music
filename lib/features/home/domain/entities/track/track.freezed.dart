@@ -20,7 +20,12 @@ Track _$TrackFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Track {
-  List<Album> get albums => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  List<Artist> get artists => throw _privateConstructorUsedError;
+  Album get album => throw _privateConstructorUsedError;
+  String? get previewUrl => throw _privateConstructorUsedError;
+  int get durationMs => throw _privateConstructorUsedError;
 
   /// Serializes this Track to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -36,7 +41,15 @@ abstract class $TrackCopyWith<$Res> {
   factory $TrackCopyWith(Track value, $Res Function(Track) then) =
       _$TrackCopyWithImpl<$Res, Track>;
   @useResult
-  $Res call({List<Album> albums});
+  $Res call(
+      {String id,
+      String name,
+      List<Artist> artists,
+      Album album,
+      String? previewUrl,
+      int durationMs});
+
+  $AlbumCopyWith<$Res> get album;
 }
 
 /// @nodoc
@@ -54,14 +67,49 @@ class _$TrackCopyWithImpl<$Res, $Val extends Track>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? albums = null,
+    Object? id = null,
+    Object? name = null,
+    Object? artists = null,
+    Object? album = null,
+    Object? previewUrl = freezed,
+    Object? durationMs = null,
   }) {
     return _then(_value.copyWith(
-      albums: null == albums
-          ? _value.albums
-          : albums // ignore: cast_nullable_to_non_nullable
-              as List<Album>,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      artists: null == artists
+          ? _value.artists
+          : artists // ignore: cast_nullable_to_non_nullable
+              as List<Artist>,
+      album: null == album
+          ? _value.album
+          : album // ignore: cast_nullable_to_non_nullable
+              as Album,
+      previewUrl: freezed == previewUrl
+          ? _value.previewUrl
+          : previewUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      durationMs: null == durationMs
+          ? _value.durationMs
+          : durationMs // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
+  }
+
+  /// Create a copy of Track
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $AlbumCopyWith<$Res> get album {
+    return $AlbumCopyWith<$Res>(_value.album, (value) {
+      return _then(_value.copyWith(album: value) as $Val);
+    });
   }
 }
 
@@ -72,7 +120,16 @@ abstract class _$$TrackImplCopyWith<$Res> implements $TrackCopyWith<$Res> {
       __$$TrackImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Album> albums});
+  $Res call(
+      {String id,
+      String name,
+      List<Artist> artists,
+      Album album,
+      String? previewUrl,
+      int durationMs});
+
+  @override
+  $AlbumCopyWith<$Res> get album;
 }
 
 /// @nodoc
@@ -88,13 +145,38 @@ class __$$TrackImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? albums = null,
+    Object? id = null,
+    Object? name = null,
+    Object? artists = null,
+    Object? album = null,
+    Object? previewUrl = freezed,
+    Object? durationMs = null,
   }) {
     return _then(_$TrackImpl(
-      albums: null == albums
-          ? _value._albums
-          : albums // ignore: cast_nullable_to_non_nullable
-              as List<Album>,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      artists: null == artists
+          ? _value._artists
+          : artists // ignore: cast_nullable_to_non_nullable
+              as List<Artist>,
+      album: null == album
+          ? _value.album
+          : album // ignore: cast_nullable_to_non_nullable
+              as Album,
+      previewUrl: freezed == previewUrl
+          ? _value.previewUrl
+          : previewUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      durationMs: null == durationMs
+          ? _value.durationMs
+          : durationMs // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -102,23 +184,40 @@ class __$$TrackImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$TrackImpl implements _Track {
-  const _$TrackImpl({final List<Album> albums = const []}) : _albums = albums;
+  const _$TrackImpl(
+      {required this.id,
+      required this.name,
+      required final List<Artist> artists,
+      required this.album,
+      this.previewUrl,
+      required this.durationMs})
+      : _artists = artists;
 
   factory _$TrackImpl.fromJson(Map<String, dynamic> json) =>
       _$$TrackImplFromJson(json);
 
-  final List<Album> _albums;
   @override
-  @JsonKey()
-  List<Album> get albums {
-    if (_albums is EqualUnmodifiableListView) return _albums;
+  final String id;
+  @override
+  final String name;
+  final List<Artist> _artists;
+  @override
+  List<Artist> get artists {
+    if (_artists is EqualUnmodifiableListView) return _artists;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_albums);
+    return EqualUnmodifiableListView(_artists);
   }
 
   @override
+  final Album album;
+  @override
+  final String? previewUrl;
+  @override
+  final int durationMs;
+
+  @override
   String toString() {
-    return 'Track(albums: $albums)';
+    return 'Track(id: $id, name: $name, artists: $artists, album: $album, previewUrl: $previewUrl, durationMs: $durationMs)';
   }
 
   @override
@@ -126,13 +225,26 @@ class _$TrackImpl implements _Track {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TrackImpl &&
-            const DeepCollectionEquality().equals(other._albums, _albums));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            const DeepCollectionEquality().equals(other._artists, _artists) &&
+            (identical(other.album, album) || other.album == album) &&
+            (identical(other.previewUrl, previewUrl) ||
+                other.previewUrl == previewUrl) &&
+            (identical(other.durationMs, durationMs) ||
+                other.durationMs == durationMs));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_albums));
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      const DeepCollectionEquality().hash(_artists),
+      album,
+      previewUrl,
+      durationMs);
 
   /// Create a copy of Track
   /// with the given fields replaced by the non-null parameter values.
@@ -151,12 +263,28 @@ class _$TrackImpl implements _Track {
 }
 
 abstract class _Track implements Track {
-  const factory _Track({final List<Album> albums}) = _$TrackImpl;
+  const factory _Track(
+      {required final String id,
+      required final String name,
+      required final List<Artist> artists,
+      required final Album album,
+      final String? previewUrl,
+      required final int durationMs}) = _$TrackImpl;
 
   factory _Track.fromJson(Map<String, dynamic> json) = _$TrackImpl.fromJson;
 
   @override
-  List<Album> get albums;
+  String get id;
+  @override
+  String get name;
+  @override
+  List<Artist> get artists;
+  @override
+  Album get album;
+  @override
+  String? get previewUrl;
+  @override
+  int get durationMs;
 
   /// Create a copy of Track
   /// with the given fields replaced by the non-null parameter values.

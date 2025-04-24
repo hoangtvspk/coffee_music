@@ -1,37 +1,33 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'playlist.dart';
+part of 'album.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$PlaylistImpl _$$PlaylistImplFromJson(Map<String, dynamic> json) =>
-    _$PlaylistImpl(
+_$AlbumImpl _$$AlbumImplFromJson(Map<String, dynamic> json) => _$AlbumImpl(
       id: json['id'] as String,
       name: json['name'] as String,
-      description: json['description'] as String,
-      images: (json['images'] as List<dynamic>?)
-              ?.map((e) => SpotifyImage.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          const [],
-      owner: json['owner'] as String,
-      totalTracks: (json['totalTracks'] as num).toInt(),
+      images: (json['images'] as List<dynamic>)
+          .map((e) => SourceImage.fromJson(e as Map<String, dynamic>))
+          .toList(),
       type: json['type'] as String,
+      albumType: json['albumType'] as String,
       releaseDate: json['releaseDate'] as String,
+      totalTracks: (json['totalTracks'] as num).toInt(),
       artists:
           (json['artists'] as List<dynamic>).map((e) => e as String).toList(),
     );
 
-Map<String, dynamic> _$$PlaylistImplToJson(_$PlaylistImpl instance) =>
+Map<String, dynamic> _$$AlbumImplToJson(_$AlbumImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'description': instance.description,
       'images': instance.images,
-      'owner': instance.owner,
-      'totalTracks': instance.totalTracks,
       'type': instance.type,
+      'albumType': instance.albumType,
       'releaseDate': instance.releaseDate,
+      'totalTracks': instance.totalTracks,
       'artists': instance.artists,
     };

@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '../../../../../core/entities/spotify_image/spotify_image.dart';
-import '../../../../../features/home/domain/entities/playlist/playlist.dart';
+import '../../../../../core/domain/entities/source_image/source_image.dart';
+import '../../../../../core/domain/entities/playlist/playlist.dart';
 import '../owner/owner_model.dart';
 
 part 'playlist_model.freezed.dart';
@@ -14,7 +14,7 @@ class PlaylistModel with _$PlaylistModel {
     required String id,
     required String name,
     required String description,
-    @Default([]) List<SpotifyImage> images,
+    @Default([]) List<SourceImage> images,
     required OwnerModel owner,
     required Map<String, dynamic> tracks,
     required String type,

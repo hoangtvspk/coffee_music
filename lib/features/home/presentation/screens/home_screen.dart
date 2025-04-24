@@ -1,9 +1,11 @@
 import 'package:buitify_coffee/core/storage/secure_storage.dart';
 import 'package:buitify_coffee/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:buitify_coffee/features/home/domain/usecases/get_artists_top_track.dart';
 import 'package:buitify_coffee/features/home/domain/usecases/get_several_track.dart';
 import 'package:buitify_coffee/features/home/presentation/widgets/home_banner.dart';
 import 'package:buitify_coffee/features/home/presentation/widgets/home_skeleton.dart';
 import 'package:buitify_coffee/features/home/presentation/widgets/playlist_list.dart';
+import 'package:buitify_coffee/features/home/presentation/widgets/saved_tracks_list.dart';
 import 'package:buitify_coffee/features/home/presentation/widgets/walking_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,6 +16,7 @@ import '../../../../core/l10n/app_localizations.dart';
 import '../../data/datasources/home_remote_data_source.dart';
 import '../../data/repositories/home_repository_impl.dart';
 import '../../domain/usecases/get_new_releases.dart';
+import '../../domain/usecases/get_saved_track.dart';
 import '../../domain/usecases/get_user_playlists.dart';
 import '../bloc/home_bloc.dart';
 import '../widgets/album_list.dart';
@@ -38,6 +41,13 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   String token = '';
   late final HomeBloc _homeBloc;
+  String artistId = '6TITnFVRcl0AcZ4syE7Toe';
+  String trackId = '7ouMYWpwJ422jRcDASZB7P';
+  List<String> trackIds = [
+    '7ouMYWpwJ422jRcDASZB7P',
+    '4VqPOruhp5EdPBeR92t6lQ',
+    '2takcwOaAZWiXQijPHIx7B',
+  ];
 
   @override
   void initState() {
@@ -52,6 +62,8 @@ class _HomeScreenState extends State<HomeScreen> {
       getNewReleases: GetNewReleases(repository),
       getUserPlaylists: GetUserPlaylists(repository),
       getSeveralTrack: GetSeveralTrack(repository),
+      getSavedTracks: GetSavedTrack(repository),
+      getArtistTopTracks: GetArtistTopTrack(repository),
     )..add(const HomeEvent.started());
   }
 
@@ -89,9 +101,20 @@ class _HomeScreenState extends State<HomeScreen> {
 
                 // 3. Finally get tracks
                 await Future.delayed(const Duration(milliseconds: 100));
-                _homeBloc.add(const HomeEvent.getTracks(
-                  ids:
-                      '7ouMYWpwJ422jRcDASZB7P,4VqPOruhp5EdPBeR92t6lQ,2takcwOaAZWiXQijPHIx7B',
+                _homeBloc.add(HomeEvent.getTracks(
+                  ids: trackIds.join(','),
+                ));
+
+                // 4. Finally get saved tracks
+                await Future.delayed(const Duration(milliseconds: 100));
+                _homeBloc.add(HomeEvent.getSavedTracks(
+                  trackId: trackId,
+                ));
+
+                // 5. Finally get artist top tracks
+                await Future.delayed(const Duration(milliseconds: 100));
+                _homeBloc.add(HomeEvent.getArtistTopTracks(
+                  artistId: artistId,
                 ));
               },
               orElse: () {},
@@ -151,6 +174,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       create: (context) => _homeBloc,
                       child: BlocBuilder<HomeBloc, HomeState>(
                         builder: (context, state) {
+                          print("saved tracks: ${state.savedTracks}");
                           return Column(
                             spacing: 24,
                             children: [
@@ -217,12 +241,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                   key: const ValueKey('loading_several_tracks'),
                                 ),
                                 failure: (message) => const SizedBox.shrink(),
-                                orElse: () => state.tracks.albums.isNotEmpty
+                                orElse: () => state.tracks.isNotEmpty
                                     ? AlbumList(
-                                        albums: state.tracks.albums,
+                                        albums: state.tracks
+                                            .map((track) => track.album)
+                                            .toList(),
                                         title: context.l10n.severalTracks,
                                         onAlbumSelected: (albumId) {
-                                          final album = state.tracks.albums
+                                          final album = state.tracks
+                                              .map((track) => track.album)
                                               .firstWhere(
                                                   (a) => a.id == albumId);
                                           context.push('/album/$albumId',
@@ -232,8 +259,47 @@ class _HomeScreenState extends State<HomeScreen> {
                                     : const SizedBox.shrink(),
                               ),
 
-                              // Note: Tracks section will be implemented later
-                              // when we have the TrackList widget ready
+                              // Saved Tracks Section
+                              state.statusLoadSavedTracks.maybeWhen(
+                                idle: () => const HomeSkeleton(
+                                  title: 'Saved Tracks',
+                                  key: ValueKey('idle_saved_tracks'),
+                                ),
+                                loading: () => const HomeSkeleton(
+                                  title: 'Saved Tracks',
+                                  key: ValueKey('loading_saved_tracks'),
+                                ),
+                                failure: (message) => const SizedBox.shrink(),
+                                orElse: () => state.savedTracks.isNotEmpty
+                                    ? SavedTracksList(
+                                        tracks: state.savedTracks,
+                                        title: 'Saved Tracks',
+                                      )
+                                    : const SizedBox.shrink(),
+                              ),
+
+                              // Artist Top Tracks Section
+                              state.statusLoadArtistTopTracks.maybeWhen(
+                                idle: () => const HomeSkeleton(
+                                  title: 'Artist Top Tracks',
+                                  key: ValueKey('idle_artist_top_tracks'),
+                                ),
+                                loading: () => const HomeSkeleton(
+                                  title: 'Artist Top Tracks',
+                                  key: ValueKey('loading_artist_top_tracks'),
+                                ),
+                                failure: (message) => const SizedBox.shrink(),
+                                orElse: () => state.artistTopTracks.isNotEmpty
+                                    ? SavedTracksList(
+                                        tracks: state.artistTopTracks,
+                                        title: state
+                                            .artistTopTracks.first.artists
+                                            .firstWhere((artist) =>
+                                                artist.id == artistId)
+                                            .name,
+                                      )
+                                    : const SizedBox.shrink(),
+                              ),
                             ],
                           );
                         },

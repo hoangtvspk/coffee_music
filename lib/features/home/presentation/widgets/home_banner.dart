@@ -30,12 +30,46 @@ class _HomeBannerState extends State<HomeBanner> {
     super.dispose();
   }
 
+  List<Map<String, String>> _getBannerImages() {
+    return [
+      {
+        'image': 'assets/images/night_1.png',
+        'time': 'Night',
+      },
+      {
+        'image': 'assets/images/afternoon_1.png',
+        'time': 'Afternoon',
+      },
+      {
+        'image': 'assets/images/morning_1.png',
+        'time': 'Morning',
+      },
+    ];
+  }
+
+  String _getCurrentTimePeriod() {
+    final hour = _dateTime.hour;
+    if (hour >= 5 && hour < 12) {
+      return 'Morning';
+    } else if (hour >= 12 && hour < 18) {
+      return 'Afternoon';
+    } else {
+      return 'Night';
+    }
+  }
+
+  String _getCurrentImage() {
+    final timePeriod = _getCurrentTimePeriod();
+    return _getBannerImages()
+        .firstWhere((image) => image['time'] == timePeriod)['image']!;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         Image.asset(
-          'assets/images/home_chill_banner.png',
+          _getCurrentImage(),
           height: 200,
           width: double.infinity,
           fit: BoxFit.cover,

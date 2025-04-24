@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import '../../../../core/error/failure.dart';
 import '../../../../core/usecase/usecase.dart';
-import '../entities/album/album.dart';
+import '../../../../core/domain/entities/album/album.dart';
 import '../repositories/home_repository.dart';
 
 class GetNewReleases implements UseCase<List<Album>, PaginationParams> {

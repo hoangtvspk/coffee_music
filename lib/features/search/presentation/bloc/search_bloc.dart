@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/domain/entities/status.dart';
+import '../../../../core/domain/entities/status/status.dart';
 import '../../data/repositories/search_repository_impl.dart';
 import '../../domain/entities/search_result.dart';
 import 'search_event.dart';

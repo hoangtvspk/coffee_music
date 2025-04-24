@@ -15,7 +15,7 @@ _$TrackItemImpl _$$TrackItemImplFromJson(Map<String, dynamic> json) =>
       durationMs: (json['durationMs'] as num).toInt(),
       trackNumber: (json['trackNumber'] as num).toInt(),
       images: (json['images'] as List<dynamic>)
-          .map((e) => SpotifyImage.fromJson(e as Map<String, dynamic>))
+          .map((e) => SourceImage.fromJson(e as Map<String, dynamic>))
           .toList(),
       album: json['album'] == null
           ? null

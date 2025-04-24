@@ -25,7 +25,7 @@ mixin _$TrackItemModel {
   List<String> get artists => throw _privateConstructorUsedError;
   int get durationMs => throw _privateConstructorUsedError;
   int get trackNumber => throw _privateConstructorUsedError;
-  List<SpotifyImage> get images => throw _privateConstructorUsedError;
+  List<SourceImage> get images => throw _privateConstructorUsedError;
   AlbumModel? get album => throw _privateConstructorUsedError;
 
   /// Serializes this TrackItemModel to a JSON map.
@@ -50,7 +50,7 @@ abstract class $TrackItemModelCopyWith<$Res> {
       List<String> artists,
       int durationMs,
       int trackNumber,
-      List<SpotifyImage> images,
+      List<SourceImage> images,
       AlbumModel? album});
 
   $AlbumModelCopyWith<$Res>? get album;
@@ -103,7 +103,7 @@ class _$TrackItemModelCopyWithImpl<$Res, $Val extends TrackItemModel>
       images: null == images
           ? _value.images
           : images // ignore: cast_nullable_to_non_nullable
-              as List<SpotifyImage>,
+              as List<SourceImage>,
       album: freezed == album
           ? _value.album
           : album // ignore: cast_nullable_to_non_nullable
@@ -140,7 +140,7 @@ abstract class _$$TrackItemModelImplCopyWith<$Res>
       List<String> artists,
       int durationMs,
       int trackNumber,
-      List<SpotifyImage> images,
+      List<SourceImage> images,
       AlbumModel? album});
 
   @override
@@ -192,7 +192,7 @@ class __$$TrackItemModelImplCopyWithImpl<$Res>
       images: null == images
           ? _value._images
           : images // ignore: cast_nullable_to_non_nullable
-              as List<SpotifyImage>,
+              as List<SourceImage>,
       album: freezed == album
           ? _value.album
           : album // ignore: cast_nullable_to_non_nullable
@@ -211,7 +211,7 @@ class _$TrackItemModelImpl extends _TrackItemModel
       required final List<String> artists,
       required this.durationMs,
       required this.trackNumber,
-      final List<SpotifyImage> images = const [],
+      final List<SourceImage> images = const [],
       this.album})
       : _artists = artists,
         _images = images,
@@ -238,10 +238,10 @@ class _$TrackItemModelImpl extends _TrackItemModel
   final int durationMs;
   @override
   final int trackNumber;
-  final List<SpotifyImage> _images;
+  final List<SourceImage> _images;
   @override
   @JsonKey()
-  List<SpotifyImage> get images {
+  List<SourceImage> get images {
     if (_images is EqualUnmodifiableListView) return _images;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_images);
@@ -321,7 +321,7 @@ abstract class _TrackItemModel extends TrackItemModel {
       required final List<String> artists,
       required final int durationMs,
       required final int trackNumber,
-      final List<SpotifyImage> images,
+      final List<SourceImage> images,
       final AlbumModel? album}) = _$TrackItemModelImpl;
   const _TrackItemModel._() : super._();
 
@@ -339,7 +339,7 @@ abstract class _TrackItemModel extends TrackItemModel {
   @override
   int get trackNumber;
   @override
-  List<SpotifyImage> get images;
+  List<SourceImage> get images;
   @override
   AlbumModel? get album;
 

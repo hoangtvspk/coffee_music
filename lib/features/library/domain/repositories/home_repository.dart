@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import '../../../../core/error/failure.dart';
-import '../../../../features/home/domain/entities/playlist/playlist.dart';
+import '../../../../core/domain/entities/playlist/playlist.dart';
 
 abstract class HomeRepository {
   Future<Either<Failure, List<Playlist>>> getUserPlaylists({

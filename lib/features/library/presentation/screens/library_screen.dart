@@ -1,10 +1,11 @@
+import 'package:buitify_coffee/core/widgets/image/cached_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../core/config/app_color.dart';
 import '../bloc/playlist_bloc.dart';
-import '../../../../features/home/domain/entities/playlist/playlist.dart';
+import '../../../../core/domain/entities/playlist/playlist.dart';
 import '../../domain/usecases/get_user_playlists.dart';
 import '../../data/repositories/home_repository_impl.dart';
 import '../../data/datasources/home_remote_data_source.dart';
@@ -31,36 +32,66 @@ class LibraryScreen extends StatelessWidget {
             ),
           )..add(PlaylistEvent.getUserPlaylists(userId: userId)),
           child: Scaffold(
-            backgroundColor: AppColor.grayLight,
-            body: SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Your Library',
-                      style: GoogleFonts.poppins(
-                        color: Colors.white,
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
+            backgroundColor: Colors.transparent,
+            body: Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [Color(0xFF1C1C1E), Color(0xFF000000)],
+                ),
+              ),
+              child: SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        spacing: 16,
+                        children: [
+                          BlocBuilder<AuthBloc, AuthState>(
+                            builder: (context, state) {
+                              return state.maybeWhen(
+                                success: (user) => ClipRRect(
+                                  borderRadius: BorderRadius.circular(30),
+                                  child: CachedImage(
+                                    imageUrl: user.images.first.url,
+                                    width: 30,
+                                    height: 30,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                orElse: () => const SizedBox.shrink(),
+                              );
+                            },
+                          ),
+                          Text(
+                            'Your Library',
+                            style: GoogleFonts.poppins(
+                              color: Colors.white,
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                    const SizedBox(height: 20),
-                    Expanded(
-                      child: BlocBuilder<PlaylistBloc, PlaylistState>(
-                        builder: (context, state) {
-                          return state.statusLoadPlaylists.when(
-                            idle: () => _buildEmptyState(),
-                            loading: () => _buildLoadingState(),
-                            failure: (error) => _buildErrorState(error),
-                            success: () =>
-                                _buildPlaylistGrid(state.userPlaylists),
-                          );
-                        },
+                      const SizedBox(height: 20),
+                      Expanded(
+                        child: BlocBuilder<PlaylistBloc, PlaylistState>(
+                          builder: (context, state) {
+                            return state.statusLoadPlaylists.when(
+                              idle: () => _buildEmptyState(),
+                              loading: () => _buildLoadingState(),
+                              failure: (error) => _buildErrorState(error),
+                              success: () =>
+                                  _buildPlaylistGrid(state.userPlaylists),
+                            );
+                          },
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

@@ -22,12 +22,12 @@ AlbumModel _$AlbumModelFromJson(Map<String, dynamic> json) {
 mixin _$AlbumModel {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  List<SpotifyImage> get images => throw _privateConstructorUsedError;
+  List<SourceImage> get images => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
   String get albumType => throw _privateConstructorUsedError;
   String get releaseDate => throw _privateConstructorUsedError;
   int get totalTracks => throw _privateConstructorUsedError;
-  List<ArtistModel> get artists => throw _privateConstructorUsedError;
+  List<Artist> get artists => throw _privateConstructorUsedError;
 
   /// Serializes this AlbumModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -48,12 +48,12 @@ abstract class $AlbumModelCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      List<SpotifyImage> images,
+      List<SourceImage> images,
       String type,
       String albumType,
       String releaseDate,
       int totalTracks,
-      List<ArtistModel> artists});
+      List<Artist> artists});
 }
 
 /// @nodoc
@@ -92,7 +92,7 @@ class _$AlbumModelCopyWithImpl<$Res, $Val extends AlbumModel>
       images: null == images
           ? _value.images
           : images // ignore: cast_nullable_to_non_nullable
-              as List<SpotifyImage>,
+              as List<SourceImage>,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -112,7 +112,7 @@ class _$AlbumModelCopyWithImpl<$Res, $Val extends AlbumModel>
       artists: null == artists
           ? _value.artists
           : artists // ignore: cast_nullable_to_non_nullable
-              as List<ArtistModel>,
+              as List<Artist>,
     ) as $Val);
   }
 }
@@ -128,12 +128,12 @@ abstract class _$$AlbumModelImplCopyWith<$Res>
   $Res call(
       {String id,
       String name,
-      List<SpotifyImage> images,
+      List<SourceImage> images,
       String type,
       String albumType,
       String releaseDate,
       int totalTracks,
-      List<ArtistModel> artists});
+      List<Artist> artists});
 }
 
 /// @nodoc
@@ -170,7 +170,7 @@ class __$$AlbumModelImplCopyWithImpl<$Res>
       images: null == images
           ? _value._images
           : images // ignore: cast_nullable_to_non_nullable
-              as List<SpotifyImage>,
+              as List<SourceImage>,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -190,7 +190,7 @@ class __$$AlbumModelImplCopyWithImpl<$Res>
       artists: null == artists
           ? _value._artists
           : artists // ignore: cast_nullable_to_non_nullable
-              as List<ArtistModel>,
+              as List<Artist>,
     ));
   }
 }
@@ -201,12 +201,12 @@ class _$AlbumModelImpl extends _AlbumModel {
   const _$AlbumModelImpl(
       {required this.id,
       required this.name,
-      required final List<SpotifyImage> images,
+      required final List<SourceImage> images,
       required this.type,
       required this.albumType,
       required this.releaseDate,
       required this.totalTracks,
-      required final List<ArtistModel> artists})
+      required final List<Artist> artists})
       : _images = images,
         _artists = artists,
         super._();
@@ -218,9 +218,9 @@ class _$AlbumModelImpl extends _AlbumModel {
   final String id;
   @override
   final String name;
-  final List<SpotifyImage> _images;
+  final List<SourceImage> _images;
   @override
-  List<SpotifyImage> get images {
+  List<SourceImage> get images {
     if (_images is EqualUnmodifiableListView) return _images;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_images);
@@ -234,9 +234,9 @@ class _$AlbumModelImpl extends _AlbumModel {
   final String releaseDate;
   @override
   final int totalTracks;
-  final List<ArtistModel> _artists;
+  final List<Artist> _artists;
   @override
-  List<ArtistModel> get artists {
+  List<Artist> get artists {
     if (_artists is EqualUnmodifiableListView) return _artists;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_artists);
@@ -298,12 +298,12 @@ abstract class _AlbumModel extends AlbumModel {
   const factory _AlbumModel(
       {required final String id,
       required final String name,
-      required final List<SpotifyImage> images,
+      required final List<SourceImage> images,
       required final String type,
       required final String albumType,
       required final String releaseDate,
       required final int totalTracks,
-      required final List<ArtistModel> artists}) = _$AlbumModelImpl;
+      required final List<Artist> artists}) = _$AlbumModelImpl;
   const _AlbumModel._() : super._();
 
   factory _AlbumModel.fromJson(Map<String, dynamic> json) =
@@ -314,7 +314,7 @@ abstract class _AlbumModel extends AlbumModel {
   @override
   String get name;
   @override
-  List<SpotifyImage> get images;
+  List<SourceImage> get images;
   @override
   String get type;
   @override
@@ -324,7 +324,7 @@ abstract class _AlbumModel extends AlbumModel {
   @override
   int get totalTracks;
   @override
-  List<ArtistModel> get artists;
+  List<Artist> get artists;
 
   /// Create a copy of AlbumModel
   /// with the given fields replaced by the non-null parameter values.

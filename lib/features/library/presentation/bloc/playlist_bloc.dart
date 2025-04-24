@@ -1,9 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../../core/entities/entities/status.dart';
-import '../../../../core/usecase/usecase.dart' hide UserPaginationParams;
-import '../../../../features/home/domain/entities/playlist/playlist.dart';
+import '../../../../core/domain/entities/status/status.dart';
+import '../../../../core/domain/entities/playlist/playlist.dart';
 import '../../domain/usecases/get_user_playlists.dart';
 
 part 'playlist_bloc.freezed.dart';

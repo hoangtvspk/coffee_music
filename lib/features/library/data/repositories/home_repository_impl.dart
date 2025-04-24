@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import '../../../../core/error/failure.dart';
-import '../../../../features/home/domain/entities/playlist/playlist.dart';
+import '../../../../core/domain/entities/playlist/playlist.dart';
 import '../../domain/repositories/home_repository.dart';
 import '../datasources/home_remote_data_source.dart';
 import '../models/playlist/playlist_model.dart';

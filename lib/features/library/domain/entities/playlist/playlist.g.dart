@@ -12,7 +12,7 @@ _$PlaylistImpl _$$PlaylistImplFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String,
       description: json['description'] as String,
       images: (json['images'] as List<dynamic>?)
-              ?.map((e) => SpotifyImage.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => SourceImage.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
       owner: json['owner'] as String,

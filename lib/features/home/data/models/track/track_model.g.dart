@@ -8,13 +8,22 @@ part of 'track_model.dart';
 
 _$TrackModelImpl _$$TrackModelImplFromJson(Map<String, dynamic> json) =>
     _$TrackModelImpl(
-      albums: (json['albums'] as List<dynamic>?)
-              ?.map((e) => Album.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          const [],
+      id: json['id'] as String,
+      name: json['name'] as String,
+      artists: (json['artists'] as List<dynamic>)
+          .map((e) => Artist.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      album: AlbumModel.fromJson(json['album'] as Map<String, dynamic>),
+      previewUrl: json['previewUrl'] as String? ?? null,
+      durationMs: (json['duration_ms'] as num).toInt(),
     );
 
 Map<String, dynamic> _$$TrackModelImplToJson(_$TrackModelImpl instance) =>
     <String, dynamic>{
-      'albums': instance.albums,
+      'id': instance.id,
+      'name': instance.name,
+      'artists': instance.artists,
+      'album': instance.album,
+      'previewUrl': instance.previewUrl,
+      'duration_ms': instance.durationMs,
     };

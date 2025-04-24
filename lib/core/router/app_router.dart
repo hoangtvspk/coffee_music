@@ -1,6 +1,6 @@
 import 'package:buitify_coffee/core/widgets/go_route_wrapper/go_route_with_bloc.dart';
 import 'package:buitify_coffee/core/widgets/transition_wrapper/fade_screen_transition.dart';
-import 'package:buitify_coffee/features/home/domain/entities/playlist/playlist.dart';
+import 'package:buitify_coffee/core/domain/entities/playlist/playlist.dart';
 import 'package:buitify_coffee/features/tracks_list/data/datasources/tracks_list_remote_data_source.dart';
 import 'package:buitify_coffee/features/tracks_list/data/repositories/tracks_list_repository_impl.dart';
 import 'package:buitify_coffee/features/tracks_list/domain/repositories/tracks_list_repository.dart';
@@ -13,7 +13,7 @@ import 'package:go_router/go_router.dart';
 import '../../features/tracks_list/domain/usecases/get_tracks.dart';
 import '../../features/tracks_list/presentation/bloc/track_list/tracks_list_bloc.dart';
 import '../../features/tracks_list/presentation/screens/tracks_list_screen.dart';
-import '../../features/home/domain/entities/album/album.dart';
+import '../domain/entities/album/album.dart';
 import '../network/dio_client.dart';
 import '../storage/secure_storage.dart';
 

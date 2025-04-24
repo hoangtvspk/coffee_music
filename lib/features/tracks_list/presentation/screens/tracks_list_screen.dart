@@ -1,6 +1,6 @@
-import 'package:buitify_coffee/core/entities/entities/status.dart';
+import 'package:buitify_coffee/core/domain/entities/status/status.dart';
 import 'package:buitify_coffee/core/widgets/image/cached_image.dart';
-import 'package:buitify_coffee/core/entities/tracks_list/tracks_list.dart';
+import 'package:buitify_coffee/core/domain/entities/tracks_list/tracks_list.dart';
 import 'package:buitify_coffee/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
