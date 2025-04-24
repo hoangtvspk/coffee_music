@@ -271,7 +271,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 failure: (message) => const SizedBox.shrink(),
                                 orElse: () => state.savedTracks.isNotEmpty
-                                    ? SavedTracksList(
+                                    ? ColumnTracksList(
                                         tracks: state.savedTracks,
                                         title: 'Saved Tracks',
                                       )
@@ -290,7 +290,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 failure: (message) => const SizedBox.shrink(),
                                 orElse: () => state.artistTopTracks.isNotEmpty
-                                    ? SavedTracksList(
+                                    ? ColumnTracksList(
                                         tracks: state.artistTopTracks,
                                         title: state
                                             .artistTopTracks.first.artists

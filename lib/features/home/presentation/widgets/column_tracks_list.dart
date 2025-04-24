@@ -1,8 +1,8 @@
 import 'package:buitify_coffee/features/home/domain/entities/track/track.dart';
 import 'package:flutter/material.dart';
 
-class SavedTracksList extends StatelessWidget {
-  const SavedTracksList({
+class ColumnTracksList extends StatelessWidget {
+  const ColumnTracksList({
     super.key,
     required this.tracks,
     required this.title,

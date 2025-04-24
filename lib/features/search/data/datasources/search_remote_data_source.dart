@@ -1,5 +1,4 @@
 import 'package:buitify_coffee/core/network/dio_client.dart';
-import 'package:dio/dio.dart';
 import '../../domain/entities/search_result.dart';
 
 class SearchRemoteDataSource {

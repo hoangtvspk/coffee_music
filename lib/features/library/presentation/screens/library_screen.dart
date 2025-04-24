@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../../../core/config/app_color.dart';
 import '../bloc/playlist_bloc.dart';
 import '../../../../core/domain/entities/playlist/playlist.dart';
 import '../../domain/usecases/get_user_playlists.dart';

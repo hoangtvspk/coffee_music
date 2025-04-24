@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import '../../domain/entities/search_result.dart';
 import '../datasources/search_remote_data_source.dart';
 
