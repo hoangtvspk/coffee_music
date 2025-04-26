@@ -1,7 +1,9 @@
+import 'package:buitify_coffee/core/config/env_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:spotify_sdk/spotify_sdk.dart';
 import '../../../../core/config/app_color.dart';
 import '../../../../core/l10n/app_localizations.dart';
 import '../../../home/presentation/screens/home_screen.dart';
@@ -48,6 +50,7 @@ class _MainScreenState extends State<MainScreen> {
     final queryParams = uri.queryParameters;
     final tab = queryParams['tab'];
     context.read<MainBloc>().add(MainDeepLinkReceived(tab: tab));
+    _connectToSpotifyRemote();
   }
 
   @override
@@ -58,6 +61,14 @@ class _MainScreenState extends State<MainScreen> {
 
   void _onItemTapped(int index) {
     context.read<MainBloc>().add(MainTabChanged(index: index));
+  }
+
+  void _connectToSpotifyRemote() async {
+    await SpotifySdk.connectToSpotifyRemote(
+      clientId: EnvConfig.spotifyClientId,
+      redirectUrl: EnvConfig.spotifyRedirectUri,
+    );
+    await SpotifySdk.pause();
   }
 
   @override

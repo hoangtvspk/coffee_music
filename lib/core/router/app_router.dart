@@ -1,15 +1,16 @@
 import 'package:buitify_coffee/core/widgets/go_route_wrapper/go_route_with_bloc.dart';
 import 'package:buitify_coffee/core/widgets/transition_wrapper/fade_screen_transition.dart';
 import 'package:buitify_coffee/core/domain/entities/playlist/playlist.dart';
+import 'package:buitify_coffee/features/media_player/data/datasources/player_remote_data_source.dart';
+import 'package:buitify_coffee/features/media_player/data/repositories/player_repository_impl.dart';
+import 'package:buitify_coffee/features/media_player/domain/repositories/player_repository.dart';
+import 'package:buitify_coffee/features/media_player/presentation/bloc/player_bloc.dart';
+import 'package:buitify_coffee/features/media_player/presentation/screens/player_screen.dart';
 import 'package:buitify_coffee/features/tracks_list/data/datasources/tracks_list_remote_data_source.dart';
 import 'package:buitify_coffee/features/tracks_list/data/repositories/tracks_list_repository_impl.dart';
 import 'package:buitify_coffee/features/tracks_list/domain/repositories/tracks_list_repository.dart';
 import 'package:buitify_coffee/features/auth/presentation/screens/login_screen.dart';
 import 'package:buitify_coffee/features/main/presentation/screens/main_screen.dart';
-import 'package:buitify_coffee/features/media_player/presentation/media_player_screen.dart';
-import 'package:buitify_coffee/features/media_player/presentation/test_media_player_screen.dart';
-import 'package:buitify_coffee/features/media_player/presentation/bloc/media_player_bloc.dart';
-import 'package:buitify_coffee/features/media_player/domain/entities/media_player_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -67,10 +68,6 @@ GoRouter router = GoRouter(
       path: '/main',
       builder: (context, state) => const MainScreen(),
     ),
-    GoRoute(
-      path: '/test-media-player',
-      builder: (context, state) => const TestMediaPlayerScreen(),
-    ),
     GoRouteWithBloc<TracksListBloc, TracksListRepository,
         TrackListRemoteDataSource>(
       path: '/album/:albumId',
@@ -78,7 +75,7 @@ GoRouter router = GoRouter(
         id: state.pathParameters['albumId'] ?? '',
         listInfo: state.extra as Album,
       ),
-      createBloc: (repository) => TracksListBloc(
+      createBloc: (repository, state) => TracksListBloc(
         getTracks: GetTracks(repository),
       ),
       createDataSource: () => AlbumTrackRemoteDataSourceImpl(),
@@ -95,7 +92,7 @@ GoRouter router = GoRouter(
         id: state.pathParameters['playlistId'] ?? '',
         listInfo: state.extra as Playlist,
       ),
-      createBloc: (repository) => TracksListBloc(
+      createBloc: (repository, state) => TracksListBloc(
         getTracks: GetTracks(repository),
       ),
       createDataSource: () => PlaylistTrackRemoteDataSourceImpl(),
@@ -105,48 +102,20 @@ GoRouter router = GoRouter(
         child: child,
       ),
     ).build(),
-    GoRoute(
+    GoRouteWithBloc<PlayerBloc, PlayerRepository, PlayerRemoteDataSource>(
       path: '/player',
-      pageBuilder: (context, state) {
-        final track = state.extra as Map<String, dynamic>?;
-        final child = track == null
-            ? const MediaPlayerScreen()
-            : BlocProvider(
-                create: (context) => MediaPlayerBloc()
-                  ..add(
-                    MediaPlayerEvent.loadTrack(
-                      trackUrl: track['url'] as String,
-                      title: track['title'] as String,
-                      artist: track['artist'] as String,
-                      imageUrl: track['imageUrl'] as String,
-                    ),
-                  ),
-                child: const MediaPlayerScreen(),
-              );
-
-        return CustomTransitionPage(
-          key: state.pageKey,
-          child: child,
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            // Slide up from bottom
-            const begin = Offset(0.0, 1.0);
-            const end = Offset.zero;
-
-            var tween = Tween(begin: begin, end: end)
-                .chain(CurveTween(curve: Curves.easeOutCubic));
-            var offsetAnimation = animation.drive(tween);
-
-            return SlideTransition(
-              position: offsetAnimation,
-              child: FadeTransition(
-                opacity: animation,
-                child: child,
-              ),
-            );
-          },
-          transitionDuration: const Duration(milliseconds: 400),
-        );
-      },
-    ),
+      screenBuilder: (context, state) => PlayerScreen(
+        trackDetails: state.extra as Map<String, String>,
+      ),
+      createBloc: (repository, state) => PlayerBloc(repository)
+        ..add(PlayerEvent.playTrack(
+            (state.extra as Map<String, String>)['url'] ?? '')),
+      createDataSource: () => PlayerRemoteDataSourceImpl(),
+      createRepository: (dataSource) => PlayerRepositoryImpl(dataSource),
+      transitionBuilder: (child, state) => FadeScreenTransition(
+        key: state.pageKey,
+        child: child,
+      ),
+    ).build(),
   ],
 );

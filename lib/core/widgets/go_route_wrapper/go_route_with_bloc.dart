@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class GoRouteWithBloc<B extends BlocBase<Object?>, R, D> {
   final String path;
   final Widget Function(BuildContext, GoRouterState) screenBuilder;
-  final B Function(R repository) createBloc;
+  final B Function(R repository, GoRouterState state) createBloc;
   final D Function() createDataSource;
   final R Function(D dataSource) createRepository;
   final Page<void> Function(Widget child, GoRouterState state)?
@@ -29,7 +29,7 @@ class GoRouteWithBloc<B extends BlocBase<Object?>, R, D> {
           create: (context) {
             final dataSource = createDataSource();
             final repository = createRepository(dataSource);
-            return createBloc(repository);
+            return createBloc(repository, state);
           },
           child: screen,
         );

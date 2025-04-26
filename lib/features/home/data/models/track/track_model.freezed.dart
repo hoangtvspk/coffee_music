@@ -24,7 +24,9 @@ mixin _$TrackModel {
   String get name => throw _privateConstructorUsedError;
   List<Artist> get artists => throw _privateConstructorUsedError;
   AlbumModel get album => throw _privateConstructorUsedError;
+  @JsonKey(name: 'preview_url')
   String? get previewUrl => throw _privateConstructorUsedError;
+  @JsonKey(name: 'duration_ms')
   int get durationMs => throw _privateConstructorUsedError;
 
   /// Serializes this TrackModel to a JSON map.
@@ -48,8 +50,8 @@ abstract class $TrackModelCopyWith<$Res> {
       String name,
       List<Artist> artists,
       AlbumModel album,
-      String? previewUrl,
-      int durationMs});
+      @JsonKey(name: 'preview_url') String? previewUrl,
+      @JsonKey(name: 'duration_ms') int durationMs});
 
   $AlbumModelCopyWith<$Res> get album;
 }
@@ -128,8 +130,8 @@ abstract class _$$TrackModelImplCopyWith<$Res>
       String name,
       List<Artist> artists,
       AlbumModel album,
-      String? previewUrl,
-      int durationMs});
+      @JsonKey(name: 'preview_url') String? previewUrl,
+      @JsonKey(name: 'duration_ms') int durationMs});
 
   @override
   $AlbumModelCopyWith<$Res> get album;
@@ -192,8 +194,8 @@ class _$TrackModelImpl extends _TrackModel {
       required this.name,
       required final List<Artist> artists,
       required this.album,
-      this.previewUrl = null,
-      required this.durationMs})
+      @JsonKey(name: 'preview_url') this.previewUrl = null,
+      @JsonKey(name: 'duration_ms') required this.durationMs})
       : _artists = artists,
         super._();
 
@@ -215,9 +217,10 @@ class _$TrackModelImpl extends _TrackModel {
   @override
   final AlbumModel album;
   @override
-  @JsonKey()
+  @JsonKey(name: 'preview_url')
   final String? previewUrl;
   @override
+  @JsonKey(name: 'duration_ms')
   final int durationMs;
 
   @override
@@ -269,12 +272,13 @@ class _$TrackModelImpl extends _TrackModel {
 
 abstract class _TrackModel extends TrackModel {
   const factory _TrackModel(
-      {required final String id,
-      required final String name,
-      required final List<Artist> artists,
-      required final AlbumModel album,
-      final String? previewUrl,
-      required final int durationMs}) = _$TrackModelImpl;
+          {required final String id,
+          required final String name,
+          required final List<Artist> artists,
+          required final AlbumModel album,
+          @JsonKey(name: 'preview_url') final String? previewUrl,
+          @JsonKey(name: 'duration_ms') required final int durationMs}) =
+      _$TrackModelImpl;
   const _TrackModel._() : super._();
 
   factory _TrackModel.fromJson(Map<String, dynamic> json) =
@@ -289,8 +293,10 @@ abstract class _TrackModel extends TrackModel {
   @override
   AlbumModel get album;
   @override
+  @JsonKey(name: 'preview_url')
   String? get previewUrl;
   @override
+  @JsonKey(name: 'duration_ms')
   int get durationMs;
 
   /// Create a copy of TrackModel

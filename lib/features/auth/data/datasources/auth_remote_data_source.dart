@@ -26,7 +26,14 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   final _redirectUri = EnvConfig.spotifyRedirectUri;
   final _discoveryUrl =
       'https://accounts.spotify.com/.well-known/openid-configuration';
-  final _scopes = ['user-read-private', 'user-read-email', 'user-library-read'];
+  final _scopes = [
+    'user-read-private',
+    'user-read-email',
+    'user-library-read',
+    'user-modify-playback-state',
+    'user-read-playback-state',
+    'streaming'
+  ];
 
   String? _accessToken;
   String? _refreshToken;
@@ -102,6 +109,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
           'grant_type': 'refresh_token',
           'refresh_token': _refreshToken,
           'client_id': _clientId,
+          'scope': _scopes.join(' '),
         },
         options: Options(
           headers: {

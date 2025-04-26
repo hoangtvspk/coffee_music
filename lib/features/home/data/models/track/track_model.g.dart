@@ -14,7 +14,7 @@ _$TrackModelImpl _$$TrackModelImplFromJson(Map<String, dynamic> json) =>
           .map((e) => Artist.fromJson(e as Map<String, dynamic>))
           .toList(),
       album: AlbumModel.fromJson(json['album'] as Map<String, dynamic>),
-      previewUrl: json['previewUrl'] as String? ?? null,
+      previewUrl: json['preview_url'] as String? ?? null,
       durationMs: (json['duration_ms'] as num).toInt(),
     );
 
@@ -24,6 +24,6 @@ Map<String, dynamic> _$$TrackModelImplToJson(_$TrackModelImpl instance) =>
       'name': instance.name,
       'artists': instance.artists,
       'album': instance.album,
-      'previewUrl': instance.previewUrl,
+      'preview_url': instance.previewUrl,
       'duration_ms': instance.durationMs,
     };

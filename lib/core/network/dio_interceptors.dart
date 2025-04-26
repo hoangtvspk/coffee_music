@@ -174,7 +174,7 @@ class DioInterceptors {
           }
 
           if (_accessToken != null) {
-            print('accessToken: $_accessToken');
+            // print('accessToken: $_accessToken');
             options.headers['Authorization'] = 'Bearer $_accessToken';
           }
           if (!options.headers.containsKey('Content-Type')) {
@@ -192,33 +192,38 @@ class DioInterceptors {
               final response = await _handleTokenRefresh(error, handler);
               return handler.resolve(response);
             } catch (e) {
+              print('Token refresh failed: $e');
               return handler.reject(error);
             }
           }
 
           switch (error.response?.statusCode) {
             case 403:
-              // Handle forbidden
+              print('Forbidden error: ${error.response?.data}');
               break;
             case 404:
-              // Handle not found
+              print('Not found error: ${error.response?.data}');
               break;
             case 500:
-              // Handle server error
+              print('Server error: ${error.response?.data}');
               break;
+            default:
+              print('Other error status: ${error.response?.statusCode}');
+              print('Error data: ${error.response?.data}');
           }
+          print('=== End DioInterceptor Error ===');
           return handler.next(error);
         },
       ),
     );
 
-    // if (kDebugMode) {
-    //   _dio.interceptors.add(LogInterceptor(
-    //     requestBody: true,
-    //     responseBody: true,
-    //     requestHeader: true,
-    //     responseHeader: true,
-    //   ));
-    // }
+    // Add logging interceptor for debugging
+    // _dio.interceptors.add(LogInterceptor(
+    //   requestBody: true,
+    //   responseBody: true,
+    //   requestHeader: true,
+    //   responseHeader: true,
+    //   error: true,
+    // ));
   }
 }

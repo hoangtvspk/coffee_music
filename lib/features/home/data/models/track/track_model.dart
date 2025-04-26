@@ -15,17 +15,9 @@ class TrackModel with _$TrackModel {
     required String name,
     required List<Artist> artists,
     required AlbumModel album,
-    @Default(null) String? previewUrl,
-    required int durationMs,
+    @JsonKey(name: 'preview_url') @Default(null) String? previewUrl,
+    @JsonKey(name: 'duration_ms') required int durationMs,
   }) = _TrackModel;
-
-  @override
-  @JsonKey(name: 'preview_url')
-  String? get previewUrl => throw UnimplementedError();
-
-  @override
-  @JsonKey(name: 'duration_ms')
-  int get durationMs => throw UnimplementedError();
 
   factory TrackModel.fromJson(Map<String, dynamic> json) =>
       _$TrackModelFromJson(json);

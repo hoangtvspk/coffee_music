@@ -4,6 +4,7 @@ import 'package:buitify_coffee/core/domain/entities/tracks_list/tracks_list.dart
 import 'package:buitify_coffee/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import '../bloc/track_list/tracks_list_bloc.dart';
 
 class AlbumDetailScreen<T extends TracksList> extends StatefulWidget {
@@ -213,7 +214,19 @@ class _AlbumDetailScreenState<T extends TracksList>
                               ),
                             ),
                             onTap: () {
-                              // TODO: Implement track playback
+                              print(
+                                  'Playing track: ${track.name} with ID: ${track.id}');
+                              context.push('/player', extra: {
+                                'url': track.id,
+                                'title': track.name,
+                                'artist': track.artists.join(', '),
+                                'imageUrl':
+                                    track.album?.images.isNotEmpty ?? false
+                                        ? track.images.first.url
+                                        : widget.listInfo.images.isNotEmpty
+                                            ? widget.listInfo.images.first.url
+                                            : '',
+                              });
                             },
                           );
                         },

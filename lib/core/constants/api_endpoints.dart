@@ -21,6 +21,7 @@ class ApiEndpoints {
   // Track endpoints
   static String severalTracks(String ids) => 'tracks?ids=$ids';
   static String savedTracks() => 'me/tracks';
+  static String track(String id) => 'tracks/$id';
 
   // Artist endpoints
   static String artist(String artistId) => 'artists/$artistId';

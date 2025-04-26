@@ -106,8 +106,24 @@ class DioClient {
     );
   }
 
-  Future<Response> put(String path, {dynamic data}) async {
-    return await _dio.put(path, data: data);
+  Future<Response> put(
+    String path, {
+    dynamic data,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+    CancelToken? cancelToken,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
+  }) async {
+    return await _dio.put(
+      path,
+      data: data,
+      queryParameters: queryParameters,
+      options: options,
+      cancelToken: cancelToken,
+      onSendProgress: onSendProgress,
+      onReceiveProgress: onReceiveProgress,
+    );
   }
 
   Future<Response> delete(String path, {dynamic data}) async {
