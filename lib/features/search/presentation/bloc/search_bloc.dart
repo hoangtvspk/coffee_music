@@ -1,9 +1,12 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../../../core/domain/entities/status/status.dart';
 import '../../data/repositories/search_repository_impl.dart';
 import '../../domain/entities/search_result.dart';
-import 'search_event.dart';
-import 'search_state.dart';
+
+part 'search_bloc.freezed.dart';
+part 'search_event.dart';
+part 'search_state.dart';
 
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
   final SearchRepositoryImpl _repository;

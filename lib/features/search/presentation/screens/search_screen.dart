@@ -5,7 +5,6 @@ import '../../../../core/config/app_color.dart';
 import '../../data/datasources/search_remote_data_source.dart';
 import '../../data/repositories/search_repository_impl.dart';
 import '../bloc/search_bloc.dart';
-import '../bloc/search_event.dart';
 import '../widgets/search_results.dart';
 
 class SearchScreen extends StatefulWidget {

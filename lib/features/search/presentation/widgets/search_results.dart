@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../core/config/app_color.dart';
 import '../bloc/search_bloc.dart';
-import '../bloc/search_state.dart';
 
 class SearchResults extends StatelessWidget {
   const SearchResults({super.key});
@@ -131,13 +130,13 @@ class SearchResults extends StatelessWidget {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        subtitle: Text(
-                          track.artists.map((e) => e.name).join(', '),
-                          style: GoogleFonts.poppins(
-                            fontSize: 14,
-                            color: Colors.grey[600],
-                          ),
-                        ),
+                        // subtitle: Text(
+                        //   track.artists.map((e) => e.name).join(', '),
+                        //   style: GoogleFonts.poppins(
+                        //     fontSize: 14,
+                        //     color: Colors.grey[600],
+                        //   ),
+                        // ),
                         trailing: IconButton(
                           icon: const Icon(Icons.play_circle_outline),
                           color: AppColor.primary,
