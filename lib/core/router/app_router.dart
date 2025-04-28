@@ -12,7 +12,6 @@ import 'package:buitify_coffee/features/tracks_list/domain/repositories/tracks_l
 import 'package:buitify_coffee/features/auth/presentation/screens/login_screen.dart';
 import 'package:buitify_coffee/features/main/presentation/screens/main_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:go_router/go_router.dart';
 

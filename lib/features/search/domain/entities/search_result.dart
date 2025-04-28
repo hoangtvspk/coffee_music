@@ -7,8 +7,8 @@ part 'search_result.g.dart';
 class SearchResult with _$SearchResult {
   const factory SearchResult({
     required List<Track> tracks,
-    required List<Album> albums,
-    required List<Artist> artists,
+    @Default([]) List<Album> albums,
+    @Default([]) List<Artist> artists,
   }) = _SearchResult;
 
   factory SearchResult.fromJson(Map<String, dynamic> json) =>
@@ -20,7 +20,7 @@ class Track with _$Track {
   const factory Track({
     required String id,
     required String name,
-    required List<Artist> artists,
+    // required List<Artist> artists,
     required Album album,
     required String previewUrl,
     required int durationMs,

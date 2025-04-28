@@ -129,8 +129,8 @@ class __$$SearchResultImplCopyWithImpl<$Res>
 class _$SearchResultImpl implements _SearchResult {
   const _$SearchResultImpl(
       {required final List<Track> tracks,
-      required final List<Album> albums,
-      required final List<Artist> artists})
+      final List<Album> albums = const [],
+      final List<Artist> artists = const []})
       : _tracks = tracks,
         _albums = albums,
         _artists = artists;
@@ -148,6 +148,7 @@ class _$SearchResultImpl implements _SearchResult {
 
   final List<Album> _albums;
   @override
+  @JsonKey()
   List<Album> get albums {
     if (_albums is EqualUnmodifiableListView) return _albums;
     // ignore: implicit_dynamic_type
@@ -156,6 +157,7 @@ class _$SearchResultImpl implements _SearchResult {
 
   final List<Artist> _artists;
   @override
+  @JsonKey()
   List<Artist> get artists {
     if (_artists is EqualUnmodifiableListView) return _artists;
     // ignore: implicit_dynamic_type
@@ -204,8 +206,8 @@ class _$SearchResultImpl implements _SearchResult {
 abstract class _SearchResult implements SearchResult {
   const factory _SearchResult(
       {required final List<Track> tracks,
-      required final List<Album> albums,
-      required final List<Artist> artists}) = _$SearchResultImpl;
+      final List<Album> albums,
+      final List<Artist> artists}) = _$SearchResultImpl;
 
   factory _SearchResult.fromJson(Map<String, dynamic> json) =
       _$SearchResultImpl.fromJson;
@@ -232,8 +234,8 @@ Track _$TrackFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Track {
   String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  List<Artist> get artists => throw _privateConstructorUsedError;
+  String get name =>
+      throw _privateConstructorUsedError; // required List<Artist> artists,
   Album get album => throw _privateConstructorUsedError;
   String get previewUrl => throw _privateConstructorUsedError;
   int get durationMs => throw _privateConstructorUsedError;
@@ -253,12 +255,7 @@ abstract class $TrackCopyWith<$Res> {
       _$TrackCopyWithImpl<$Res, Track>;
   @useResult
   $Res call(
-      {String id,
-      String name,
-      List<Artist> artists,
-      Album album,
-      String previewUrl,
-      int durationMs});
+      {String id, String name, Album album, String previewUrl, int durationMs});
 
   $AlbumCopyWith<$Res> get album;
 }
@@ -280,7 +277,6 @@ class _$TrackCopyWithImpl<$Res, $Val extends Track>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? artists = null,
     Object? album = null,
     Object? previewUrl = null,
     Object? durationMs = null,
@@ -294,10 +290,6 @@ class _$TrackCopyWithImpl<$Res, $Val extends Track>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      artists: null == artists
-          ? _value.artists
-          : artists // ignore: cast_nullable_to_non_nullable
-              as List<Artist>,
       album: null == album
           ? _value.album
           : album // ignore: cast_nullable_to_non_nullable
@@ -332,12 +324,7 @@ abstract class _$$TrackImplCopyWith<$Res> implements $TrackCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String id,
-      String name,
-      List<Artist> artists,
-      Album album,
-      String previewUrl,
-      int durationMs});
+      {String id, String name, Album album, String previewUrl, int durationMs});
 
   @override
   $AlbumCopyWith<$Res> get album;
@@ -358,7 +345,6 @@ class __$$TrackImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? artists = null,
     Object? album = null,
     Object? previewUrl = null,
     Object? durationMs = null,
@@ -372,10 +358,6 @@ class __$$TrackImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      artists: null == artists
-          ? _value._artists
-          : artists // ignore: cast_nullable_to_non_nullable
-              as List<Artist>,
       album: null == album
           ? _value.album
           : album // ignore: cast_nullable_to_non_nullable
@@ -398,11 +380,9 @@ class _$TrackImpl implements _Track {
   const _$TrackImpl(
       {required this.id,
       required this.name,
-      required final List<Artist> artists,
       required this.album,
       required this.previewUrl,
-      required this.durationMs})
-      : _artists = artists;
+      required this.durationMs});
 
   factory _$TrackImpl.fromJson(Map<String, dynamic> json) =>
       _$$TrackImplFromJson(json);
@@ -411,14 +391,7 @@ class _$TrackImpl implements _Track {
   final String id;
   @override
   final String name;
-  final List<Artist> _artists;
-  @override
-  List<Artist> get artists {
-    if (_artists is EqualUnmodifiableListView) return _artists;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_artists);
-  }
-
+// required List<Artist> artists,
   @override
   final Album album;
   @override
@@ -428,7 +401,7 @@ class _$TrackImpl implements _Track {
 
   @override
   String toString() {
-    return 'Track(id: $id, name: $name, artists: $artists, album: $album, previewUrl: $previewUrl, durationMs: $durationMs)';
+    return 'Track(id: $id, name: $name, album: $album, previewUrl: $previewUrl, durationMs: $durationMs)';
   }
 
   @override
@@ -438,7 +411,6 @@ class _$TrackImpl implements _Track {
             other is _$TrackImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            const DeepCollectionEquality().equals(other._artists, _artists) &&
             (identical(other.album, album) || other.album == album) &&
             (identical(other.previewUrl, previewUrl) ||
                 other.previewUrl == previewUrl) &&
@@ -448,14 +420,8 @@ class _$TrackImpl implements _Track {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      name,
-      const DeepCollectionEquality().hash(_artists),
-      album,
-      previewUrl,
-      durationMs);
+  int get hashCode =>
+      Object.hash(runtimeType, id, name, album, previewUrl, durationMs);
 
   /// Create a copy of Track
   /// with the given fields replaced by the non-null parameter values.
@@ -477,7 +443,6 @@ abstract class _Track implements Track {
   const factory _Track(
       {required final String id,
       required final String name,
-      required final List<Artist> artists,
       required final Album album,
       required final String previewUrl,
       required final int durationMs}) = _$TrackImpl;
@@ -487,9 +452,7 @@ abstract class _Track implements Track {
   @override
   String get id;
   @override
-  String get name;
-  @override
-  List<Artist> get artists;
+  String get name; // required List<Artist> artists,
   @override
   Album get album;
   @override

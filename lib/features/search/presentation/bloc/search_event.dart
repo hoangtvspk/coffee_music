@@ -1,6 +1,4 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-
-part 'search_event.freezed.dart';
+part of 'search_bloc.dart';
 
 @freezed
 class SearchEvent with _$SearchEvent {

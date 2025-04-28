@@ -1,8 +1,4 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-import '../../../../core/domain/entities/status/status.dart';
-import '../../domain/entities/search_result.dart';
-
-part 'search_state.freezed.dart';
+part of 'search_bloc.dart';
 
 @freezed
 class SearchState with _$SearchState {

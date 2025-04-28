@@ -13,8 +13,15 @@ class SearchRemoteDataSource {
         },
       );
 
-      return SearchResult.fromJson(response.data);
+      final searchResult = {
+        'tracks': response.data['tracks']['items'],
+        'albums': [],
+        'artists': [],
+      };
+      print(searchResult);
+      return SearchResult.fromJson(searchResult);
     } catch (e) {
+      print('Error searching: $e');
       rethrow;
     }
   }
