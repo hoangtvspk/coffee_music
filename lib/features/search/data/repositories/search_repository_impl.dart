@@ -11,6 +11,7 @@ class SearchRepositoryImpl {
       final response = await _remoteDataSource.search(query);
       return response;
     } catch (e) {
+      print(e);
       rethrow;
     }
   }
